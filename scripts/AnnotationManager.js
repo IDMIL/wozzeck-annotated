@@ -18,30 +18,34 @@ class AnnotationManager extends TimeManagerListener {
 
       let timeStampDiv = document.createElement("div");
       timeStampDiv.classList.add("annotation-time-stamp");
-      timeStampDiv.innerText = this.getStringForTimestamp(annotation.time);
+      timeStampDiv.innerText = this.getStringForTimestamp(annotation);
       annotationDiv.appendChild(timeStampDiv);
 
       let annotationTextDiv = document.createElement("div");
       annotationTextDiv.classList.add("annotation-text");
-      annotationTextDiv.innerText = annotation.text;
+      annotationTextDiv.innerText = annotation.annotation;
       annotationDiv.appendChild(annotationTextDiv);
 
       annotationDiv.onclick = () => {
-        timeManager.goToTime(annotation.time.act, annotation.time.bar, annotation.time.beat);
+        timeManager.goToTime(annotation.act, annotation.measure_range[0], 1);
       }
 
       scrollerDiv.appendChild(annotationDiv);
     }
   }
 
-  getStringForTimestamp(timestamp) {
-    return 'Act ' + timestamp.act + ', scene ' + timestamp.scene + ', bar ' + timestamp.bar;
+  getStringForTimestamp(annotation) {
+    return 'Act ' + annotation.act + ', scene ' +
+      this.timeManager.getScene(annotation.act, annotation.measure_range[0]) +
+      ', measures ' + annotation.measure_range[0] + '–' + annotation.measure_range[1];
   }
 
   timeUpdated(scoreTime) {
     let annotationDivs = document.getElementById('annotations-scroller').children;
     for (let i = 0; i < annotationDivs.length; i++) {
-      if ((annotations[i].time.act === scoreTime.act) && (annotations[i].time.bar === scoreTime.bar)) {
+      if ((annotations[i].act === scoreTime.act) &&
+        (annotations[i].measure_range[0] <= scoreTime.bar) &&
+      (annotations[i].measure_range[1] >= scoreTime.bar)) {
         annotationDivs[i].classList.add("current-annotation");
         annotationDivs[i].scrollIntoView();
       } else {

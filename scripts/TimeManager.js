@@ -39,9 +39,19 @@ class TimeManager {
   }
 
   getCurrentScene() {
-    const sceneRanges = scene_bar_ranges[this.getCurrentAct() - 1];
+    return this.getScene(this.getCurrentAct(), this.getCurrentBarWithinAct());
+    // const sceneRanges = scene_bar_ranges[this.getCurrentAct() - 1];
+    // for (let i = 0; i < sceneRanges.length; i++) {
+    //   if (sceneRanges[i][0] <= this.getCurrentBarWithinAct() && this.getCurrentBarWithinAct() <= sceneRanges[i][1]) {
+    //     return i + 1;
+    //   }
+    // }
+  }
+
+  getScene(act, bar) {
+    const sceneRanges = scene_bar_ranges[act - 1];
     for (let i = 0; i < sceneRanges.length; i++) {
-      if (sceneRanges[i][0] <= this.getCurrentBarWithinAct() && this.getCurrentBarWithinAct() <= sceneRanges[i][1]) {
+      if (sceneRanges[i][0] <= bar && bar <= sceneRanges[i][1]) {
         return i + 1;
       }
     }
