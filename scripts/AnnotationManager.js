@@ -15,7 +15,7 @@ class AnnotationManager extends TimeManagerListener {
       console.log(annotation);
       let annotationDiv = document.createElement("div");
       annotationDiv.classList.add("annotation");
-
+      annotationDiv.classList.add(annotation.code + "annotation");
       let timeStampDiv = document.createElement("div");
       timeStampDiv.classList.add("annotation-time-stamp");
       timeStampDiv.innerText = this.getStringForTimestamp(annotation);
