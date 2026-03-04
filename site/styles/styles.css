@@ -87,6 +87,13 @@ h1, h2 {
 
 #annotations-section {
     grid-area: annotations;
+
+    --dynamiques-color: #ffc000;
+    --duree-color: #00b0f0;
+    --formes-color: #7030a0;
+    --intonation-color: #ff0000;
+    --motifs-color: #00b050;
+    --timbre-color: #b84507;
 }
 
 #video-player {
@@ -126,7 +133,7 @@ h1, h2 {
 
 .annotation {
     background:lightgrey;
-    border: 1px solid black;
+    border-left: 4px solid;
     border-radius: 5px;
     margin-bottom: 10px;
     padding: 5px;
@@ -171,4 +178,28 @@ h1, h2 {
 
 .current-scene {
     background: lightgrey;
+}
+
+.dy-annotation {
+    border-left-color: var(--dynamiques-color);
+}
+
+.du-annotation {
+    border-left-color: var(--duree-color);
+}
+
+.for-annotation {
+    border-left-color: var(--formes-color);
+}
+
+.int-annotation {
+    border-left-color: var(--intonation-color);
+}
+
+.mo-annotation {
+    border-left-color: var(--motifs-color);
+}
+
+.tim-annotation {
+    border-left-color: var(--timbre-color);
 }
