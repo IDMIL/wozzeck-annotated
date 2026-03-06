@@ -1,13 +1,13 @@
-import { langaugeCode, text } from "./data/text";
+import { LanguageCode, text } from "./data/text";
 import {TimeManager} from "./TimeManager";
 import {ScoreManager} from "./ScoreManager";
 import {TransportManager} from "./TransportManager";
 import {TimelineManager} from "./TimelineManager";
 import {AnnotationManager} from "./AnnotationManager";
+import {globals} from "./globals";
 
-function buildWindow(lang : langaugeCode ) {
-
-    console.log(lang);
+function buildWindow(lang : LanguageCode ) {
+    globals.language = lang;
 
     const otherLangPage = lang === 'en' ? 'fr.html' : 'en.html';
     const otherLangName = lang === 'en' ? 'FR' : 'EN';
@@ -16,12 +16,12 @@ function buildWindow(lang : langaugeCode ) {
         <div id="content">
   <div id="layout-sections">
     <div class="section" id="title-section">
-      <h1>` + text[lang].TITLE + `</h1>
-      <h2>` + text[lang].BYLINE + `</h2>
+      <h1>` + text[globals.language].TITLE + `</h1>
+      <h2>` + text[globals.language].BYLINE + `</h2>
       <h3><a href="`+ otherLangPage + `">` + otherLangName + `</a></h3>
     </div>
     <div class="section" id="timelines-section">
-      <h2>` + text[lang].TIMELINES + `</h2>
+      <h2>` + text[globals.language].TIMELINES + `</h2>
       <div class="timeline" id="acts-timeline"></div>
       <div class="timeline" id="scenes-timeline"></div>
       <div class="timeline" id="scene-structure-timeline"></div>

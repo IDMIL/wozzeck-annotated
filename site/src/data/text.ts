@@ -1,10 +1,11 @@
-export type langaugeCode = "en" | "fr";
+export type LanguageCode = "en" | "fr";
 
 export const text = {
     'en' : {
         ACT: 'act',
         SCENE: 'scene',
         BAR: 'bar',
+        BARS: 'bars',
         BEAT: 'beat',
         PREV: 'previous',
         NEXT: 'next',
@@ -18,6 +19,7 @@ export const text = {
         ACT: 'acte',
         SCENE: 'scène',
         BAR: 'mesure',
+        BARS: 'mesures',
         BEAT: 'temps',
         PREV: 'précédent',
         NEXT: 'suivant',

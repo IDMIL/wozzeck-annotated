@@ -1,5 +1,7 @@
 import {ScoreTime, TimeManager, TimeManagerListener} from "./TimeManager";
 import {Annotation, AnnotationCode, annotations} from "./data/annotations";
+import {globals} from "./globals";
+import {text} from "./data/text";
 
 export class AnnotationManager extends TimeManagerListener {
     annotationCodes : { [code in AnnotationCode] : string; } = {
@@ -79,9 +81,16 @@ export class AnnotationManager extends TimeManagerListener {
     }
 
     getStringForTimestamp(annotation : Annotation) {
-        return 'Act ' + annotation.act + ', scene ' +
-            this.timeManager.getScene(annotation.act, annotation.measure_range[0]) +
-            ', measures ' + annotation.measure_range[0] + '–' + annotation.measure_range[1];
+        const act_scene = text[globals.language]["ACT"] +
+            annotation.act + ', ' + text[globals.language]["SCENE"] + ' ' +
+            this.timeManager.getScene(annotation.act, annotation.measure_range[0]);
+
+        const mr = annotation.measure_range;
+        const measure = (mr[0] === mr[1]) ?
+            (text[globals.language]["BAR"] + ' ' + mr[0]) :
+            (text[globals.language]["BARS"] + ' ' + mr[0] + '–' + mr[1]);
+
+        return act_scene + ', ' + measure;
     }
 
     setAnnotationVisibilityFromState() {
