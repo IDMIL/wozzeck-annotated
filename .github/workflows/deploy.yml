@@ -21,6 +21,7 @@ jobs:
           cd ..
           mkdir public
           mv site/dist/* public
+          mv site/data public
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
