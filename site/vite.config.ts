@@ -2,8 +2,9 @@ import { defineConfig } from "vite";
 import { resolve } from 'node:path';
 
 export default defineConfig({
-  root: ".",
-  build: {
+    root: ".",
+    base: './', // Add this line to set the base path to relative
+    build: {
       rollupOptions: {
           input: {
               main: resolve(__dirname, 'index.html'),
