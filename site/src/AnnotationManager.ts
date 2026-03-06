@@ -59,7 +59,7 @@ export class AnnotationManager extends TimeManagerListener {
         for (const annotation of annotations) {
             let annotationDiv = document.createElement("div");
             annotationDiv.classList.add("annotation");
-            annotationDiv.classList.add(annotation.code + "annotation");
+            annotationDiv.classList.add(annotation.code + "-annotation");
             let timeStampDiv = document.createElement("div");
             timeStampDiv.classList.add("annotation-time-stamp");
             timeStampDiv.innerText = this.getStringForTimestamp(annotation);
