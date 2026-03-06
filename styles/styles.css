@@ -202,7 +202,7 @@ h1, h2 {
     background-color: var(--duree-color);
 }
 
-.for-annotation-type {
+.form-annotation-type {
     background-color: var(--formes-color);
 }
 
@@ -226,7 +226,7 @@ h1, h2 {
     border-left-color: var(--duree-color);
 }
 
-.for-annotation {
+.form-annotation {
     border-left-color: var(--formes-color);
 }
 

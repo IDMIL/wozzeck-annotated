@@ -1,4 +1,13 @@
- function buildWindow(lang) {
+import { langaugeCode, text } from "./data/text";
+import {TimeManager} from "./TimeManager";
+import {ScoreManager} from "./ScoreManager";
+import {TransportManager} from "./TransportManager";
+import {TimelineManager} from "./TimelineManager";
+import {AnnotationManager} from "./AnnotationManager";
+
+function buildWindow(lang : langaugeCode ) {
+
+    console.log(lang);
 
     const otherLangPage = lang === 'en' ? 'fr.html' : 'en.html';
     const otherLangName = lang === 'en' ? 'FR' : 'EN';
@@ -47,20 +56,23 @@
     </div>
   </div>
 </div>
-    `
+    `;
 
-  let timeManager = new TimeManager();
+    let timeManager = new TimeManager();
 
-  let scoreManager = new ScoreManager();
-  let transportManager = new TransportManager(timeManager);
-  let timelineManager = new TimelineManager(timeManager);
-  let annotationManager = new AnnotationManager(timeManager);
+    let scoreManager = new ScoreManager();
+    let transportManager = new TransportManager(timeManager);
+    let timelineManager = new TimelineManager(timeManager);
+    let annotationManager = new AnnotationManager(timeManager);
 
-  timeManager.listeners.push(scoreManager);
-  timeManager.listeners.push(transportManager);
-  timeManager.listeners.push(timelineManager);
-  timeManager.listeners.push(annotationManager);
+    timeManager.listeners.push(scoreManager);
+    timeManager.listeners.push(transportManager);
+    timeManager.listeners.push(timelineManager);
+    timeManager.listeners.push(annotationManager);
 
-  timeManager.notifyListeners();
+    timeManager.notifyListeners();
 
 }
+
+// Expose to window so index.html can call it
+(window as any).buildWindow = buildWindow;
