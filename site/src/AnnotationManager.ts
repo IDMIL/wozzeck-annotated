@@ -81,7 +81,7 @@ export class AnnotationManager extends TimeManagerListener {
     }
 
     getStringForTimestamp(annotation : Annotation) {
-        const act_scene = text[globals.language]["ACT"] +
+        const act_scene = text[globals.language]["ACT"] + ' ' +
             annotation.act + ', ' + text[globals.language]["SCENE"] + ' ' +
             this.timeManager.getScene(annotation.act, annotation.measure_range[0]);
 
