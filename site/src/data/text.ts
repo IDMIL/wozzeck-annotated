@@ -1,4 +1,6 @@
-text = {
+export type langaugeCode = "en" | "fr";
+
+export const text = {
     'en' : {
         ACT: 'act',
         SCENE: 'scene',
