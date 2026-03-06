@@ -180,6 +180,44 @@ h1, h2 {
     background: lightgrey;
 }
 
+#annotation-type-selectors {
+    display: flex;
+    gap: 3px;
+    padding-bottom: 5px;
+}
+
+.annotation-type {
+    cursor: pointer;
+}
+
+.annotation-type-hidden {
+    opacity: 50%;
+}
+
+.dy-annotation-type {
+    background-color: var(--dynamiques-color);
+}
+
+.du-annotation-type {
+    background-color: var(--duree-color);
+}
+
+.for-annotation-type {
+    background-color: var(--formes-color);
+}
+
+.int-annotation-type {
+    background-color: var(--intonation-color);
+}
+
+.mo-annotation-type {
+    background-color: var(--motifs-color);
+}
+
+.tim-annotation-type {
+    background-color: var(--timbre-color);
+}
+
 .dy-annotation {
     border-left-color: var(--dynamiques-color);
 }
@@ -202,4 +240,8 @@ h1, h2 {
 
 .tim-annotation {
     border-left-color: var(--timbre-color);
+}
+
+.annotation-hidden {
+    display: none;
 }
