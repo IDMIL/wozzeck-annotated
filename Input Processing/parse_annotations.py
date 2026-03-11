@@ -61,6 +61,10 @@ def parse_annotations(filename, act_number):
                     if len(measure_range) == 1:
                         current_measures = [measure_range[0], measure_range[0]]
                     else:
+                        if (len(str(measure_range[1])) < len(str(measure_range[0]))):
+                            # Number format like 123-35
+                            prefix = str(measure_range[0])[-len(str(measure_range[1]))+1:]
+                            measure_range[1] = int(prefix + str(measure_range[1]))
                         current_measures = [measure_range[0], measure_range[1]]
 
                 a['annotation'] = replaceSymbols(row[2])
@@ -83,5 +87,20 @@ for f in listdir("annotations"):
         act_number = 1
     elif 'actiii' in f.lower():
         act_number = 3
+    else:
+        print("Cannot determine act of", f)
+        continue
     all_annotations += parse_annotations('annotations/' + f, act_number)
-print(all_annotations)
+with open("../site/src/data/annotations.ts", 'w', encoding='utf8') as annotations_file:
+    annotations_file.write("""export type AnnotationCode = 'dy' | 'du' | 'for' | 'int' | 'mo' | 'tim' | 'graph';
+
+export interface Annotation {
+    code : Array<AnnotationCode>;
+    annotation : string;
+    act : number;
+    measure_range : [number, number];
+}
+
+export const annotations : Array<Annotation> =
+""")
+    annotations_file.write(str(all_annotations))
