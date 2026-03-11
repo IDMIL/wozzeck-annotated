@@ -38,7 +38,7 @@ def replaceSymbols(line):
 
 def parse_annotations(filename, act_number):
     annotations = []
-    with open(filename, encoding='ansi') as csvfile:
+    with open(filename, encoding='utf8') as csvfile:
         csvreader = csv.reader(csvfile, delimiter=',')
         is_header = True
         current_measures = None
