@@ -8,7 +8,6 @@ h1, h2 {
 }
 
 #content {
-    position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
@@ -26,8 +25,8 @@ h1, h2 {
         "score  score   transport"
         "score  score   video-player";
     gap: 10px;
-    grid-template-columns: 300px auto 600px;
-    grid-template-rows: 1fr 1fr 1fr 2fr;
+    grid-template-columns: 300px auto auto;
+    grid-template-rows: 300px 400px auto auto;
 }
 
 @media (max-width: 800px) {
