@@ -7,10 +7,11 @@ export class AnnotationManager extends TimeManagerListener {
     annotationCodes : { [code in AnnotationCode] : string; } = {
         'dy' : 'Dynamiques',
         'du': 'Durée',
-        'form' : 'Formes',
+        'for' : 'Formes',
         'int' : 'Intonation',
         'mo' : 'Motifs',
-        'tim' : 'Timbre'
+        'tim' : 'Timbre',
+        'graph' : 'Graphique'
     }
 
     soloedAnnotationCategories : Array<AnnotationCode> = [];
@@ -36,7 +37,6 @@ export class AnnotationManager extends TimeManagerListener {
             codeButton.classList.add('annotation-type');
             codeButton.classList.add(code + '-annotation-type');
             codeButton.onclick = (event) => {
-                console.log(event.shiftKey);
                 if (event.shiftKey && !this.soloedAnnotationCategories.includes(code)) {
                     this.soloedAnnotationCategories.push(code);
                 } else if (event.shiftKey) {
@@ -61,7 +61,12 @@ export class AnnotationManager extends TimeManagerListener {
         for (const annotation of annotations) {
             let annotationDiv = document.createElement("div");
             annotationDiv.classList.add("annotation");
-            annotationDiv.classList.add(annotation.code + "-annotation");
+            for (const code of annotation.code) {
+                annotationDiv.classList.add(code + "-annotation");
+            }
+            if (annotation.code.length === 0) {
+                annotationDiv.classList.add('unclassified-annotation');
+            }
             let timeStampDiv = document.createElement("div");
             timeStampDiv.classList.add("annotation-time-stamp");
             timeStampDiv.innerText = this.getStringForTimestamp(annotation);
@@ -95,6 +100,9 @@ export class AnnotationManager extends TimeManagerListener {
 
     setAnnotationVisibilityFromState() {
         if (this.soloedAnnotationCategories.length === 0) {
+            for (const elem of document.getElementsByClassName('unclassified-annotation')) {
+                elem.classList.remove('annotation-hidden');
+            }
             for (const elem of document.getElementsByClassName('annotation-type')) {
                 elem.classList.remove('annotation-type-hidden');
             }
@@ -104,6 +112,11 @@ export class AnnotationManager extends TimeManagerListener {
             }
             return;
         }
+
+        for (const elem of document.getElementsByClassName('unclassified-annotation')) {
+            elem.classList.add('annotation-hidden');
+        }
+
 
         for (const key in this.annotationCodes) {
             for (const elem of document.getElementsByClassName(key + '-annotation-type')) {

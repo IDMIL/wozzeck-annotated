@@ -94,6 +94,7 @@ h1, h2 {
     --intonation-color: #ff0000;
     --motifs-color: #00b050;
     --timbre-color: #b84507;
+    --graph-color: lightgray;
 }
 
 #video-player {
@@ -202,7 +203,7 @@ h1, h2 {
     background-color: var(--duree-color);
 }
 
-.form-annotation-type {
+.for-annotation-type {
     background-color: var(--formes-color);
 }
 
@@ -218,6 +219,10 @@ h1, h2 {
     background-color: var(--timbre-color);
 }
 
+.graph-annotation-type {
+    background-color: var(--graph-color);
+}
+
 .dy-annotation {
     border-left-color: var(--dynamiques-color);
 }
@@ -226,7 +231,7 @@ h1, h2 {
     border-left-color: var(--duree-color);
 }
 
-.form-annotation {
+.for-annotation {
     border-left-color: var(--formes-color);
 }
 
@@ -240,6 +245,10 @@ h1, h2 {
 
 .tim-annotation {
     border-left-color: var(--timbre-color);
+}
+
+.graph-annotation {
+    /*border-left-color: var(--graph-color);*/
 }
 
 .annotation-hidden {
