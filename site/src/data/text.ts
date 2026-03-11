@@ -12,7 +12,7 @@ export const text = {
         TITLE: '<i>Wozzeck</i> Visual Score',
         BYLINE: 'By Arden Butterfield, François-Hugues Leclair, and Matthieu Galliker',
         ANNOTATIONS: 'Annotations',
-        TIMELINES: 'Timelines',
+        TIMELINES: 'Temporal Structure',
         VIDEO_PLAYER: 'Video Player'
     },
     'fr' : {
@@ -26,7 +26,7 @@ export const text = {
         TITLE: 'Partition visuelle de <i>Wozzeck</i>',
         BYLINE: 'Par Arden Butterfield, François-Hugues Leclair et Matthieu Galliker',
         ANNOTATIONS: 'Annotations',
-        TIMELINES: 'Calendriers',
+        TIMELINES: 'Structure temporelle',
         VIDEO_PLAYER: 'Lecteur vidéo'
     }
 }
