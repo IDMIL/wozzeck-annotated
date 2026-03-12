@@ -30,9 +30,10 @@ def replaceSymbols(line):
 
     parts = line.split(' ')
     for i, p in enumerate(parts):
-        if p.startswith("#") and i > 1 and parts[i-1] in note_names:
+        prev_is_notename = i > 1 and parts[i-1].strip("(") in note_names
+        if p.startswith("#") and prev_is_notename:
             parts[i] = sharp + p[1:]
-        elif p.startswith("b") and i > 1 and parts[i-1] in note_names and (len(p) == 1 or not p[1].isalpha()):
+        elif p.startswith("b") and prev_is_notename and (len(p) == 1 or not p[1].isalpha()):
             parts[i] = flat + p[1:]
     return ' '.join(parts)
 
@@ -73,8 +74,10 @@ def parse_annotations(filename, act_number, isGeneral):
                     if len(page_range) == 1:
                         measure_range = pageToBarRange(page_range[0])
                         current_measures = [measure_range[0], measure_range[1]]
+                        page_range = [page_range[0], page_range[0]]
                     else:
                         current_measures = [pageToBarRange(page_range[0])[0], pageToBarRange(page_range[1])[1]]
+
                 elif row[1] != '':
                     measure_range = row[1].split('-')
                     try:
@@ -95,6 +98,7 @@ def parse_annotations(filename, act_number, isGeneral):
                 a['annotation'] = replaceSymbols(row[2])
                 a['act'] = act_number
                 a['is_general'] = isGeneral
+                a['page_range'] = page_range if isGeneral else [0,0]
                 a['measure_range'] = current_measures
                 annotations.append(a)
     return annotations
@@ -103,7 +107,7 @@ def test_replaceFlatSymbols():
     print(replaceSymbols("Intervalle de Ré dièse-Si bécarre"))
     print(replaceSymbols("Accord important : Si b - Do # - Mi - Sol # - Mi b - Fa (3ce min. entre Si b et Do #, 5te entre Sol # et Mi b, 9e min entre Mi et Fa)"))
     print(replaceSymbols("al chromatique et sensation de pentatonique (sauf Mi) sur Ré b (Do #, note de la soumission) et cycle de 5te (sauf Mi) : Ré b - La b - Mi b - Si b - Fa"))
-
+    print(replaceSymbols("(Do #, note de la soumission)"))
 # test_replaceFlatSymbols()
 # # print(parse_annotations("annotations/W-ActIIISce4_withCode.csv", 3))
 all_annotations = []
@@ -127,6 +131,7 @@ export interface Annotation {
     annotation : string;
     act : number;
     is_general: boolean;
+    page_range: [number, number];
     measure_range : [number, number];
 }
 

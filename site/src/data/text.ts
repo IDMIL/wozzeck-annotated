@@ -13,7 +13,8 @@ export const text = {
         BYLINE: 'By Arden Butterfield, François-Hugues Leclair, and Matthieu Galliker',
         ANNOTATIONS: 'Annotations',
         TIMELINES: 'Temporal Structure',
-        VIDEO_PLAYER: 'Video Player'
+        VIDEO_PLAYER: 'Video Player',
+        PAGE: 'page'
     },
     'fr' : {
         ACT: 'acte',
@@ -27,6 +28,7 @@ export const text = {
         BYLINE: 'Par Arden Butterfield, François-Hugues Leclair et Matthieu Galliker',
         ANNOTATIONS: 'Annotations',
         TIMELINES: 'Structure temporelle',
-        VIDEO_PLAYER: 'Lecteur vidéo'
+        VIDEO_PLAYER: 'Lecteur vidéo',
+        PAGE: 'page'
     }
 }

@@ -90,6 +90,13 @@ export class AnnotationManager extends TimeManagerListener {
             annotation.act + ', ' + text[globals.language]["SCENE"] + ' ' +
             this.timeManager.getScene(annotation.act, annotation.measure_range[0]);
 
+        if (annotation.is_general) {
+            const pages = text[globals.language]["PAGE"] + ' ' + (
+            (annotation.page_range[0] === annotation.page_range[1])
+                ? annotation.page_range[0] : [annotation.page_range[0]] + '–' + annotation.page_range[1]);
+            return act_scene + ', ' + pages;
+        }
+
         const mr = annotation.measure_range;
         const measure = (mr[0] === mr[1]) ?
             (text[globals.language]["BAR"] + ' ' + mr[0]) :
