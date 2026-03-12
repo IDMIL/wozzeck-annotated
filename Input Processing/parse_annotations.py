@@ -63,8 +63,9 @@ def parse_annotations(filename, act_number):
                     else:
                         if (len(str(measure_range[1])) < len(str(measure_range[0]))):
                             # Number format like 123-35
-                            prefix = str(measure_range[0])[-len(str(measure_range[1]))+1:]
+                            prefix = str(measure_range[0])[:-len(str(measure_range[1]))]
                             measure_range[1] = int(prefix + str(measure_range[1]))
+
                         current_measures = [measure_range[0], measure_range[1]]
 
                 a['annotation'] = replaceSymbols(row[2])
