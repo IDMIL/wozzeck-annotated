@@ -36,7 +36,21 @@ def replaceSymbols(line):
             parts[i] = flat + p[1:]
     return ' '.join(parts)
 
-def parse_annotations(filename, act_number):
+def getStartMeasures(a):
+    with open(f'act{a}pagebars.txt', 'r') as f:
+        lines = f.readlines()
+    return [int(l.split("#")[0].strip().split(".")[0]) for l in lines]
+
+start_measures = [getStartMeasures(1) + [717], getStartMeasures(2) + [818], getStartMeasures(3) + [392]]
+firstpages = [5, 174, 381]
+
+def pageToBarRange(page : int):
+    for act in range(len(firstpages)-1, -1, -1):
+        if page >= firstpages[act]:
+            return (start_measures[act][page - firstpages[act]],
+                    start_measures[act][page + 1 - firstpages[act]] - 1)
+
+def parse_annotations(filename, act_number, isGeneral):
     annotations = []
     with open(filename, encoding='utf8') as csvfile:
         csvreader = csv.reader(csvfile, delimiter=',')
@@ -50,8 +64,18 @@ def parse_annotations(filename, act_number):
                     continue
                 a = {}
                 a['code'] = parseAnnotationCodes(row[0])
-
-                if row[1] != '':
+                if isGeneral and row[1] != '':
+                    page_range = row[1].split('-')
+                    try:
+                        page_range = [int(i) for i in page_range]
+                    except ValueError:
+                        print("cannot parse measure range", page_range, "on row", row, "in", filename)
+                    if len(page_range) == 1:
+                        measure_range = pageToBarRange(page_range[0])
+                        current_measures = [measure_range[0], measure_range[1]]
+                    else:
+                        current_measures = [pageToBarRange(page_range[0])[0], pageToBarRange(page_range[1])[1]]
+                elif row[1] != '':
                     measure_range = row[1].split('-')
                     try:
                         measure_range = [int(i) for i in measure_range]
@@ -70,6 +94,7 @@ def parse_annotations(filename, act_number):
 
                 a['annotation'] = replaceSymbols(row[2])
                 a['act'] = act_number
+                a['is_general'] = isGeneral
                 a['measure_range'] = current_measures
                 annotations.append(a)
     return annotations
@@ -91,7 +116,7 @@ for f in listdir("annotations"):
     else:
         print("Cannot determine act of", f)
         continue
-    all_annotations += parse_annotations('annotations/' + f, act_number)
+    all_annotations += parse_annotations('annotations/' + f, act_number, "general" in f.lower())
 
 all_annotations.sort(key=lambda a: a['act'] * 10000 + a['measure_range'][0])
 with open("../site/src/data/annotations.ts", 'w', encoding='utf8') as annotations_file:
@@ -101,9 +126,12 @@ export interface Annotation {
     code : Array<AnnotationCode>;
     annotation : string;
     act : number;
+    is_general: boolean;
     measure_range : [number, number];
 }
 
 export const annotations : Array<Annotation> =
 """)
-    annotations_file.write(str(all_annotations))
+    annotations_file.write(str(all_annotations)
+                           .replace("'is_general': False", "'is_general': false")
+                           .replace("'is_general': True", "'is_general': true"))
