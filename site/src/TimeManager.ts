@@ -15,9 +15,8 @@ export interface ScoreTime {
 }
 
 export class TimeManagerListener {
-    async timeUpdated(scoreTime : ScoreTime) {
+    async timeUpdated(_ : ScoreTime) {
         // Called when the time is set to this time. Classes should modify the view as needed to reflect this position.
-        console.log(scoreTime);
     }
 
     async preloadTime(_ : ScoreTime) {
@@ -66,7 +65,6 @@ export class TimeManager {
                 time.bar = this.getLengthOfAct(time.act);
             }
         }
-        console.log(time);
     }
 
     advanceBar(numBars : number) {

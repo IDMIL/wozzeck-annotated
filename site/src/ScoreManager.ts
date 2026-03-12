@@ -2,7 +2,7 @@ import {ScoreTime, TimeManager, TimeManagerListener} from "./TimeManager";
 import {bar_to_page} from "./data/barToPage";
 
 export class ScoreManager extends TimeManagerListener {
-    private currentPage: undefined | number;
+    private currentPage: undefined | string;
 
     constructor(tm : TimeManager) {
         super();
@@ -33,9 +33,8 @@ export class ScoreManager extends TimeManagerListener {
     }
 
     async timeUpdated(scoreTime : ScoreTime) {
-        let newPage : number = bar_to_page[scoreTime.act-1][scoreTime.bar].page;
+        let newPage : string = bar_to_page[scoreTime.act-1][scoreTime.bar].image;
         let im = document.getElementById('score-viewer-image') as HTMLImageElement;
-
         if (newPage !== this.currentPage) {
             this.currentPage = newPage;
             im.src = bar_to_page[scoreTime.act-1][scoreTime.bar].image;
