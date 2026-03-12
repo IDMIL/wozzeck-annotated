@@ -92,6 +92,8 @@ for f in listdir("annotations"):
         print("Cannot determine act of", f)
         continue
     all_annotations += parse_annotations('annotations/' + f, act_number)
+
+all_annotations.sort(key=lambda a: a['act'] * 10000 + a['measure_range'][0])
 with open("../site/src/data/annotations.ts", 'w', encoding='utf8') as annotations_file:
     annotations_file.write("""export type AnnotationCode = 'dy' | 'du' | 'for' | 'int' | 'mo' | 'tim' | 'graph';
 
