@@ -16,7 +16,13 @@ export interface ScoreTime {
 
 export class TimeManagerListener {
     timeUpdated(scoreTime : ScoreTime) {
+        // Called when the time is set to this time. Classes should modify the view as needed to reflect this position.
         console.log(scoreTime);
+    }
+
+    preloadTime(_ : ScoreTime) {
+        // Called when a user action suggests an intent to go to a time (for example, hovering over a button). Classes
+        // should fetch resources or perform calculations as needed for the update, so that they can respond quicker.
     }
 }
 
@@ -31,6 +37,13 @@ export class TimeManager {
         this.scoreTime.beat = beat;
 
         this.notifyListeners();
+    }
+
+    preloadTime(time: ScoreTime) {
+        for (const listener of this.listeners) {
+            listener.preloadTime(time);
+        }
+
     }
 
     addToTime(time : ScoreTime, numBars : number) {

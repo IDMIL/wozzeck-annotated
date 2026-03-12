@@ -26,6 +26,11 @@ export class TimelineManager extends TimeManagerListener {
                 actDiv.onclick = () => {
                     this.timeManager.goToTime(i + 1, 1, 1);
                 }
+                actDiv.onmouseenter = () => {
+                    this.timeManager.preloadTime({act: i + 1, bar: 1, beat: 1, barLength: 1});
+                }
+
+
                 actsTimeline.appendChild(actDiv);
             }
         }
@@ -46,6 +51,10 @@ export class TimelineManager extends TimeManagerListener {
                     const sceneBar = sceneBarRange[0];
                     sceneDiv.onclick = () => {
                         this.timeManager.goToTime(a, sceneBar, 1);
+                    }
+
+                    sceneDiv.onmouseenter = () => {
+                        this.timeManager.preloadTime({act: a, bar: sceneBar, beat: 1, barLength: 1});
                     }
                     scenesTimeline.appendChild(sceneDiv);
                     sceneNumber++;
@@ -94,8 +103,11 @@ export class TimelineManager extends TimeManagerListener {
                     const rect = sceneStructureDiv.getBoundingClientRect();
                     timelineCursor.style.left = event.clientX - rect.x + "px";
                     const proportion = (event.clientX - rect.x) / (rect.width);
-                    cursorLabel.innerText = "bar " + this.#getBarAtProportionOfCurrentScene(proportion);
+                    let barNumber = this.#getBarAtProportionOfCurrentScene(proportion);
+                    cursorLabel.innerText = "bar " + barNumber;
+                    this.timeManager.preloadTime({act: this.timeManager.getCurrentAct(), bar: barNumber, beat: 1, barLength: 1})
                 }
+
 
             });
 

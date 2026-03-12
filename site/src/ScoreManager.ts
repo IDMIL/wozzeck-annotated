@@ -10,6 +10,10 @@ export class ScoreManager extends TimeManagerListener {
         this.timeManager = tm;
     }
 
+    preloadTime(time: ScoreTime) {
+        this.preloadImage(bar_to_page[time.act - 1][time.bar].image);
+    }
+
     preloadImage(url : string) {
         var img=new Image();
         img.src=url;
@@ -17,7 +21,7 @@ export class ScoreManager extends TimeManagerListener {
 
     preloadAround(time : ScoreTime, numBars: number) {
         let timeCopy : ScoreTime = {act: time.act, bar: time.bar, beat: time.beat, barLength: time.barLength};
-        for (let i = 1; i <= numBars; ++i) {
+        for (let i = 0; i <= numBars; ++i) {
             this.timeManager.addToTime(timeCopy, i);
             this.preloadImage(bar_to_page[timeCopy.act - 1][timeCopy.bar].image);
         }
