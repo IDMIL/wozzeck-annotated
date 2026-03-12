@@ -141,7 +141,7 @@ export class AnnotationManager extends TimeManagerListener {
         }
     }
 
-    timeUpdated(scoreTime : ScoreTime) {
+    async timeUpdated(scoreTime : ScoreTime) {
         const scroller = document.getElementById('annotations-scroller');
         if (scroller === null) {
             return;
