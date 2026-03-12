@@ -15,6 +15,19 @@ export class ScoreManager extends TimeManagerListener {
         img.src=url;
     }
 
+    preloadAround(time : ScoreTime, numBars: number) {
+        let timeCopy : ScoreTime = {act: time.act, bar: time.bar, beat: time.beat, barLength: time.barLength};
+        for (let i = 1; i <= numBars; ++i) {
+            this.timeManager.addToTime(timeCopy, i);
+            this.preloadImage(bar_to_page[timeCopy.act - 1][timeCopy.bar].image);
+        }
+        timeCopy = {act: time.act, bar: time.bar, beat: time.beat, barLength: time.barLength};
+        for (let i = 1; i <= numBars; ++i) {
+            this.timeManager.addToTime(timeCopy, -i);
+            this.preloadImage(bar_to_page[timeCopy.act - 1][timeCopy.bar].image);
+        }
+    }
+
     timeUpdated(scoreTime : ScoreTime) {
         let newPage : number = bar_to_page[scoreTime.act-1][scoreTime.bar].page;
         let im = document.getElementById('score-viewer-image') as HTMLImageElement;
@@ -37,6 +50,8 @@ export class ScoreManager extends TimeManagerListener {
             overlay.style.width = overlayWidth + "px";
             overlay.style.height = overlayHeight + "px";
         }
+
+        this.preloadAround(scoreTime, 5);
     }
 
     timeManager;
