@@ -26,7 +26,6 @@ export class TimeManager {
     }
 
     goToTime(act : Act, bar : Bar, beat : Beat) {
-        console.log(`goToTime(${act}, ${bar}, ${beat})`);
         this.scoreTime.act = act;
         this.scoreTime.bar = bar;
         this.scoreTime.beat = beat;
@@ -34,13 +33,36 @@ export class TimeManager {
         this.notifyListeners();
     }
 
+    addToTime(time : ScoreTime, numBars : number) {
+        time.bar = time.bar + numBars;
+
+        while (time.bar < 1) {
+            if (time.act > 1) {
+                time.act -= 1;
+                time.bar += this.getLengthOfAct(time.act);
+            } else {
+                time.bar = 1;
+            }
+        }
+
+        while (time.bar > this.getLengthOfAct(time.act)) {
+            if (time.act < this.getNumActs()) {
+                time.bar -= this.getLengthOfAct(time.act);
+                time.act += 1;
+            } else {
+                time.bar = this.getLengthOfAct(time.act);
+            }
+        }
+        console.log(time);
+    }
+
     advanceBar(numBars : number) {
-        this.scoreTime.bar += numBars;
+        this.addToTime(this.scoreTime, numBars);
+
         this.notifyListeners();
     }
 
     notifyListeners() {
-        console.log("notifying listeners of scoreTime", this.scoreTime);
         for (const listener of this.listeners) {
             listener.timeUpdated(this.scoreTime);
         }
@@ -72,6 +94,14 @@ export class TimeManager {
             }
         }
         return 1;
+    }
+
+    getNumActs() : number {
+        return scene_bar_ranges.length;
+    }
+
+    getLengthOfAct(act: Act) : number {
+        return scene_bar_ranges[act-1][scene_bar_ranges[act-1].length - 1][1];
     }
 
     getProportionOfCurrentScene() : number {

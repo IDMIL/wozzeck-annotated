@@ -1,12 +1,18 @@
-import {ScoreTime, TimeManagerListener} from "./TimeManager";
+import {ScoreTime, TimeManager, TimeManagerListener} from "./TimeManager";
 import {bar_to_page} from "./data/barToPage";
 
 export class ScoreManager extends TimeManagerListener {
     private currentPage: undefined | number;
 
-    constructor() {
+    constructor(tm : TimeManager) {
         super();
         this.currentPage = undefined;
+        this.timeManager = tm;
+    }
+
+    preloadImage(url : string) {
+        var img=new Image();
+        img.src=url;
     }
 
     timeUpdated(scoreTime : ScoreTime) {
@@ -30,7 +36,8 @@ export class ScoreManager extends TimeManagerListener {
             overlay.style.left = overlayX + "px";
             overlay.style.width = overlayWidth + "px";
             overlay.style.height = overlayHeight + "px";
-            console.log("set overlay dimensions", overlayX, overlayY, overlayWidth, overlayHeight);
         }
     }
+
+    timeManager;
 }

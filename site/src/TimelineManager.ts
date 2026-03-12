@@ -24,7 +24,6 @@ export class TimelineManager extends TimeManagerListener {
                 actDiv.innerText = (i + 1).toString();
                 actDiv.style.width = (actLengths[i] * 100 / totalLength) + "%";
                 actDiv.onclick = () => {
-                    console.log("timeline button clicked, act " + (i + 1));
                     this.timeManager.goToTime(i + 1, 1, 1);
                 }
                 actsTimeline.appendChild(actDiv);
@@ -46,7 +45,6 @@ export class TimelineManager extends TimeManagerListener {
                     const a = actNumber;
                     const sceneBar = sceneBarRange[0];
                     sceneDiv.onclick = () => {
-                        console.log("timeline button clicked, act " + actNumber + " scene " + sceneNumber);
                         this.timeManager.goToTime(a, sceneBar, 1);
                     }
                     scenesTimeline.appendChild(sceneDiv);
@@ -115,7 +113,6 @@ export class TimelineManager extends TimeManagerListener {
 
     timeUpdated(_ : ScoreTime) {
 
-        console.log("timeline update")
         const act = this.timeManager.getCurrentAct();
         const scene = this.timeManager.getCurrentScene();
 
@@ -146,7 +143,6 @@ export class TimelineManager extends TimeManagerListener {
         if (sceneStructure !== null && currentBarCursor !== null) {
             const rect = sceneStructure.getBoundingClientRect();
             const p = rect.width * this.timeManager.getProportionOfCurrentScene();
-            console.log(p);
             currentBarCursor.style.left = p + "px";
         }
     }

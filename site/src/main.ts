@@ -60,7 +60,7 @@ function buildWindow(lang : LanguageCode ) {
 
     let timeManager = new TimeManager();
 
-    let scoreManager = new ScoreManager();
+    let scoreManager = new ScoreManager(timeManager);
     let transportManager = new TransportManager(timeManager);
     let timelineManager = new TimelineManager(timeManager);
     let annotationManager = new AnnotationManager(timeManager);
