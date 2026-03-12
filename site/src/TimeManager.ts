@@ -15,12 +15,12 @@ export interface ScoreTime {
 }
 
 export class TimeManagerListener {
-    timeUpdated(scoreTime : ScoreTime) {
+    async timeUpdated(scoreTime : ScoreTime) {
         // Called when the time is set to this time. Classes should modify the view as needed to reflect this position.
         console.log(scoreTime);
     }
 
-    preloadTime(_ : ScoreTime) {
+    async preloadTime(_ : ScoreTime) {
         // Called when a user action suggests an intent to go to a time (for example, hovering over a button). Classes
         // should fetch resources or perform calculations as needed for the update, so that they can respond quicker.
     }

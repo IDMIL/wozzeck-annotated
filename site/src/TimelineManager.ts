@@ -123,7 +123,7 @@ export class TimelineManager extends TimeManagerListener {
         }
     }
 
-    timeUpdated(_ : ScoreTime) {
+    async timeUpdated(_ : ScoreTime) {
 
         const act = this.timeManager.getCurrentAct();
         const scene = this.timeManager.getCurrentScene();

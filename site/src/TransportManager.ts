@@ -38,7 +38,7 @@ export class TransportManager extends TimeManagerListener {
         }
     }
 
-    timeUpdated(scoreTime : ScoreTime) {
+    async timeUpdated(scoreTime : ScoreTime) {
         const transportActNumber = document.getElementById("transportActNumber");
         if (transportActNumber !== null) {
             transportActNumber.innerText = scoreTime.act.toString();

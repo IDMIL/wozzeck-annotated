@@ -10,7 +10,7 @@ export class ScoreManager extends TimeManagerListener {
         this.timeManager = tm;
     }
 
-    preloadTime(time: ScoreTime) {
+    async preloadTime(time: ScoreTime) {
         this.preloadImage(bar_to_page[time.act - 1][time.bar].image);
     }
 
@@ -32,7 +32,7 @@ export class ScoreManager extends TimeManagerListener {
         }
     }
 
-    timeUpdated(scoreTime : ScoreTime) {
+    async timeUpdated(scoreTime : ScoreTime) {
         let newPage : number = bar_to_page[scoreTime.act-1][scoreTime.bar].page;
         let im = document.getElementById('score-viewer-image') as HTMLImageElement;
 
