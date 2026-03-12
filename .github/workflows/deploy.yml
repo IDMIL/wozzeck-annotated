@@ -12,10 +12,11 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v6
 
-      - name: Prepare annotations
+      - name: Pre-process data
         run: |
           cd Input\ Processing
           python parse_annotations.py
+          python getBarMappingsDummyMeasurebounds.py
           cd ..
 
       - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
