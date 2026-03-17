@@ -3,7 +3,10 @@ export type LanguageCode = "en" | "fr";
 export const text = {
     'en' : {
         ACT: 'act',
+        ACTS: 'acts',
         SCENE: 'scene',
+        SCENES: 'scenes',
+        SCENE_STRUCTURE: 'scene structure',
         BAR: 'bar',
         BARS: 'bars',
         BEAT: 'beat',
@@ -18,7 +21,10 @@ export const text = {
     },
     'fr' : {
         ACT: 'acte',
+        ACTS: 'actes',
         SCENE: 'scène',
+        SCENES: 'scenes',
+        SCENE_STRUCTURE: 'structure scénique',
         BAR: 'mesure',
         BARS: 'mesures',
         BEAT: 'temps',

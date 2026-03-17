@@ -22,9 +22,6 @@ function buildWindow(lang : LanguageCode ) {
     </div>
     <div class="section" id="timelines-section">
       <h2>` + text[globals.language].TIMELINES + `</h2>
-      <div class="timeline" id="acts-timeline"></div>
-      <div class="timeline" id="scenes-timeline"></div>
-      <div class="timeline" id="scene-structure-timeline"></div>
     </div>
     <div class="section" id="score-viewer-section">
     <div id="image-holder">

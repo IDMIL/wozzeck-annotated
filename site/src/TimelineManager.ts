@@ -17,120 +17,152 @@ export class TimelineManager extends TimeManagerListener {
             actLengths.push(l);
         }
 
-        let actsTimeline = document.getElementById("acts-timeline");
-        if (actsTimeline !== null) {
-            for (let i = 0; i < actLengths.length; i++) {
-                let actDiv = document.createElement("div");
-                actDiv.id = "timeline-act-" + (i + 1);
-                actDiv.classList.add("timeline-button");
-                actDiv.classList.add("timeline-act");
-                actDiv.innerText = (i + 1).toString();
-                actDiv.style.width = (actLengths[i] * 100 / totalLength) + "%";
-                actDiv.onclick = () => {
-                    this.timeManager.goToTime(i + 1, 1, 1);
-                }
-                actDiv.onmouseenter = () => {
-                    this.timeManager.preloadTime({act: i + 1, bar: 1, beat: 1, barLength: 1});
-                }
+        let timelineSection = document.getElementById("timelines-section");
+        if (timelineSection === null) {
+            return;
+        }
+        let actsSection = document.createElement("div");
+        actsSection.id = "acts-timeline";
+        actsSection.classList.add("timeline-container");
+        let actsHeading = document.createElement("h3");
+        actsHeading.innerText = text[globals.language].ACTS;
+        let actsTimeline = document.createElement("div");
+        actsTimeline.classList.add("timeline");
+
+        actsSection.appendChild(actsHeading);
+        actsSection.appendChild(actsTimeline);
+        timelineSection.appendChild(actsSection);
 
 
-                actsTimeline.appendChild(actDiv);
+        let scenesSection = document.createElement("div");
+        scenesSection.id = "scenes-timeline";
+        scenesSection.classList.add("timeline-container");
+        let scenesHeading = document.createElement("h3");
+        scenesHeading.innerText = text[globals.language].SCENES;
+        let scenesTimeline = document.createElement("div");
+        scenesTimeline.classList.add("timeline");
+
+        scenesSection.appendChild(scenesHeading);
+        scenesSection.appendChild(scenesTimeline);
+        timelineSection.appendChild(scenesSection);
+
+
+        let sceneStructureSection = document.createElement("div");
+        sceneStructureSection.id = "scene-structure-timeline";
+        sceneStructureSection.classList.add("timeline-container");
+        let sceneStructureHeading = document.createElement("h3");
+        sceneStructureHeading.innerText = text[globals.language].SCENE_STRUCTURE;
+        let sceneStructureTimeline = document.createElement("div");
+        sceneStructureTimeline.classList.add("timeline");
+
+        sceneStructureSection.appendChild(sceneStructureHeading);
+        sceneStructureSection.appendChild(sceneStructureTimeline);
+        timelineSection.appendChild(sceneStructureSection);
+
+        for (let i = 0; i < actLengths.length; i++) {
+            let actDiv = document.createElement("div");
+            actDiv.id = "timeline-act-" + (i + 1);
+            actDiv.classList.add("timeline-button");
+            actDiv.classList.add("timeline-act");
+            actDiv.innerText = (i + 1).toString();
+            actDiv.style.width = (actLengths[i] * 100 / totalLength) + "%";
+            actDiv.onclick = () => {
+                this.timeManager.goToTime(i + 1, 1, 1);
             }
+            actDiv.onmouseenter = () => {
+                this.timeManager.preloadTime({act: i + 1, bar: 1, beat: 1, barLength: 1});
+            }
+
+            actsTimeline.appendChild(actDiv);
         }
 
-        let scenesTimeline = document.getElementById("scenes-timeline");
-        if (scenesTimeline !== null) {
-            let actNumber = 1;
-            for (const actBarRange of scene_bar_ranges) {
-                let sceneNumber = 1;
-                for (const sceneBarRange of actBarRange) {
-                    let sceneDiv = document.createElement("div");
-                    sceneDiv.id = "timeline-act-" + actNumber + "-scene-" + sceneNumber;
-                    sceneDiv.classList.add("timeline-button");
-                    sceneDiv.classList.add("timeline-scene");
-                    sceneDiv.style.width = ((sceneBarRange[1] + 1 - sceneBarRange[0]) * 100 / totalLength) + "%";
-                    sceneDiv.innerText = sceneNumber.toString();
-                    const a = actNumber;
-                    const sceneBar = sceneBarRange[0];
-                    sceneDiv.onclick = () => {
-                        this.timeManager.goToTime(a, sceneBar, 1);
-                    }
-
-                    sceneDiv.onmouseenter = () => {
-                        this.timeManager.preloadTime({act: a, bar: sceneBar, beat: 1, barLength: 1});
-                    }
-                    scenesTimeline.appendChild(sceneDiv);
-                    sceneNumber++;
+        let actNumber = 1;
+        for (const actBarRange of scene_bar_ranges) {
+            let sceneNumber = 1;
+            for (const sceneBarRange of actBarRange) {
+                let sceneDiv = document.createElement("div");
+                sceneDiv.id = "timeline-act-" + actNumber + "-scene-" + sceneNumber;
+                sceneDiv.classList.add("timeline-button");
+                sceneDiv.classList.add("timeline-scene");
+                sceneDiv.style.width = ((sceneBarRange[1] + 1 - sceneBarRange[0]) * 100 / totalLength) + "%";
+                sceneDiv.innerText = sceneNumber.toString();
+                const a = actNumber;
+                const sceneBar = sceneBarRange[0];
+                sceneDiv.onclick = () => {
+                    this.timeManager.goToTime(a, sceneBar, 1);
                 }
-                actNumber++;
+
+                sceneDiv.onmouseenter = () => {
+                    this.timeManager.preloadTime({act: a, bar: sceneBar, beat: 1, barLength: 1});
+                }
+                scenesTimeline.appendChild(sceneDiv);
+                sceneNumber++;
             }
+            actNumber++;
         }
 
-        let sceneStructureTimeline = document.getElementById("scene-structure-timeline");
-        if (sceneStructureTimeline !== null) {
-            let sceneStructureDiv = document.createElement("div");
-            sceneStructureDiv.classList.add("timeline-button");
-            sceneStructureDiv.id = "scene-structure-button";
-            sceneStructureDiv.style.width = "100%";
-            sceneStructureTimeline.appendChild(sceneStructureDiv);
+        let sceneStructureDiv = document.createElement("div");
+        sceneStructureDiv.classList.add("timeline-button");
+        sceneStructureDiv.id = "scene-structure-button";
+        sceneStructureDiv.style.width = "100%";
+        sceneStructureTimeline.appendChild(sceneStructureDiv);
 
-            let currentBarCursorDiv = document.createElement("div");
-            currentBarCursorDiv.id = "timeline-current-bar-cursor";
-            sceneStructureDiv.appendChild(currentBarCursorDiv);
+        let currentBarCursorDiv = document.createElement("div");
+        currentBarCursorDiv.id = "timeline-current-bar-cursor";
+        sceneStructureDiv.appendChild(currentBarCursorDiv);
 
-            let cursorDiv = document.createElement("div");
-            cursorDiv.id = "timeline-cursor";
-            sceneStructureDiv.appendChild(cursorDiv);
-            let cursorLabel = document.createElement("div");
-            cursorLabel.id = "timeline-cursor-label";
-            cursorDiv.appendChild(cursorLabel);
+        let cursorDiv = document.createElement("div");
+        cursorDiv.id = "timeline-cursor";
+        sceneStructureDiv.appendChild(cursorDiv);
+        let cursorLabel = document.createElement("div");
+        cursorLabel.id = "timeline-cursor-label";
+        cursorDiv.appendChild(cursorLabel);
 
-            sceneStructureDiv.addEventListener("mouseenter", () => {
-                let timelineCursor = document.getElementById("timeline-cursor");
-                if (timelineCursor !== null) {
-                    timelineCursor.style.display = "block";
-                }
-            });
+        sceneStructureDiv.addEventListener("mouseenter", () => {
+            let timelineCursor = document.getElementById("timeline-cursor");
+            if (timelineCursor !== null) {
+                timelineCursor.style.display = "block";
+            }
+        });
 
-            sceneStructureDiv.addEventListener("mouseleave", () => {
-                let timelineCursor = document.getElementById("timeline-cursor");
-                if (timelineCursor !== null) {
-                    timelineCursor.style.display = "none";
-                }
-            });
+        sceneStructureDiv.addEventListener("mouseleave", () => {
+            let timelineCursor = document.getElementById("timeline-cursor");
+            if (timelineCursor !== null) {
+                timelineCursor.style.display = "none";
+            }
+        });
 
 
-            sceneStructureDiv.addEventListener("mousemove", (event) => {
-                let timelineCursor = document.getElementById("timeline-cursor");
-                if (timelineCursor !== null) {
-                    const rect = sceneStructureDiv.getBoundingClientRect();
-                    timelineCursor.style.left = event.clientX - rect.x + "px";
-                    const proportion = (event.clientX - rect.x) / (rect.width);
-                    const barNumber = this.#getBarAtProportionOfCurrentScene(proportion);
-                    const pageNumber = bar_to_page[this.timeManager.getCurrentAct() - 1][barNumber].page + act_starting_pages[this.timeManager.getCurrentAct() - 1] - 1;
-                    cursorLabel.innerText = text[globals.language].BAR + " " + barNumber + ", " +
-                        text[globals.language].PAGE + " " + pageNumber;
-                    this.timeManager.preloadTime({act: this.timeManager.getCurrentAct(), bar: barNumber, beat: 1, barLength: 1})
-                    if (proportion > 0.75) {
-                        timelineCursor.classList.add("left");
-                    } else {
-                        timelineCursor.classList.remove("left");
-                    }
-                }
-
-
-            });
-
-            sceneStructureDiv.addEventListener("click", (event) => {
+        sceneStructureDiv.addEventListener("mousemove", (event) => {
+            let timelineCursor = document.getElementById("timeline-cursor");
+            if (timelineCursor !== null) {
                 const rect = sceneStructureDiv.getBoundingClientRect();
-                const clickProportion = (event.clientX - rect.x) / (rect.width);
+                timelineCursor.style.left = event.clientX - rect.x + "px";
+                const proportion = (event.clientX - rect.x) / (rect.width);
+                const barNumber = this.#getBarAtProportionOfCurrentScene(proportion);
+                const pageNumber = bar_to_page[this.timeManager.getCurrentAct() - 1][barNumber].page + act_starting_pages[this.timeManager.getCurrentAct() - 1] - 1;
+                cursorLabel.innerText = text[globals.language].BAR + " " + barNumber + ", " +
+                    text[globals.language].PAGE + " " + pageNumber;
+                this.timeManager.preloadTime({act: this.timeManager.getCurrentAct(), bar: barNumber, beat: 1, barLength: 1})
+                if (proportion > 0.75) {
+                    timelineCursor.classList.add("left");
+                } else {
+                    timelineCursor.classList.remove("left");
+                }
+            }
 
-                this.timeManager.goToTime(
-                    this.timeManager.getCurrentAct(),
-                    this.#getBarAtProportionOfCurrentScene(clickProportion),
-                    1);
-            });
-        }
+
+        });
+
+        sceneStructureDiv.addEventListener("click", (event) => {
+            const rect = sceneStructureDiv.getBoundingClientRect();
+            const clickProportion = (event.clientX - rect.x) / (rect.width);
+
+            this.timeManager.goToTime(
+                this.timeManager.getCurrentAct(),
+                this.#getBarAtProportionOfCurrentScene(clickProportion),
+                1);
+        });
     }
 
     async timeUpdated(_ : ScoreTime) {
