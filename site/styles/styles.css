@@ -149,6 +149,14 @@ h1, h2 {
 #timeline-cursor-label {
     width: 100px;
     padding-left: 5px;
+    white-space: nowrap;
+    position: relative;
+}
+
+#timeline-cursor.left #timeline-cursor-label {
+    left: -210px;
+    text-align: right;
+    width: 200px;
 }
 
 .current-act {

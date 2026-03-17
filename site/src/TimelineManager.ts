@@ -1,5 +1,8 @@
 import {ScoreTime, TimeManager, TimeManagerListener} from "./TimeManager";
 import {scene_bar_ranges} from "./data/sceneBarRanges";
+import {globals} from "./globals";
+import {text} from "./data/text";
+import {act_starting_pages, bar_to_page} from "./data/barToPage";
 
 export class TimelineManager extends TimeManagerListener {
     constructor(tm : TimeManager) {
@@ -9,7 +12,7 @@ export class TimelineManager extends TimeManagerListener {
         let actLengths = [];
         let totalLength = 0;
         for (const actBarRanges of scene_bar_ranges) {
-            const l = actBarRanges[actBarRanges.length - 1][1] - actBarRanges[0][0];
+            const l = actBarRanges[actBarRanges.length - 1][1] + 1 - actBarRanges[0][0];
             totalLength += l;
             actLengths.push(l);
         }
@@ -45,7 +48,7 @@ export class TimelineManager extends TimeManagerListener {
                     sceneDiv.id = "timeline-act-" + actNumber + "-scene-" + sceneNumber;
                     sceneDiv.classList.add("timeline-button");
                     sceneDiv.classList.add("timeline-scene");
-                    sceneDiv.style.width = ((sceneBarRange[1] - sceneBarRange[0]) * 100 / totalLength) + "%";
+                    sceneDiv.style.width = ((sceneBarRange[1] + 1 - sceneBarRange[0]) * 100 / totalLength) + "%";
                     sceneDiv.innerText = sceneNumber.toString();
                     const a = actNumber;
                     const sceneBar = sceneBarRange[0];
@@ -103,9 +106,16 @@ export class TimelineManager extends TimeManagerListener {
                     const rect = sceneStructureDiv.getBoundingClientRect();
                     timelineCursor.style.left = event.clientX - rect.x + "px";
                     const proportion = (event.clientX - rect.x) / (rect.width);
-                    let barNumber = this.#getBarAtProportionOfCurrentScene(proportion);
-                    cursorLabel.innerText = "bar " + barNumber;
+                    const barNumber = this.#getBarAtProportionOfCurrentScene(proportion);
+                    const pageNumber = bar_to_page[this.timeManager.getCurrentAct() - 1][barNumber].page + act_starting_pages[this.timeManager.getCurrentAct() - 1] - 1;
+                    cursorLabel.innerText = text[globals.language].BAR + " " + barNumber + ", " +
+                        text[globals.language].PAGE + " " + pageNumber;
                     this.timeManager.preloadTime({act: this.timeManager.getCurrentAct(), bar: barNumber, beat: 1, barLength: 1})
+                    if (proportion > 0.75) {
+                        timelineCursor.classList.add("left");
+                    } else {
+                        timelineCursor.classList.remove("left");
+                    }
                 }
 
 
