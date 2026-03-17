@@ -46,5 +46,6 @@ export interface ActInfo {
     [index : string] : BarInfo;
 }
 
+export const act_starting_pages = [5, 174, 381];
 
 export const bar_to_page : Array<ActInfo> = """ + str(mappings) + ";")
