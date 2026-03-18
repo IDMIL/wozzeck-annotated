@@ -55,7 +55,11 @@ export class ArchitectureManager extends TimeManagerListener {
             for (const annotation of sceneArchitecture.annotations) {
                 const archListItem = document.createElement('div');
                 archListItem.classList.add('architecture-list-item');
-                archListItem.innerText = annotation.annotation + ' (m. ' + annotation.range[0] + '‒' + annotation.range[1] + ')';
+                if (annotation.range[0] === annotation.range[1]) {
+                    archListItem.innerText = annotation.annotation + ' m. ' + annotation.range[0];
+                } else {
+                    archListItem.innerText = annotation.annotation + ' (m. ' + annotation.range[0] + '‒' + annotation.range[1] + ')';
+                }
                 archListItem.onclick = () => {
                     this.timeManager.goToTime(this.currentAct, annotation.range[0], scoreTime.beat);
                 }
