@@ -35,7 +35,6 @@ export class TimeManager {
         this.scoreTime.act = act;
         this.scoreTime.bar = bar;
         this.scoreTime.beat = beat;
-        console.log("new score time", this.scoreTime);
         this.notifyListeners();
     }
 
