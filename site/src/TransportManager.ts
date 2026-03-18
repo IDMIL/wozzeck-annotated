@@ -36,6 +36,20 @@ export class TransportManager extends TimeManagerListener {
                 this.timeManager.advanceBar(1);
             }
         }
+
+        const prevPageButton = document.getElementById("prev-page-button");
+        if (prevPageButton !== null) {
+            prevPageButton.onclick = () => {
+                this.timeManager.advancePage(-1);
+            }
+        }
+
+        const nextPageButton = document.getElementById("next-page-button");
+        if (nextPageButton !== null) {
+            nextPageButton.onclick = () => {
+                this.timeManager.advancePage(1);
+            }
+        }
     }
 
     async timeUpdated(scoreTime : ScoreTime) {

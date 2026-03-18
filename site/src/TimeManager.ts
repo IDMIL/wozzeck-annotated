@@ -1,4 +1,5 @@
 import {scene_bar_ranges} from "./data/sceneBarRanges";
+import {act_starting_pages, bar_to_page} from "./data/barToPage";
 
 
 export type Act = number;
@@ -34,7 +35,7 @@ export class TimeManager {
         this.scoreTime.act = act;
         this.scoreTime.bar = bar;
         this.scoreTime.beat = beat;
-
+        console.log("new score time", this.scoreTime);
         this.notifyListeners();
     }
 
@@ -71,6 +72,30 @@ export class TimeManager {
         this.addToTime(this.scoreTime, numBars);
 
         this.notifyListeners();
+    }
+
+    advancePage(numPages : number) {
+        const currentPage = bar_to_page[this.scoreTime.act - 1][this.scoreTime.bar].page - 1
+            + act_starting_pages[this.scoreTime.act - 1];
+        let targetPage = currentPage + numPages;
+        if (targetPage < act_starting_pages[0]) {
+            targetPage = act_starting_pages[0];
+        } else if (targetPage >= act_starting_pages[bar_to_page.length]) {
+            targetPage = act_starting_pages[bar_to_page.length] - 1;
+        }
+
+        for (let act = 0; act < bar_to_page.length; ++act) {
+            if (targetPage >= act_starting_pages[act] && targetPage < act_starting_pages[act + 1]) {
+                targetPage -= act_starting_pages[act];
+                targetPage += 1;
+                for (const bar in bar_to_page[act]) {
+                    if (bar_to_page[act][bar].page === targetPage) {
+                        this.goToTime(act + 1, Number(bar), this.scoreTime.beat);
+                        return;
+                    }
+                }
+            }
+        }
     }
 
     notifyListeners() {

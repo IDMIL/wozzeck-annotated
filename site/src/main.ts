@@ -24,10 +24,10 @@ function buildWindow(lang : LanguageCode ) {
       <h2>` + text[globals.language].TIMELINES + `</h2>
     </div>
     <div class="section" id="score-viewer-section">
-    <div id="image-holder">
+     <div id="image-holder">
       <img class="score-page-image" id="score-viewer-image" src="data/pages/sheet5.png" alt="Page 5"/>
       <div id="current-bar-overlay" class="score-overlay"></div>
-    </div>
+     </div>
     </div>
     <div class="section" id="annotations-section">
       <h2>` + text[lang].ANNOTATIONS + `</h2>
@@ -44,8 +44,10 @@ function buildWindow(lang : LanguageCode ) {
         <p id="transport-beat-number">1</p>
       </div>
       <div class="transport buttons">
-        <button id="prev-bar-button">` + text[lang].PREV + `</button>
-        <button id="next-bar-button">` + text[lang].NEXT + `</button>
+        <button id="prev-bar-button">` + text[lang].PREV_BAR + `</button>
+        <button id="next-bar-button">` + text[lang].NEXT_BAR + `</button>
+        <button id="prev-page-button">` + text[lang].PREV_PAGE + `</button>
+        <button id="next-page-button">` + text[lang].NEXT_PAGE + `</button>
       </div>
     </div>
     <div class="section" id="video-player-section">

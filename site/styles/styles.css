@@ -33,6 +33,7 @@ h1, h2 {
     border-radius: 20px;
     background-color: black;
     padding: 10px;
+    position: relative;
 }
 
 #title-section {
@@ -275,4 +276,19 @@ h1, h2 {
     .score-page-image {
         width: 100%;
     }
+}
+
+.change-page-button {
+    width: 100px;
+    height: 90%;
+    background-color: pink;
+    position: absolute;
+    display: none;
+}
+
+#previous-page-button {
+    left: 0;
+}
+
+#next-page-button {
 }
