@@ -42,7 +42,7 @@ export const architecture : Architecture = {
                 {"annotation": "Rhapsodie", "range": [286, 301]},
                 {"annotation": "Interlude orchestral ;", "range": [302, 329]},
                 {"annotation": "Rideau", "range": [307, 310]},
-                {"annotation": "Changement de scéne", "range": [341, 325]},
+                {"annotation": "Changement de scéne", "range": [311, 325]},
                 {"annotation": "Approche de la musique militaire", "range": [326, 327]},
                 {"annotation": "Levée du rideau", "range": [328, 329]},
             ]
