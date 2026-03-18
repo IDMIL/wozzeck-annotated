@@ -20,13 +20,12 @@ h1, h2 {
     height: 100%;
     display: grid;
     grid-template-areas:
-        "title  timelines   timelines"
-        "score  score   annotations"
-        "score  score   transport"
-        "score  score   video-player";
+        "title  transport   score"
+        "timelines   timelines   score"
+        "annotations   annotations score";
     gap: 10px;
-    grid-template-columns: 300px auto auto;
-    grid-template-rows: 300px 400px auto auto;
+    /*grid-template-columns: 300px auto auto;*/
+    /*grid-template-rows: 300px 400px auto auto;*/
 }
 
 .section {
@@ -76,8 +75,9 @@ h1, h2 {
     --graph-color: lightgray;
 }
 
-#video-player {
+#video-player-section {
     grid-area: video-player;
+    display: none;
 }
 
 #transport-section {
@@ -95,7 +95,7 @@ h1, h2 {
 }
 
 .timeline-button {
-    height: 30px;
+    height: 100%;
     background-color: white;
     border: 1px solid black;
     display: inline-block;
@@ -128,10 +128,11 @@ h1, h2 {
 .timeline-container {
     display: flex;
     gap: 10px;
+    height: 30px;
 }
 
 .timeline-container h3 {
-    width: 180px;
+    width: 80px;
     color: white;
     margin: 0;
     text-align: right;
@@ -183,13 +184,15 @@ h1, h2 {
 
 #annotation-type-selectors {
     display: flex;
-    gap: 3px;
+    gap: 5px;
     padding-bottom: 5px;
     flex-wrap: wrap;
 }
 
 .annotation-type {
     cursor: pointer;
+    border-style: none;
+    border-radius: 5px;
 }
 
 .annotation-type-hidden {
@@ -291,4 +294,27 @@ h1, h2 {
 }
 
 #next-page-button {
+}
+
+h1, h2, h3 {
+    font-family: "Jost", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+div {
+    font-family: "Jost", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+
+}
+
+button {
+    font-family: "Jost", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    text-transform: uppercase;
 }
