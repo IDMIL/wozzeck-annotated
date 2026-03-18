@@ -9,7 +9,7 @@ export interface BarInfo {
 }
 
 export interface ActInfo {
-    [index : string] : BarInfo;
+    [index : number] : BarInfo;
 }
 
 export const act_starting_pages = [5, 174, 381, 487];

@@ -4,10 +4,6 @@ html, body {
     background-color: darkblue;
 }
 
-h1, h2 {
-    color: white;
-}
-
 #content {
     top: 0;
     left: 0;
@@ -301,6 +297,7 @@ h1, h2, h3 {
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
+    color: white;
 }
 
 div {
@@ -317,4 +314,18 @@ button {
     font-weight: 600;
     font-style: normal;
     text-transform: uppercase;
+}
+
+.architecture-list-item {
+    color: white;
+    font-size: small;
+    cursor: pointer;
+}
+
+.architecture-list-item--active {
+    color: orange;
+}
+
+.architecture-list-item:hover {
+    color: yellow;
 }

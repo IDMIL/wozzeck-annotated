@@ -5,6 +5,7 @@ import {TransportManager} from "./TransportManager";
 import {TimelineManager} from "./TimelineManager";
 import {AnnotationManager} from "./AnnotationManager";
 import {globals} from "./globals";
+import {ArchitectureManager} from "./ArchitectureManager";
 
 function buildWindow(lang : LanguageCode ) {
     globals.language = lang;
@@ -49,6 +50,7 @@ function buildWindow(lang : LanguageCode ) {
         <button id="prev-page-button">` + text[lang].PREV_PAGE + `</button>
         <button id="next-page-button">` + text[lang].NEXT_PAGE + `</button>
       </div>
+      <div id="architecture-list"></div>
     </div>
     <div class="section" id="video-player-section">
       <h2>` + text[lang].VIDEO_PLAYER + `</h2>
@@ -63,11 +65,13 @@ function buildWindow(lang : LanguageCode ) {
     let transportManager = new TransportManager(timeManager);
     let timelineManager = new TimelineManager(timeManager);
     let annotationManager = new AnnotationManager(timeManager);
+    let architectureManager = new ArchitectureManager(timeManager);
 
     timeManager.listeners.push(scoreManager);
     timeManager.listeners.push(transportManager);
     timeManager.listeners.push(timelineManager);
     timeManager.listeners.push(annotationManager);
+    timeManager.listeners.push(architectureManager);
 
     timeManager.notifyListeners();
 
