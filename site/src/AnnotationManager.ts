@@ -27,6 +27,10 @@ export class AnnotationManager extends TimeManagerListener {
             return;
         }
 
+        const header = document.createElement("h2");
+        header.innerText = text[globals.language].ANNOTATIONS;
+        annotationsSection.appendChild(header);
+
         let annotationTypeSelectorDiv = document.createElement('div');
         annotationTypeSelectorDiv.id = 'annotation-type-selectors';
 

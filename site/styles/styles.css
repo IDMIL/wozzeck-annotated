@@ -1,53 +1,87 @@
+* {
+    box-sizing: border-box;
+}
+
 html, body {
     margin: 0;
     padding: 0;
-    background-color: darkblue;
-}
-
-#content {
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    padding: 10px;
+    background-color: black;
+    height: 100%;
 }
 
 #layout-sections {
-    height: 100%;
-    display: grid;
-    grid-template-areas:
-        "title  transport   score"
-        "timelines   timelines   score"
-        "annotations   annotations score";
-    gap: 10px;
-    /*grid-template-columns: 300px auto auto;*/
-    /*grid-template-rows: 300px 400px auto auto;*/
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.main-area {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+.main-area-left {
+    display: flex;
+    flex-direction: column;
 }
 
 .section {
-    border-radius: 20px;
     background-color: black;
     padding: 10px;
     position: relative;
 }
 
 #title-section {
-    grid-area: title;
+    width: 100%;
+    background-color: #0057ac;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
 }
 
+#analysis-tabs {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+#title-section h1,h3 {
+    margin: 0;
+}
+
+
 #timelines-section {
-    grid-area: timelines;
-    }
+    width: 100%;
+    background-color: #0b113a;
+    flex-shrink: 0;
+}
+
+#timelines-section h2 {
+    margin: 0;
+}
 
 #score-viewer-section {
-    grid-area: score;
-    display: flex;
-    justify-content: center;
+    height: 100%;
+    width: auto;
+    padding: 0;
 }
 
 #image-holder {
-    position: relative;
+    height: 100%;
+    width: auto;
 }
+
+.score-page-image {
+    max-height: 100%;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
 
 #current-bar-overlay {
     position: absolute;
@@ -59,8 +93,13 @@ html, body {
     left: 0;
 }
 
+#architecture-list {
+    min-width: 400px;
+}
+
 #annotations-section {
-    grid-area: annotations;
+    display: flex;
+    flex-direction: column;
 
     --dynamiques-color: #ffc000;
     --duree-color: #00b0f0;
@@ -80,10 +119,6 @@ html, body {
     grid-area: transport;
 }
 
-.score-page-image {
-    max-width: 500px;
-    max-height: 100%;
-}
 
 #position-text p {
     color: white;
@@ -95,7 +130,6 @@ html, body {
     background-color: white;
     border: 1px solid black;
     display: inline-block;
-    box-sizing: border-box;
     cursor: pointer;
 }
 

@@ -21,6 +21,12 @@ export class TimelineManager extends TimeManagerListener {
         if (timelineSection === null) {
             return;
         }
+
+        const heading = document.createElement("h2");
+        heading.innerText = text[globals.language].TIMELINES;
+        timelineSection.appendChild(heading);
+
+
         let actsSection = document.createElement("div");
         actsSection.id = "acts-timeline";
         actsSection.classList.add("timeline-container");

@@ -1,5 +1,7 @@
 import {ScoreTime, TimeManager, TimeManagerListener} from "./TimeManager";
 import {scene_bar_ranges} from "./data/sceneBarRanges";
+import {text} from "./data/text";
+import {globals} from "./globals";
 
 function getSceneNumber(scoreTime : ScoreTime) {
     const act = scoreTime.act;
@@ -21,6 +23,28 @@ export class TransportManager extends TimeManagerListener {
     constructor(tm : TimeManager) {
         super();
         this.timeManager = tm;
+
+        const transportSection = document.getElementById("transport-section");
+        if (transportSection === null) {
+            return;
+        }
+        transportSection.innerHTML = `
+      <div id="position-text">
+      <p class="level-name">` + text[globals.language].ACT + `</p>
+        <p id="transport-act-number">1</p>
+        <p class="level-name">` + text[globals.language].SCENE + `</p>
+        <p id="transport-scene-number">1</p>
+        <p class="level-name">` + text[globals.language].BAR + `</p>
+        <p id="transport-bar-number">1</p>
+        <p class="level-name">` + text[globals.language].BEAT + `</p>
+        <p id="transport-beat-number">1</p>
+      </div>
+      <div class="transport buttons">
+        <button id="prev-bar-button">` + text[globals.language].PREV_BAR + `</button>
+        <button id="next-bar-button">` + text[globals.language].NEXT_BAR + `</button>
+        <button id="prev-page-button">` + text[globals.language].PREV_PAGE + `</button>
+        <button id="next-page-button">` + text[globals.language].NEXT_PAGE + `</button>
+      </div>`;
 
         const prevBarButton = document.getElementById("prev-bar-button");
         if (prevBarButton !== null) {

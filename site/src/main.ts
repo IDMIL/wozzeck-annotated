@@ -1,4 +1,4 @@
-import { LanguageCode, text } from "./data/text";
+import { LanguageCode } from "./data/text";
 import {TimeManager} from "./TimeManager";
 import {ScoreManager} from "./ScoreManager";
 import {TransportManager} from "./TransportManager";
@@ -6,57 +6,27 @@ import {TimelineManager} from "./TimelineManager";
 import {AnnotationManager} from "./AnnotationManager";
 import {globals} from "./globals";
 import {ArchitectureManager} from "./ArchitectureManager";
+import {TitleSectionManager} from "./TitleSectionManager";
 
 function buildWindow(lang : LanguageCode ) {
     globals.language = lang;
 
-    const otherLangPage = lang === 'en' ? 'fr.html' : 'en.html';
-    const otherLangName = lang === 'en' ? 'FR' : 'EN';
-
     document.body.innerHTML  = `
-        <div id="content">
   <div id="layout-sections">
-    <div class="section" id="title-section">
-      <h1>` + text[globals.language].TITLE + `</h1>
-      <h2>` + text[globals.language].BYLINE + `</h2>
-      <h3><a href="`+ otherLangPage + `">` + otherLangName + `</a></h3>
-    </div>
-    <div class="section" id="timelines-section">
-      <h2>` + text[globals.language].TIMELINES + `</h2>
-    </div>
-    <div class="section" id="score-viewer-section">
-     <div id="image-holder">
-      <img class="score-page-image" id="score-viewer-image" src="data/pages/sheet5.png" alt="Page 5"/>
-      <div id="current-bar-overlay" class="score-overlay"></div>
-     </div>
-    </div>
-    <div class="section" id="annotations-section">
-      <h2>` + text[lang].ANNOTATIONS + `</h2>
-    </div>
-    <div class="section" id="transport-section">
-      <div id="position-text">
-        <p class="level-name">` + text[lang].ACT + `</p>
-        <p id="transport-act-number">1</p>
-        <p class="level-name">` + text[lang].SCENE + `</p>
-        <p id="transport-scene-number">1</p>
-        <p class="level-name">` + text[lang].BAR + `</p>
-        <p id="transport-bar-number">1</p>
-        <p class="level-name">` + text[lang].BEAT + `</p>
-        <p id="transport-beat-number">1</p>
-      </div>
-      <div class="transport buttons">
-        <button id="prev-bar-button">` + text[lang].PREV_BAR + `</button>
-        <button id="next-bar-button">` + text[lang].NEXT_BAR + `</button>
-        <button id="prev-page-button">` + text[lang].PREV_PAGE + `</button>
-        <button id="next-page-button">` + text[lang].NEXT_PAGE + `</button>
-      </div>
-      <div id="architecture-list"></div>
-    </div>
-    <div class="section" id="video-player-section">
-      <h2>` + text[lang].VIDEO_PLAYER + `</h2>
+    <div class="section" id="title-section"></div>
+    <div class="section" id="timelines-section"></div>
+    <div class="main-area">
+        <div class="main-area-left">
+          <div class="section" id="transport-section"></div>
+          <div id="analysis-tabs">
+            <div class="section" id="annotations-section"></div>
+            <div class="section" id="architecture-list"></div>
+            <div class="section" id="video-player-section"></div>
+          </div>
+        </div>
+      <div class="section" id="score-viewer-section"></div>
     </div>
   </div>
-</div>
     `;
 
     let timeManager = new TimeManager();
@@ -66,6 +36,7 @@ function buildWindow(lang : LanguageCode ) {
     let timelineManager = new TimelineManager(timeManager);
     let annotationManager = new AnnotationManager(timeManager);
     let architectureManager = new ArchitectureManager(timeManager);
+    new TitleSectionManager();
 
     timeManager.listeners.push(scoreManager);
     timeManager.listeners.push(transportManager);
