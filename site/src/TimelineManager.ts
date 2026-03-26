@@ -178,7 +178,7 @@ export class TimelineManager extends TimeManagerListener {
 
         const actsElement = document.getElementById("acts-timeline");
         if (actsElement !== null) {
-            for (const child of actsElement.children) {
+            for (const child of actsElement.getElementsByClassName('timeline-button')) {
                 if (child.id === "timeline-act-" + act) {
                     child.classList.add("current-act");
                 } else {
@@ -189,7 +189,7 @@ export class TimelineManager extends TimeManagerListener {
 
         const scenesElement = document.getElementById("scenes-timeline");
         if (scenesElement !== null) {
-            for (const child of scenesElement.children) {
+            for (const child of scenesElement.getElementsByClassName('timeline-button')) {
                 if (child.id === "timeline-act-" + act + "-scene-" + scene) {
                     child.classList.add("current-scene");
                 } else {

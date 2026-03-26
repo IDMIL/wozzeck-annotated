@@ -9,7 +9,7 @@ export class TitleSectionManager {
             const otherLangName = globals.language === 'en' ? 'FR' : 'EN';
 
             titleSection.innerHTML = `<h1>` + text[globals.language].TITLE + `</h1>
-      <h3><a href="`+ otherLangPage + `">` + otherLangName + `</a></h3>`;
+      <h3 class="language-switch"><a href="`+ otherLangPage + `">` + otherLangName + `</a></h3>`;
         }
     }
 }
