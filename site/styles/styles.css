@@ -142,6 +142,12 @@ html, body {
     border: 1px solid black;
     display: inline-block;
     cursor: pointer;
+    padding-left: 2px;
+}
+
+.timeline-button span {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .timeline-button:hover {

@@ -1,7 +1,7 @@
 import {ScoreTime, TimeManager, TimeManagerListener} from "./TimeManager";
 import {scene_bar_ranges} from "./data/sceneBarRanges";
 import {text} from "./data/text";
-import {globals} from "./globals";
+import {getRomanNumerals, globals} from "./globals";
 
 function getSceneNumber(scoreTime : ScoreTime) {
     const act = scoreTime.act;
@@ -77,9 +77,9 @@ export class TransportManager extends TimeManagerListener {
     }
 
     async timeUpdated(scoreTime : ScoreTime) {
-        const transportActNumber = document.getElementById("transportActNumber");
+        const transportActNumber = document.getElementById("transport-act-number");
         if (transportActNumber !== null) {
-            transportActNumber.innerText = scoreTime.act.toString();
+            transportActNumber.innerText = getRomanNumerals(scoreTime.act);
         }
         const transportSceneNumber = document.getElementById("transport-scene-number");
         if (transportSceneNumber !== null) {
