@@ -57,6 +57,7 @@ html, body {
     flex-direction: row;
     min-height: 0;
     gap: 10px;
+    padding-bottom: 10px;
 }
 
 #title-section h1, #title-section h3 {
@@ -164,7 +165,8 @@ html, body {
 }
 
 .scroller-area {
-    border: 1px solid white;
+    border: 1px solid gray;
+    padding: 10px;
     overflow: scroll;
 }
 
