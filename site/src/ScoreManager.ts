@@ -8,6 +8,15 @@ export class ScoreManager extends TimeManagerListener {
         super();
         this.currentPage = undefined;
         this.timeManager = tm;
+
+        const scoreViewer = document.getElementById("score-viewer-section");
+        if (scoreViewer) {
+            scoreViewer.innerHTML = `
+            <div id="image-holder">
+              <img class="score-page-image" id="score-viewer-image"/>
+              <div id="current-bar-overlay" class="score-overlay"></div>
+            </div>`
+        }
     }
 
     async preloadTime(time: ScoreTime) {

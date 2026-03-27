@@ -6,7 +6,7 @@ export const text = {
         ACTS: 'acts',
         SCENE: 'scene',
         SCENES: 'scenes',
-        SCENE_STRUCTURE: 'structure',
+        SCENE_STRUCTURE: 'measures',
         BAR: 'bar',
         BARS: 'bars',
         BEAT: 'beat',
@@ -14,19 +14,20 @@ export const text = {
         NEXT_BAR: 'next bar',
         PREV_PAGE: 'previous page',
         NEXT_PAGE: 'next page',
-        TITLE: '<i>Wozzeck</i> Visual Score',
+        TITLE: '<i>Wozzeck</i> Annotated Score',
         BYLINE: 'By Arden Butterfield, François-Hugues Leclair, and Matthieu Galliker',
         ANNOTATIONS: 'Annotations',
         TIMELINES: 'Temporal Structure',
         VIDEO_PLAYER: 'Video Player',
-        PAGE: 'page'
+        PAGE: 'page',
+        INFO: 'info',
     },
     'fr' : {
         ACT: 'acte',
         ACTS: 'actes',
         SCENE: 'scène',
         SCENES: 'scenes',
-        SCENE_STRUCTURE: 'structure',
+        SCENE_STRUCTURE: 'mesures',
         BAR: 'mesure',
         BARS: 'mesures',
         BEAT: 'temps',
@@ -34,12 +35,13 @@ export const text = {
         NEXT_BAR: 'mesure suivante',
         PREV_PAGE: 'page précédente',
         NEXT_PAGE: 'page suivante',
-        TITLE: 'Partition visuelle de <i>Wozzeck</i>',
+        TITLE: 'Partition annotée de <i>Wozzeck</i>',
         BYLINE: 'Par Arden Butterfield, François-Hugues Leclair et Matthieu Galliker',
         ANNOTATIONS: 'Annotations',
         TIMELINES: 'Structure temporelle',
         VIDEO_PLAYER: 'Lecteur vidéo',
-        PAGE: 'page'
+        PAGE: 'page',
+        INFO: 'infos'
     }
 }
 

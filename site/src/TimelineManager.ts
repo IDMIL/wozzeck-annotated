@@ -1,6 +1,6 @@
 import {ScoreTime, TimeManager, TimeManagerListener} from "./TimeManager";
 import {scene_bar_ranges} from "./data/sceneBarRanges";
-import {globals} from "./globals";
+import {getRomanNumerals, globals} from "./globals";
 import {text} from "./data/text";
 import {act_starting_pages, bar_to_page} from "./data/barToPage";
 
@@ -21,6 +21,12 @@ export class TimelineManager extends TimeManagerListener {
         if (timelineSection === null) {
             return;
         }
+
+        const heading = document.createElement("h2");
+        heading.innerText = text[globals.language].TIMELINES;
+        timelineSection.appendChild(heading);
+
+
         let actsSection = document.createElement("div");
         actsSection.id = "acts-timeline";
         actsSection.classList.add("timeline-container");
@@ -64,7 +70,9 @@ export class TimelineManager extends TimeManagerListener {
             actDiv.id = "timeline-act-" + (i + 1);
             actDiv.classList.add("timeline-button");
             actDiv.classList.add("timeline-act");
-            actDiv.innerText = (i + 1).toString();
+            let actDivText = document.createElement("span");
+            actDivText.innerText = getRomanNumerals(i + 1);
+            actDiv.append(actDivText);
             actDiv.style.width = (actLengths[i] * 100 / totalLength) + "%";
             actDiv.onclick = () => {
                 this.timeManager.goToTime(i + 1, 1, 1);
@@ -85,7 +93,9 @@ export class TimelineManager extends TimeManagerListener {
                 sceneDiv.classList.add("timeline-button");
                 sceneDiv.classList.add("timeline-scene");
                 sceneDiv.style.width = ((sceneBarRange[1] + 1 - sceneBarRange[0]) * 100 / totalLength) + "%";
-                sceneDiv.innerText = sceneNumber.toString();
+                let sceneDivText = document.createElement("span");
+                sceneDivText.innerText = sceneNumber.toString();
+                sceneDiv.appendChild(sceneDivText);
                 const a = actNumber;
                 const sceneBar = sceneBarRange[0];
                 sceneDiv.onclick = () => {
@@ -172,7 +182,7 @@ export class TimelineManager extends TimeManagerListener {
 
         const actsElement = document.getElementById("acts-timeline");
         if (actsElement !== null) {
-            for (const child of actsElement.children) {
+            for (const child of actsElement.getElementsByClassName('timeline-button')) {
                 if (child.id === "timeline-act-" + act) {
                     child.classList.add("current-act");
                 } else {
@@ -183,7 +193,7 @@ export class TimelineManager extends TimeManagerListener {
 
         const scenesElement = document.getElementById("scenes-timeline");
         if (scenesElement !== null) {
-            for (const child of scenesElement.children) {
+            for (const child of scenesElement.getElementsByClassName('timeline-button')) {
                 if (child.id === "timeline-act-" + act + "-scene-" + scene) {
                     child.classList.add("current-scene");
                 } else {

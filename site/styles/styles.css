@@ -1,53 +1,97 @@
+* {
+    box-sizing: border-box;
+}
+
 html, body {
     margin: 0;
     padding: 0;
-    background-color: darkblue;
+    background-color: black;
+    height: 100%;
 }
 
-#content {
+#layout-sections {
+    position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
 }
 
-#layout-sections {
-    height: 100%;
-    display: grid;
-    grid-template-areas:
-        "title  transport   score"
-        "timelines   timelines   score"
-        "annotations   annotations score";
+.main-area {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+.main-area-left {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
-    /*grid-template-columns: 300px auto auto;*/
-    /*grid-template-rows: 300px 400px auto auto;*/
+}
+
+.section h2, .section h3 {
+    margin-top: 0;
 }
 
 .section {
-    border-radius: 20px;
     background-color: black;
-    padding: 10px;
     position: relative;
+    padding: 0 10px;
 }
 
 #title-section {
-    grid-area: title;
+    width: 100%;
+    background-color: #0057ac;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
 }
 
+#analysis-tabs {
+    display: flex;
+    flex-direction: row;
+    min-height: 0;
+    gap: 10px;
+}
+
+#title-section h1, #title-section h3 {
+    margin: 0;
+}
+
+
 #timelines-section {
-    grid-area: timelines;
-    }
+    width: 100%;
+    background-color: #0b113a;
+    flex-shrink: 0;
+    margin-bottom: 10px;
+}
+
+#timelines-section h2 {
+    margin: 0;
+}
 
 #score-viewer-section {
-    grid-area: score;
-    display: flex;
-    justify-content: center;
+    height: 100%;
+    width: auto;
+    padding: 0;
 }
 
 #image-holder {
-    position: relative;
+    height: 100%;
+    width: auto;
 }
+
+.score-page-image {
+    max-height: 100%;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
 
 #current-bar-overlay {
     position: absolute;
@@ -59,8 +103,14 @@ html, body {
     left: 0;
 }
 
+#architecture-list {
+    min-width: 400px;
+}
+
 #annotations-section {
-    grid-area: annotations;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 
     --dynamiques-color: #ffc000;
     --duree-color: #00b0f0;
@@ -80,10 +130,6 @@ html, body {
     grid-area: transport;
 }
 
-.score-page-image {
-    max-width: 500px;
-    max-height: 100%;
-}
 
 #position-text p {
     color: white;
@@ -95,8 +141,13 @@ html, body {
     background-color: white;
     border: 1px solid black;
     display: inline-block;
-    box-sizing: border-box;
     cursor: pointer;
+    padding-left: 2px;
+}
+
+.timeline-button span {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .timeline-button:hover {
@@ -113,7 +164,7 @@ html, body {
 }
 
 .scroller-area {
-    max-height: 250px;
+    border: 1px solid white;
     overflow: scroll;
 }
 
@@ -255,28 +306,6 @@ html, body {
     display: none;
 }
 
-
-@media screen and (max-width: 800px) {
-    #content {
-        position: relative;
-    }
-    #layout-sections {
-        grid-template-areas:
-        "title"
-        "timelines"
-        "score"
-        "annotations"
-        "transport"
-        "video-player";
-        grid-template-columns: 100%;
-        grid-template-rows: auto;
-    }
-
-    .score-page-image {
-        width: 100%;
-    }
-}
-
 .change-page-button {
     width: 100px;
     height: 90%;
@@ -328,4 +357,52 @@ button {
 
 .architecture-list-item:hover {
     color: yellow;
+}
+
+.title-links-and-buttons h3 {
+    cursor: pointer;
+    text-decoration: underline;
+    color: lightgray;
+}
+
+.title-links-and-buttons h3:hover {
+    color: white;
+}
+
+.title-links-and-buttons a {
+    color: inherit;
+}
+
+.title-links-and-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+#darken {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000000;
+}
+
+#credits-anchor {
+    position: fixed;
+    left: 50%;
+    top: 125px;
+    z-index: 10000000;
+    width: 0;
+    height: 0;
+}
+
+#credits-box {
+    position: relative;
+    width: 300px;
+    padding: 10px;
+    margin-left: -18px;
+    left: -150px;
+    background-color: lightgray;
+    border: 3px black solid;
 }
