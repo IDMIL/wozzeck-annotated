@@ -19,7 +19,8 @@ export const text = {
         ANNOTATIONS: 'Annotations',
         TIMELINES: 'Temporal Structure',
         VIDEO_PLAYER: 'Video Player',
-        PAGE: 'page'
+        PAGE: 'page',
+        INFO: 'info',
     },
     'fr' : {
         ACT: 'acte',
@@ -39,7 +40,8 @@ export const text = {
         ANNOTATIONS: 'Annotations',
         TIMELINES: 'Structure temporelle',
         VIDEO_PLAYER: 'Lecteur vidéo',
-        PAGE: 'page'
+        PAGE: 'page',
+        INFO: 'infos'
     }
 }
 

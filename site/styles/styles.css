@@ -359,10 +359,50 @@ button {
     color: yellow;
 }
 
-.language-switch a {
+.title-links-and-buttons h3 {
+    cursor: pointer;
+    text-decoration: underline;
     color: lightgray;
 }
 
-.language-switch a:hover {
+.title-links-and-buttons h3:hover {
     color: white;
+}
+
+.title-links-and-buttons a {
+    color: inherit;
+}
+
+.title-links-and-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+#darken {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000000;
+}
+
+#credits-anchor {
+    position: fixed;
+    left: 50%;
+    top: 125px;
+    z-index: 10000000;
+    width: 0;
+    height: 0;
+}
+
+#credits-box {
+    position: relative;
+    width: 300px;
+    padding: 10px;
+    margin-left: -18px;
+    left: -150px;
+    background-color: lightgray;
+    border: 3px black solid;
 }
