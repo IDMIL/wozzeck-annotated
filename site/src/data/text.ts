@@ -21,6 +21,7 @@ export const text = {
         VIDEO_PLAYER: 'Video Player',
         PAGE: 'page',
         INFO: 'info',
+        CLOSE: 'close'
     },
     'fr' : {
         ACT: 'acte',
@@ -41,7 +42,8 @@ export const text = {
         TIMELINES: 'Structure temporelle',
         VIDEO_PLAYER: 'Lecteur vidéo',
         PAGE: 'page',
-        INFO: 'infos'
+        INFO: 'infos',
+        CLOSE: 'annuler'
     }
 }
 

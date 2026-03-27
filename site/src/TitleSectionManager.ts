@@ -32,7 +32,7 @@ export class TitleSectionManager {
             // creditsAnchor.style.display = "none";
             creditsAnchor.innerHTML = `<div id="credits-box"><div id="credits-box-contents">
 <div id="credits-box-text"><p>` + text[globals.language].BYLINE + `</p></div> 
-<div id="credits-box-buttons"><button id="close-credits-box">close</button></div>
+<div id="credits-box-buttons"><button id="close-credits-box">` + text[globals.language].CLOSE + `</button></div>
 </div></div>`;
             titleSection.append(creditsAnchor);
             showCredits(false);
