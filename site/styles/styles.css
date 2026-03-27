@@ -408,3 +408,29 @@ button {
     background-color: lightgray;
     border: 3px black solid;
 }
+
+@media screen and (max-width: 800px) {
+    .main-area {
+        flex-direction: column;
+    }
+
+    #layout-sections {
+        position: relative;
+    }
+
+    #analysis-tabs {
+        flex-direction: column;
+    }
+
+    #annotations-scroller {
+        max-height: 500px;
+    }
+
+    #score-viewer-image {
+        width: 100%;
+    }
+
+    #architecture-list {
+        min-width: 0;
+    }
+}
