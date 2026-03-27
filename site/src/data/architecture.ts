@@ -23,7 +23,7 @@ export const architecture : Architecture = {
                 {"annotation": "Pavane", "range": [30, 50]},
                 {"annotation": "Cadenza pour alto seul", "range": [51, 64]},
                 {"annotation": "Gigue", "range": [65, 108]},
-                {"annotation": "Cudenza pour contrebasson", "range": [109, 114]},
+                {"annotation": "Cadenza pour contrebasson", "range": [109, 114]},
                 {"annotation": "Gavotte", "range": [115, 136]},
                 {"annotation": "Air", "range": [136, 153]},
                 {"annotation": "Reprise", "range": [153, 171]},
