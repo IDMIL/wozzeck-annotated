@@ -149,12 +149,13 @@ export class TimelineManager extends TimeManagerListener {
                 const rect = sceneStructureDiv.getBoundingClientRect();
                 timelineCursor.style.left = event.clientX - rect.x + "px";
                 const proportion = (event.clientX - rect.x) / (rect.width);
+
                 const barNumber = this.#getBarAtProportionOfCurrentScene(proportion);
                 const pageNumber = bar_to_page[this.timeManager.getCurrentAct() - 1][barNumber].page + act_starting_pages[this.timeManager.getCurrentAct() - 1] - 1;
                 cursorLabel.innerText = text[globals.language].BAR + " " + barNumber + ", " +
                     text[globals.language].PAGE + " " + pageNumber;
                 this.timeManager.preloadTime({act: this.timeManager.getCurrentAct(), bar: barNumber, beat: 1, barLength: 1})
-                if (proportion > 0.75) {
+                if (proportion > 0.5) {
                     timelineCursor.classList.add("left");
                 } else {
                     timelineCursor.classList.remove("left");
