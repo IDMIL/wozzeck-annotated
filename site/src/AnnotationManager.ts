@@ -158,12 +158,16 @@ export class AnnotationManager extends TimeManagerListener {
             return;
         }
         let annotationDivs = scroller.children;
+        let firstAnnotationSeen = false;
         for (let i = 0; i < annotationDivs.length; i++) {
             if ((annotations[i].act === scoreTime.act) &&
                 (annotations[i].measure_range[0] <= scoreTime.bar) &&
                 (annotations[i].measure_range[1] >= scoreTime.bar)) {
                 annotationDivs[i].classList.add("current-annotation");
-                annotationDivs[i].scrollIntoView();
+                if (!firstAnnotationSeen) {
+                    annotationDivs[i].scrollIntoView();
+                    firstAnnotationSeen = true;
+                }
             } else {
                 annotationDivs[i].classList.remove("current-annotation");
             }
