@@ -1,9 +1,16 @@
 import os.path
+import json
 
 mappings = [{}, {}, {}]
 num_bars = [717, 818, 392]
 for act in range(3):
+
     act_number = act + 1
+
+    with open(f"act{act_number}_bounding_boxes.json") as f:
+        concertcue_data = json.load(f)["data"]["score"]["barcoords"]
+
+
     with open(f'act{act_number}pagebars.txt', 'r') as f:
         lines = f.readlines()
     lines = [int(l.split("#")[0].strip().split(".")[0]) for l in lines]
@@ -24,10 +31,10 @@ for act in range(3):
         mappings[act][b + 1] = {
             'page' : page,
             'system_number': 1,
-            'x': 0,
-            'y': 0,
-            'w': 0,
-            'h': 0,
+            'x': concertcue_data[b]["x1"],
+            'y': concertcue_data[b]["y1"],
+            'w': concertcue_data[b]["x2"] - concertcue_data[b]["x1"],
+            'h': concertcue_data[b]["y2"] - concertcue_data[b]["y1"],
             'image': imagePath
         }
 
