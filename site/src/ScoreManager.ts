@@ -1,12 +1,14 @@
 import {ScoreTime, TimeManager, TimeManagerListener} from "./TimeManager";
-import {bar_to_page} from "./data/barToPage";
+import {bar_to_page, BarInfo} from "./data/barToPage";
 
 export class ScoreManager extends TimeManagerListener {
     private currentPage: undefined | string;
+    private currentAct: undefined | number;
 
     constructor(tm : TimeManager) {
         super();
         this.currentPage = undefined;
+        this.currentAct = undefined;
         this.timeManager = tm;
 
         const scoreViewer = document.getElementById("score-viewer-section");
@@ -14,7 +16,6 @@ export class ScoreManager extends TimeManagerListener {
             scoreViewer.innerHTML = `
             <div id="image-holder">
               <img class="score-page-image" id="score-viewer-image"/>
-              <div id="current-bar-overlay" class="score-overlay"></div>
             </div>`
         }
     }
@@ -24,7 +25,7 @@ export class ScoreManager extends TimeManagerListener {
     }
 
     preloadImage(url : string) {
-        var img=new Image();
+        let img=new Image();
         img.src=url;
     }
 
@@ -41,26 +42,75 @@ export class ScoreManager extends TimeManagerListener {
         }
     }
 
+    private positionOverlay(overlay: HTMLElement, barInfo: BarInfo, w: number, h: number) {
+        overlay.style.top = (barInfo.y * h) + "px";
+        overlay.style.left = (barInfo.x * w) + "px";
+        overlay.style.width = (barInfo.w * w) + "px";
+        overlay.style.height = (barInfo.h * h) + "px";
+    }
+
+    private rebuildPageOverlays(scoreTime: ScoreTime) {
+        const imageHolder = document.getElementById('image-holder');
+        if (!imageHolder) return;
+
+        imageHolder.querySelectorAll('.score-overlay').forEach(el => el.remove());
+
+        const im = document.getElementById('score-viewer-image') as HTMLImageElement;
+        const w = im.width;
+        const h = im.height;
+        const currentImage = bar_to_page[scoreTime.act - 1][scoreTime.bar].image;
+        const actBars = bar_to_page[scoreTime.act - 1];
+
+        for (const barNum in actBars) {
+            const barInfo = actBars[barNum];
+            if (barInfo.image !== currentImage) continue;
+
+            const div = document.createElement('div');
+            div.classList.add('score-overlay');
+            div.dataset.bar = barNum;
+            if (parseInt(barNum) === scoreTime.bar) {
+                div.id = 'current-bar-overlay';
+            } else {
+                div.classList.add('other-bar-overlay');
+                div.addEventListener('click', () => {
+                    this.timeManager.goToTime(scoreTime.act, parseInt(barNum), 1);
+                });
+            }
+            this.positionOverlay(div, barInfo, w, h);
+            imageHolder.appendChild(div);
+        }
+    }
+
+    private updateCurrentBarOverlay(scoreTime: ScoreTime) {
+        const prev = document.getElementById('current-bar-overlay');
+        if (prev) {
+            const prevBar = parseInt(prev.dataset.bar!);
+            prev.removeAttribute('id');
+            prev.classList.add('other-bar-overlay');
+            prev.addEventListener('click', () => {
+                this.timeManager.goToTime(scoreTime.act, prevBar, 1);
+            });
+        }
+        const imageHolder = document.getElementById('image-holder');
+        if (!imageHolder) return;
+        const newCurrent = imageHolder.querySelector(`[data-bar="${scoreTime.bar}"]`) as HTMLElement | null;
+        if (newCurrent) {
+            newCurrent.id = 'current-bar-overlay';
+            newCurrent.classList.remove('other-bar-overlay');
+        }
+    }
+
     async timeUpdated(scoreTime : ScoreTime) {
         let newPage : string = bar_to_page[scoreTime.act-1][scoreTime.bar].image;
         let im = document.getElementById('score-viewer-image') as HTMLImageElement;
-        if (newPage !== this.currentPage) {
-            this.currentPage = newPage;
-            im.src = bar_to_page[scoreTime.act-1][scoreTime.bar].image;
-        }
-        let w = im.width;
-        let h = im.height;
 
-        let overlay = document.getElementById('current-bar-overlay');
-        if (overlay !== null) {
-            const overlayX = bar_to_page[scoreTime.act-1][scoreTime.bar].x * w;
-            const overlayY = bar_to_page[scoreTime.act-1][scoreTime.bar].y * h;
-            const overlayWidth = bar_to_page[scoreTime.act-1][scoreTime.bar].w * w;
-            const overlayHeight = bar_to_page[scoreTime.act-1][scoreTime.bar].h * h;
-            overlay.style.top = overlayY + "px";
-            overlay.style.left = overlayX + "px";
-            overlay.style.width = overlayWidth + "px";
-            overlay.style.height = overlayHeight + "px";
+        if (newPage !== this.currentPage || scoreTime.act !== this.currentAct) {
+            this.currentPage = newPage;
+            this.currentAct = scoreTime.act;
+            im.src = newPage;
+            this.rebuildPageOverlays(scoreTime);
+        } else {
+            this.updateCurrentBarOverlay(scoreTime);
         }
 
         this.preloadAround(scoreTime, 5);

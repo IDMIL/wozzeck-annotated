@@ -93,14 +93,27 @@ html, body {
 }
 
 
-#current-bar-overlay {
+.score-overlay {
     position: absolute;
-    width: 30px;
-    height: 30px;
+    pointer-events: none;
+}
+
+#current-bar-overlay {
     background: pink;
     opacity: 30%;
     top: 0;
     left: 0;
+}
+
+.other-bar-overlay {
+    background: pink;
+    opacity: 0%;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.other-bar-overlay:hover {
+    opacity: 15%;
 }
 
 #architecture-list {
