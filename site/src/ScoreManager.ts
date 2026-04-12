@@ -108,6 +108,7 @@ export class ScoreManager extends TimeManagerListener {
             this.currentPage = newPage;
             this.currentAct = scoreTime.act;
             im.src = newPage;
+            await new Promise<void>(resolve => { im.onload = () => resolve(); });
             this.rebuildPageOverlays(scoreTime);
         } else {
             this.updateCurrentBarOverlay(scoreTime);
