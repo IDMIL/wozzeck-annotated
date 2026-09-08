@@ -15,9 +15,8 @@
     --timbre-color: #c05621;
     --graph-color: #718096;
 
-    /* dark theme (default) — GitHub-inspired palette */
     --color-bg: #0d1117;
-    --color-header: #0057ac;
+    --color-header: #000000;
     --color-navy: #0b113a;
     --color-panel: #161b22;
     --color-surface: #1c2128;
@@ -408,7 +407,7 @@ button {
 
 .title-links-and-buttons h3:hover {
     color: white;
-    background: rgba(255, 255, 255, 0.12);
+    background: rgb(194, 4, 4);
 }
 
 .title-links-and-buttons a {
