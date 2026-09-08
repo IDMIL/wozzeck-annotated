@@ -23,6 +23,16 @@ const TOGGLEABLE_PANELS: ToggleablePanel[] = [
     {id: "garant-score-viewer-section", label: () => text.GARANT_SCORE_VIEWER[globals.language], visibleByDefault: false},
 ];
 
+// The three score ("partition") viewers are variants of the same kind of
+// panel, so their toggles are enclosed in a shared translucent box in the
+// panel-visibility bar to read as one group rather than three unrelated
+// entries. Relies on these three being adjacent in TOGGLEABLE_PANELS above.
+const SCORE_GROUP_IDS = new Set([
+    "score-viewer-section",
+    "pv-score-viewer-section",
+    "garant-score-viewer-section",
+]);
+
 // Shows or hides a panel, announcing the change to whichever SectionManager
 // owns that element (see PANEL_VISIBILITY_EVENT). Only for user-driven
 // changes — the initial default visibility below is set directly, since a
@@ -65,6 +75,8 @@ export class PanelVisibilityManager extends SectionManager {
         const highlight = document.createElement("div");
         highlight.id = "panel-highlight-overlay";
         document.body.appendChild(highlight);
+
+        let scoreGroup: HTMLElement | null = null;
 
         for (const panel of TOGGLEABLE_PANELS) {
             const target = document.getElementById(panel.id);
@@ -111,7 +123,17 @@ export class PanelVisibilityManager extends SectionManager {
 
             toggleLabel.appendChild(checkbox);
             toggleLabel.appendChild(document.createTextNode(panel.label()));
-            bar.appendChild(toggleLabel);
+
+            if (SCORE_GROUP_IDS.has(panel.id)) {
+                if (scoreGroup === null) {
+                    scoreGroup = document.createElement("div");
+                    scoreGroup.id = "panel-visibility-score-group";
+                    bar.appendChild(scoreGroup);
+                }
+                scoreGroup.appendChild(toggleLabel);
+            } else {
+                bar.appendChild(toggleLabel);
+            }
         }
 
         this.initResizeHandles();
