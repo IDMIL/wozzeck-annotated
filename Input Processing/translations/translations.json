@@ -331,7 +331,7 @@
     },
     "Bois: ostinato sur 3 sons: annonce le <i>Klagelaut</i>": {
         "FR": "Bois: ostinato sur 3 sons: annonce le <i>Klagelaut</i>",
-        "EN-US": "Wood: ostinato on 3 sounds: announces the <i>Klagelaut</i>.",
+        "EN-US": "Woodwinds: ostinato on 3 sounds: announces the <i>Klagelaut</i>.",
         "PT-BR": "Madeira: ostinato em 3 sons: anuncia o <i>Klagelaut</i>.",
         "DE": "Holz: Ostinato auf 3 Tönen: kündigt den <i>Klagelaut</i> an"
     },
@@ -343,7 +343,7 @@
     },
     "Bois: conséquent (très bref)...Sommet atteint": {
         "FR": "Bois: conséquent (très bref)...Sommet atteint",
-        "EN-US": "Wood: consequent (very brief)...Peak reached",
+        "EN-US": "Woodwinds: consequent (very brief)...Peak reached",
         "PT-BR": "Madeira: consequente (muito breve)...Pico alcançado",
         "DE": "Holz: konsequent (sehr kurz)...Höhepunkt erreicht"
     },
@@ -427,7 +427,7 @@
     },
     "Bois: suite des accords min 6/4...Se calment progressivement": {
         "FR": "Bois: suite des accords min 6/4...Se calment progressivement",
-        "EN-US": "Wood: continuation of chords min 6/4...gradually calming down",
+        "EN-US": "Woodwinds: continuation of chords min 6/4...gradually calming down",
         "PT-BR": "Wood: continuação dos acordes em 6/4... gradualmente se acalmando",
         "DE": "Holz: Akkordfolge min 6/4...wird allmählich ruhiger"
     },
@@ -655,7 +655,7 @@
     },
     "Bois: tourmante, rythme de sicilienne...Thème de la bêtise...Coupure: éclatement de la misère": {
         "FR": "Bois: tourmante, rythme de sicilienne...Thème de la bêtise...Coupure: éclatement de la misère",
-        "EN-US": "Wood: torment, Sicilian rhythm...Theme of stupidity...Cut: burst of misery",
+        "EN-US": "Woodwinds: torment, Sicilian rhythm...Theme of stupidity...Cut: burst of misery",
         "PT-BR": "Madeira: tormento, ritmo siciliano...Tema de estupidez...Corte: explosão de miséria",
         "DE": "Holz: Sturm, sizilianischer Rhythmus...Thema der Dummheit...Schnitt: Zersplitterung des Elends"
     },
@@ -673,7 +673,7 @@
     },
     "Bois: reprise thème de la bêtise un demi-ton plus haut": {
         "FR": "Bois: reprise thème de la bêtise un demi-ton plus haut",
-        "EN-US": "Wood: a half-tone higher on the theme of stupidity",
+        "EN-US": "Woodwinds: a half-tone higher on the theme of stupidity",
         "PT-BR": "Wood: repetindo o tema da estupidez meio tom acima",
         "DE": "Holz: Wiederaufnahme des Themas Dummheit einen halben Ton höher"
     },
@@ -883,7 +883,7 @@
     },
     "Arrivée de W... Bois: <i>Hetzmotif</i>, motif de l'arrivée de Wozzeck, inquiétante arrivée": {
         "FR": "Arrivée de W... Bois: <i>Hetzmotif</i>, motif de l'arrivée de Wozzeck, inquiétante arrivée",
-        "EN-US": "Arrival of W... Wood: <i>Hetzmotif</i>, Wozzeck's arrival motif, disturbing arrival",
+        "EN-US": "Arrival of W... Woodwinds: <i>Hetzmotif</i>, Wozzeck's arrival motif, disturbing arrival",
         "PT-BR": "Chegada de W... Wood: <i>Hetzmotif</i>, motivo da chegada de Wozzeck, chegada perturbadora",
         "DE": "Die Ankunft von W... Holz: <i>Hetzmotiv</i>, Motiv der Ankunft von Wozzeck, beunruhigende Ankunft"
     },
@@ -1123,7 +1123,7 @@
     },
     "Bois: rétrograde de l'arrivée de Wozzeck (<i>Hetzmotif</i>) (cf. m.427)": {
         "FR": "Bois: rétrograde de l'arrivée de Wozzeck (<i>Hetzmotif</i>) (cf. m.427)",
-        "EN-US": "Wood: retrograde of Wozzeck's arrival (<i>Hetzmotif</i>) (cf. m.427)",
+        "EN-US": "Woodwinds: retrograde of Wozzeck's arrival (<i>Hetzmotif</i>) (cf. m.427)",
         "PT-BR": "Wood: retrógrado da chegada de Wozzeck (<i>Hetzmotif</i>) (cf. m.427)",
         "DE": "Holz: Rückwärtsgang bei der Ankunft von Wozzeck (<i>Hetzmotiv</i>) (vgl. M.427)"
     },
@@ -1141,7 +1141,7 @@
     },
     "Bois: Marie attend toujours": {
         "FR": "Bois: Marie attend toujours",
-        "EN-US": "Wood: Marie is still waiting",
+        "EN-US": "Woodwinds: Marie is still waiting",
         "PT-BR": "Wood: Marie ainda está esperando",
         "DE": "Holz: Marie wartet immer noch"
     },
@@ -2593,7 +2593,7 @@
     },
     "Bois : <i>Hetzmotiv</i> GP10 s'accélérant": {
         "FR": "Bois : <i>Hetzmotiv</i> GP10 s'accélérant",
-        "EN-US": "Wood: <i>Hetzmotiv</i> GP10 accelerating",
+        "EN-US": "Woodwinds: <i>Hetzmotiv</i> GP10 accelerating",
         "PT-BR": "Madeira: <i>Hetzmotiv</i> GP10 de aceleração",
         "DE": "Holz: <i>Hetzmotiv</i> GP10 beschleunigt sich"
     },
@@ -3187,9 +3187,9 @@
     },
     "Hbt, motif de la frayeur": {
         "FR": "Hbt, motif de la frayeur",
-        "EN-US": "LGBT, a cause for fear",
+        "EN-US": "Oboe, fear motive",
         "PT-BR": "Hbt, motivo de pânico",
-        "DE": "LGBT, Grund zur Angst"
+        "DE": "Oboe, Angstmotiv"
     },
     "Cuivres: Accords I-II-I": {
         "FR": "Cuivres: Accords I-II-I",
@@ -3217,7 +3217,7 @@
     },
     "Bois: 3ce, 4te": {
         "FR": "Bois: 3ce, 4te",
-        "EN-US": "Wood: 3rd, 4th",
+        "EN-US": "Woodwinds: 3rd, 4th",
         "PT-BR": "Madeira: 3ª, 4ª",
         "DE": "Holz: 3. Klasse, 4. Klasse"
     },
@@ -3253,7 +3253,7 @@
     },
     "Bois, motif de la frayeur en descente chromatique": {
         "FR": "Bois, motif de la frayeur en descente chromatique",
-        "EN-US": "Wood, a source of fear in a chromatic descent",
+        "EN-US": "Woodwinds, a source of fear in a chromatic descent",
         "PT-BR": "Bois, motivo de pavor na descida cromática",
         "DE": "Holz, Motiv der Angst in chromatischer Abfolge"
     },
@@ -3361,7 +3361,7 @@
     },
     "Violons, pizzicato suivis du motif de la frayeur…Notes de départ (Mi bémol, Mi bécarre, Si, Fa)": {
         "FR": "Violons, pizzicato suivis du motif de la frayeur…Notes de départ (Mi bémol, Mi bécarre, Si, Fa)",
-        "EN-US": "Violins, pizzicato followed by the motif of fear…Opening notes (E-flat, E, B, F)",
+        "EN-US": "Violins, pizzicato followed by the fear motif…Opening notes (E-flat, E, B, F)",
         "PT-BR": "Violinos, pizzicato seguido do motivo do susto… Notas iniciais (Mi bemol, Mi natural, Si, Fá)",
         "DE": "Violinen, Pizzicato, gefolgt vom Motiv der Angst… Anfangstöne (Es, E, H, F)"
     },
@@ -3385,7 +3385,7 @@
     },
     "Violons, 2 notes jouées en pizz. (préparation du motif de la frayeur)": {
         "FR": "Violons, 2 notes jouées en pizz. (préparation du motif de la frayeur)",
-        "EN-US": "Violins, 2 notes played pizzicato (setting the stage for the scare)",
+        "EN-US": "Violins, 2 notes played pizzicato (preparing the fear motif)",
         "PT-BR": "Violinos, 2 notas tocadas em pizzicato (preparação do motivo de suspense)",
         "DE": "Violinen, 2 Noten im Pizzicato (Vorbereitung des Schreckmotivs)"
     },
@@ -3463,7 +3463,7 @@
     },
     "Accords I-II-III, explicitement pour la première fois, présentés clairement sans le motif de la frayeur": {
         "FR": "Accords I-II-III, explicitement pour la première fois, présentés clairement sans le motif de la frayeur",
-        "EN-US": "I-II-III chords, presented explicitly for the first time, clearly without the motif of fear",
+        "EN-US": "I-II-III chords, presented explicitly for the first time, clearly without the fear motif",
         "PT-BR": "Acordes I-II-III, apresentados explicitamente pela primeira vez, de forma clara e sem o motivo de tensão",
         "DE": "I-II-III-Akkorde, zum ersten Mal explizit, klar dargestellt ohne das Motiv der Angst"
     },
@@ -3475,7 +3475,7 @@
     },
     "Motif de la frayeur descendante (départ sur Si)": {
         "FR": "Motif de la frayeur descendante (départ sur Si)",
-        "EN-US": "The reason for the descending motif (starting on B)",
+        "EN-US": "Descending fear motif (starting on B)",
         "PT-BR": "Motivo da escala descendente (começa em Si)",
         "DE": "Motiv der absteigenden Tonfolge (Beginn auf H)"
     },
@@ -3487,7 +3487,7 @@
     },
     "Flûtes, retour du motif de la frayeur": {
         "FR": "Flûtes, retour du motif de la frayeur",
-        "EN-US": "Oh no, the fear motif is back",
+        "EN-US": "Flutes, the fear motif is back",
         "PT-BR": "Flautas, o retorno do tema do medo",
         "DE": "Flöten, das Motiv der Angst kehrt zurück"
     },
@@ -3925,7 +3925,7 @@
     },
     "Cuivres, motif de la frayeur": {
         "FR": "Cuivres, motif de la frayeur",
-        "EN-US": "Brass instruments, a source of fear",
+        "EN-US": "Brass instruments, fear motif",
         "PT-BR": "Metais, motivo de pavor",
         "DE": "Blechblasinstrumente, Grund zur Furcht"
     },
@@ -3955,7 +3955,7 @@
     },
     "Timbales, motif de la frayeur": {
         "FR": "Timbales, motif de la frayeur",
-        "EN-US": "Timpani, a source of fear",
+        "EN-US": "Timpani, fear motif",
         "PT-BR": "Timbales, motivo de pavor",
         "DE": "Pauken, ein Grund zur Furcht"
     },
@@ -4069,7 +4069,7 @@
     },
     "Corde, La (ton central)…motif de la frayeur, disparition progressive du motif de la frayeur…sonorité de gamme par ton": {
         "FR": "Corde, La (ton central)…motif de la frayeur, disparition progressive du motif de la frayeur…sonorité de gamme par ton",
-        "EN-US": "C (root note)…motif of fear, gradual fading of the motif of fear…sound of a scale by tone",
+        "EN-US": "C (root note)…motif of fear, gradual fading of the fear motif…sound of a scale by tone",
         "PT-BR": "La (nota central)…motivo de tensão, desaparecimento gradual do motivo de tensão…sonoridade de escala por tom",
         "DE": "A (Grundton)…Motiv der Angst, allmähliches Vergehen des Motivs der Angst…Tonleiterklang nach Tönen"
     },
@@ -4519,7 +4519,7 @@
     },
     "Variation 4…Bois: élan retenu! (Non « scientifique »)…Image de la pulsation cardiaque se calmant ": {
         "FR": "Variation 4…Bois: élan retenu! (Non « scientifique »)…Image de la pulsation cardiaque se calmant ",
-        "EN-US": "Variation 4…Wood: restrained momentum! (Not “scientific”)…Image of the heartbeat slowing down ",
+        "EN-US": "Variation 4…Woodwinds: restrained momentum! (Not “scientific”)…Image of the heartbeat slowing down ",
         "PT-BR": "Variação 4…Madeira: impulso contido! (Não “científico”)…Imagem do batimento cardíaco se acalmando ",
         "DE": "Variation 4…Holz: Zurückhaltender Schwung! (Nicht „wissenschaftlich“)…Bild eines sich beruhigenden Herzschlags "
     },
@@ -4969,7 +4969,7 @@
     },
     "Bois: Thème": {
         "FR": "Bois: Thème",
-        "EN-US": "Wood: Theme",
+        "EN-US": "Woodwinds: Theme",
         "PT-BR": "Bois: Tema",
         "DE": "Holz: Thema"
     },
@@ -5263,7 +5263,7 @@
     },
     "Bois: Pulsion qui vient des profondeur": {
         "FR": "Bois: Pulsion qui vient des profondeur",
-        "EN-US": "Wood: An impulse that comes from deep within",
+        "EN-US": "Woodwinds: An impulse that comes from deep within",
         "PT-BR": "Madeira: Um impulso que vem das profundezas",
         "DE": "Holz: Ein Drang, der aus der Tiefe kommt"
     },
@@ -5311,7 +5311,7 @@
     },
     "Bois: Prolifération de ce motif": {
         "FR": "Bois: Prolifération de ce motif",
-        "EN-US": "Wood: Proliferation of this pattern",
+        "EN-US": "Woodwinds: Proliferation of this pattern",
         "PT-BR": "Madeira: Proliferação deste motivo",
         "DE": "Holz: Verbreitung dieses Musters"
     },
@@ -6283,13 +6283,13 @@
     },
     "Bois : Gamme octatonique": {
         "FR": "Bois : Gamme octatonique",
-        "EN-US": "Wood: Octatonic series",
+        "EN-US": "Woodwinds: Octatonic series",
         "PT-BR": "Madeira: Gama octatônica",
         "DE": "Holz: Oktatonische Tonleiter"
     },
     "Bois : Sobresauts": {
         "FR": "Bois : Sobresauts",
-        "EN-US": "Wood: Jerk",
+        "EN-US": "Woodwinds: Jerk",
         "PT-BR": "Madeira: Sobresaltos",
         "DE": "Holz: Ruckeln"
     },
@@ -7423,7 +7423,7 @@
     },
     "Bois : Superposition du rythme (entassement de son élément terminal)": {
         "FR": "Bois : Superposition du rythme (entassement de son élément terminal)",
-        "EN-US": "Wood: Layering of rhythm (accumulation of its terminal element)",
+        "EN-US": "Woodwinds: Layering of rhythm (accumulation of its terminal element)",
         "PT-BR": "Madeira: Sobreposição do ritmo (acúmulo do seu elemento final)",
         "DE": "Holz: Überlagerung des Rhythmus (Anhäufung seines Endelements)"
     },
@@ -7741,7 +7741,7 @@
     },
     "Bois : Accord de la scène complet": {
         "FR": "Bois : Accord de la scène complet",
-        "EN-US": "Wood: Complete stage arrangement",
+        "EN-US": "Woodwinds: Complete stage arrangement",
         "PT-BR": "Bois: Gravação completa da cena",
         "DE": "Holz: Vollständiges Bühnenarrangement"
     },
@@ -8059,7 +8059,7 @@
     },
     "Bois : Accord de la scène": {
         "FR": "Bois : Accord de la scène",
-        "EN-US": "Wood: Stage Design",
+        "EN-US": "Woodwinds: Stage Design",
         "PT-BR": "Música: Acordo da cena",
         "DE": "Holz: Harmonie der Szene"
     },

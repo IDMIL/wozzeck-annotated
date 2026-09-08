@@ -15,19 +15,23 @@
     --timbre-color: #c05621;
     --graph-color: #718096;
 
-    --color-bg: #0d1117;
+    --color-bg: #12100e;
     --color-header: #000000;
-    --color-navy: #0b113a;
-    --color-panel: #161b22;
-    --color-surface: #1c2128;
+    --color-navy: #1c1815;
+    --color-panel: #1a1613;
+    --color-surface: #241f1a;
     --color-overlay: rgba(0, 0, 0, 0.65);
-    --color-heading: #e6edf3;
-    --color-text: #c9d1d9;
-    --color-muted: #8b949e;
-    --color-border: #30363d;
-    --color-accent: #3b82f6;
-    --color-highlight: rgba(59, 130, 246, 0.18);
-    --color-item-hover: #93c5fd;
+    --color-heading: #f0ece6;
+    --color-text: #cec7bd;
+    --color-muted: #948c81;
+    --color-border: #3a332c;
+    --color-accent: #c20404;
+    /* Solid accent fills (buttons, active states) — same as --color-accent
+       here; light mode darkens it instead (see below) since a bright red
+       fill reads as too loud against light backgrounds. */
+    --color-accent-solid: var(--color-accent);
+    --color-highlight: rgba(194, 4, 4, 0.18);
+    --color-item-hover: #ff6b5e;
     --btn-hover-bg: rgba(255, 255, 255, 0.07);
     --btn-hover-border: rgba(255, 255, 255, 0.3);
 
@@ -35,37 +39,38 @@
     /* Timeline cells are their own little surface sitting on --color-navy, so
        they get their own tokens rather than reusing the panel ones — both
        themes need the cell to read as raised above that strip. */
-    --timeline-cell-bg: #232b3d;
+    --timeline-cell-bg: #2c2621;
     --timeline-cell-border: rgba(255, 255, 255, 0.14);
-    --timeline-cell-text: #c9d1d9;
-    --timeline-label-text: #e6edf3;
+    --timeline-cell-text: #cec7bd;
+    --timeline-label-text: #f0ece6;
     --timeline-row-label: rgba(255, 255, 255, 0.55);
     /* Tinted toward the row background, not toward white — in dark mode a
        white-ward mix would go pale and swallow the light cell text. */
-    --timeline-current-page-bg: color-mix(in srgb, var(--color-accent) 40%, #10182b);
+    --timeline-current-page-bg: color-mix(in srgb, var(--color-accent) 40%, #1c1815);
 }
 
 [data-theme="light"] {
     color-scheme: light;
-    --color-bg: #f5f7fa;
-    --color-navy: #dde8f5;
+    --color-bg: #f4f1ec;
+    --color-navy: #e7e1d8;
     --color-panel: #ffffff;
-    --color-surface: #e9ecf0;
+    --color-surface: #ece6dd;
     --color-overlay: rgba(0, 0, 0, 0.4);
-    --color-heading: #111827;
-    --color-text: #374151;
-    --color-muted: #9ca3af;
-    --color-border: #d1d5db;
-    --color-accent: #0057ac;
-    --color-highlight: rgba(0, 87, 172, 0.1);
-    --color-item-hover: #0057ac;
-    --btn-hover-bg: rgba(0, 87, 172, 0.06);
-    --btn-hover-border: #0057ac;
+    --color-heading: #1e1a16;
+    --color-text: #423a32;
+    --color-muted: #8a8073;
+    --color-border: #d8d0c3;
+    --color-accent: #b31217;
+    --color-accent-solid: color-mix(in srgb, var(--color-accent) 78%, black);
+    --color-highlight: rgba(179, 18, 23, 0.1);
+    --color-item-hover: #b31217;
+    --btn-hover-bg: rgba(179, 18, 23, 0.06);
+    --btn-hover-border: #b31217;
 
     --timeline-cell-bg: rgba(255, 255, 255, 0.9);
     --timeline-cell-border: rgba(0, 0, 0, 0.12);
-    --timeline-cell-text: #1a1a2e;
-    --timeline-label-text: #1a1a2e;
+    --timeline-cell-text: #241f1a;
+    --timeline-label-text: #241f1a;
     --timeline-row-label: rgba(0, 0, 0, 0.45);
     --timeline-current-page-bg: color-mix(in srgb, var(--color-accent) 35%, white);
 }
@@ -155,7 +160,7 @@ button {
 
 .section-resize-handle:hover,
 .section-resize-handle.dragging {
-    background: var(--color-accent);
+    background: var(--color-accent-solid);
 }
 
 .section-resize-top,
@@ -267,7 +272,7 @@ button {
 
 .section-move-handle:hover,
 .section-move-handle.dragging {
-    background-color: var(--color-accent);
+    background-color: var(--color-accent-solid);
 }
 
 /* Close button: a small ×, vertically centered on the panel's title (see
@@ -688,14 +693,14 @@ button {
 }
 
 .timeline-button:hover {
-    background-color: var(--color-accent);
+    background-color: var(--color-accent-solid);
     color: white;
     border-color: transparent;
 }
 
 .current-act,
 .current-scene {
-    background-color: var(--color-accent);
+    background-color: var(--color-accent-solid);
     color: white;
     border-color: transparent;
 }
@@ -758,7 +763,7 @@ button {
 
 #pv-current-bar-overlay,
 #garant-current-bar-overlay {
-    background: #f472b6;
+    background: #e0393e;
     opacity: 0.28;
     top: 0;
     left: 0;
@@ -831,7 +836,7 @@ button {
 }
 
 #current-bar-overlay {
-    background: #f472b6;
+    background: #e0393e;
     opacity: 0.28;
     top: 0;
     left: 0;
@@ -839,7 +844,7 @@ button {
 }
 
 .other-bar-overlay {
-    background: #f472b6;
+    background: #e0393e;
     opacity: 0;
     pointer-events: auto;
     cursor: pointer;
@@ -1216,7 +1221,7 @@ button {
 
 #add-annotation-add-button {
     padding: 5px 12px;
-    background: var(--color-accent);
+    background: var(--color-accent-solid);
     border: 1px solid var(--color-accent);
     border-radius: var(--radius);
     color: white;
@@ -1310,7 +1315,7 @@ button {
 }
 
 .drawing-tool-button.active {
-    background: var(--color-accent);
+    background: var(--color-accent-solid);
     border-color: var(--color-accent);
     color: white;
 }
@@ -1384,7 +1389,7 @@ button {
 
 #drawing-close-button {
     padding: 5px 12px;
-    background: var(--color-accent);
+    background: var(--color-accent-solid);
     border: 1px solid var(--color-accent);
     border-radius: var(--radius);
     color: white;
@@ -1576,6 +1581,14 @@ button {
     background: var(--color-highlight);
 }
 
+/* Light mode's highlight tint is too faint against the white/light-gray
+   surfaces to read as "selected" on its own — an inset border (not a real
+   border, so it doesn't shift layout) gives it a visible edge. Dark mode's
+   highlight already has enough contrast against the panel background. */
+[data-theme="light"] .current-annotation {
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 30%, transparent);
+}
+
 .annotation-time-stamp {
     font-size: 10px;
     font-weight: 600;
@@ -1689,7 +1702,7 @@ mark.search-highlight {
 }
 
 .architecture-list-item--active {
-    color: #fb923c;
+    color: var(--color-accent);
     font-weight: 500;
 }
 
@@ -1801,7 +1814,7 @@ mark.search-highlight {
 .change-page-button {
     width: 100px;
     height: 90%;
-    background-color: #f472b6;
+    background-color: #e0393e;
     position: absolute;
     display: none;
     opacity: 0.4;
@@ -1993,7 +2006,7 @@ mark.search-highlight {
 #next-tut-button {
     align-self: flex-end;
     padding: 5px 14px;
-    background: var(--color-accent);
+    background: var(--color-accent-solid);
     border: none;
     border-radius: var(--radius);
     color: white;
