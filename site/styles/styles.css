@@ -123,7 +123,7 @@ button {
 
 .section h2 {
     margin-top: 0;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -291,7 +291,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1;
     color: var(--color-muted);
     transition: color var(--transition);
@@ -385,7 +385,7 @@ button {
 }
 
 #title-section h1 {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
     letter-spacing: 0.01em;
 }
@@ -400,7 +400,7 @@ button {
 .title-links-and-buttons h3 {
     cursor: pointer;
     color: rgba(255, 255, 255, 0.65);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -423,7 +423,7 @@ button {
 .language-select {
     cursor: pointer;
     color: rgba(255, 255, 255, 0.65);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     font-family: inherit;
     letter-spacing: 0.04em;
@@ -469,7 +469,7 @@ button {
 }
 
 #panel-visibility-heading {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -481,7 +481,7 @@ button {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 12px;
+    font-size: 15px;
     color: var(--color-text);
     cursor: pointer;
     flex-shrink: 0;
@@ -490,8 +490,8 @@ button {
 
 .panel-visibility-toggle input[type="checkbox"] {
     accent-color: var(--color-accent);
-    width: 13px;
-    height: 13px;
+    width: 14px;
+    height: 14px;
     cursor: pointer;
 }
 
@@ -598,7 +598,7 @@ button {
 .timeline-container h3 {
     width: 72px;
     color: var(--timeline-row-label);
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.07em;
@@ -622,7 +622,7 @@ button {
     border: 1px solid var(--timeline-cell-border);
     cursor: pointer;
     padding: 0 3px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.03em;
     color: var(--timeline-cell-text);
@@ -675,7 +675,7 @@ button {
     display: flex;
     align-items: center;
     padding-left: 4px;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     color: var(--timeline-label-text);
     white-space: nowrap;
@@ -754,7 +754,7 @@ button {
 #score-title,
 #pv-score-title,
 #garant-score-title {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -818,7 +818,7 @@ button {
 }
 
 .page-annotation-text {
-    font-size: 11px;
+    font-size: 14px;
     line-height: 1.4;
     color: var(--color-text);
     font-family: var(--font-serif);
@@ -978,7 +978,7 @@ button {
 }
 
 #position-text p.level-name {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -995,7 +995,7 @@ button {
 #transport-scene-select,
 #transport-bar-input,
 #transport-page-input {
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 600;
     color: var(--color-heading);
     letter-spacing: -0.01em;
@@ -1077,7 +1077,7 @@ button {
     border: none;
     border-radius: 20px;
     padding: 3px 11px;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -1134,7 +1134,7 @@ button {
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
     padding: 14px 16px;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.55;
     color: var(--color-text);
     font-weight: 300;
@@ -1177,7 +1177,7 @@ button {
     border-radius: var(--radius);
     color: var(--color-text);
     font-family: var(--font);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 300;
     cursor: pointer;
     transition: border-color var(--transition), background var(--transition);
@@ -1208,7 +1208,7 @@ button {
     border-radius: var(--radius);
     color: var(--color-text);
     font-family: var(--font);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 300;
     cursor: pointer;
     transition: border-color var(--transition), background var(--transition);
@@ -1226,7 +1226,7 @@ button {
     border-radius: var(--radius);
     color: white;
     font-family: var(--font);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     transition: opacity var(--transition);
@@ -1265,7 +1265,7 @@ button {
 
 .floating-panel h2 {
     margin-top: 0;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -1304,7 +1304,7 @@ button {
     border-radius: var(--radius);
     color: var(--color-text);
     font-family: var(--font);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 300;
     cursor: pointer;
     transition: border-color var(--transition), background var(--transition), color var(--transition);
@@ -1333,7 +1333,7 @@ button {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -1376,7 +1376,7 @@ button {
     border-radius: var(--radius);
     color: var(--color-text);
     font-family: var(--font);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 300;
     cursor: pointer;
     transition: border-color var(--transition), background var(--transition);
@@ -1394,7 +1394,7 @@ button {
     border-radius: var(--radius);
     color: white;
     font-family: var(--font);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     transition: opacity var(--transition);
@@ -1432,7 +1432,7 @@ button {
 }
 
 .add-annotation-field-label {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -1447,7 +1447,7 @@ button {
     border-radius: var(--radius);
     color: var(--color-text);
     font-family: var(--font);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 300;
     outline: none;
     transition: border-color var(--transition), background var(--transition);
@@ -1479,7 +1479,7 @@ button {
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 400;
     color: var(--color-text);
     cursor: pointer;
@@ -1516,7 +1516,7 @@ button {
     border-radius: var(--radius);
     color: var(--color-text);
     font-family: var(--font);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 300;
     outline: none;
     resize: vertical;
@@ -1541,7 +1541,7 @@ button {
     border-radius: var(--radius);
     color: var(--color-text);
     font-family: var(--font);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 300;
     outline: none;
     transition: border-color var(--transition), background var(--transition);
@@ -1590,7 +1590,7 @@ button {
 }
 
 .annotation-time-stamp {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -1629,7 +1629,7 @@ button {
 }
 
 .annotation-text {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.45;
     color: var(--color-text);
     font-family: var(--font-serif);
@@ -1694,7 +1694,7 @@ mark.search-highlight {
 
 .architecture-list-item {
     color: var(--color-text);
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.6;
     cursor: pointer;
     transition: color var(--transition);
@@ -1775,7 +1775,7 @@ mark.search-highlight {
     border-radius: var(--radius);
     color: var(--color-text);
     font-family: var(--font);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     outline: none;
     transition: border-color var(--transition), background var(--transition);
@@ -1879,7 +1879,7 @@ mark.search-highlight {
 
 #credits-box p,#credits-box li {
     color: var(--color-text);
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.65;
     margin: 0 0 16px;
 }
@@ -1998,7 +1998,7 @@ mark.search-highlight {
 }
 
 #tut-text {
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.55;
     color: var(--color-text);
 }
