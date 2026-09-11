@@ -1,11 +1,12 @@
 import html as html_module
 import io
+import sys
 import zipfile
 import openpyxl
 import warnings
 from os import listdir
 from difflib import SequenceMatcher
-from translate import translate
+from translate import translate_all
 
 try:
     from openpyxl.cell.rich_text import CellRichText, TextBlock
@@ -176,10 +177,9 @@ def parse_annotations_sheet(ws, act_number, isGeneral):
                 current_measures = [measure_range[0], measure_range[1]]
 
         french_annotation = cell_to_html(row[2])
-        english_annotation = translate(french_annotation, 'FR', 'EN-US')
-        portuguese_annotation = translate(french_annotation, 'FR', 'PT-BR')
-        german_annotation = translate(french_annotation, 'FR', 'DE')
-        a['annotation'] = {'fr': french_annotation, 'en': english_annotation, 'pt': portuguese_annotation, 'de': german_annotation}
+        # Translations are filled in later, in a batch, once every sheet has
+        # been parsed - see the translate_all() calls below.
+        a['annotation'] = {'fr': french_annotation}
         a['annotation_source'] = 'René Schmidt'
         a['act'] = act_number
         a['is_general'] = isGeneral
@@ -188,6 +188,8 @@ def parse_annotations_sheet(ws, act_number, isGeneral):
         annotations.append(a)
 
     return annotations
+
+dry_run = '--dry-run' in sys.argv
 
 all_annotations = []
 for f in listdir("../annotations"):
@@ -214,6 +216,19 @@ for f in listdir("../annotations"):
             all_annotations += parse_annotations_sheet(wb[sheet_name], act_number, isGeneral=False)
         elif 'général' in sheet_name.lower():
             all_annotations += parse_annotations_sheet(wb[sheet_name], act_number, isGeneral=True)
+
+french_annotations = [a['annotation']['fr'] for a in all_annotations]
+english_annotations = translate_all(french_annotations, 'FR', 'EN-US', dry_run=dry_run)
+portuguese_annotations = translate_all(french_annotations, 'FR', 'PT-BR', dry_run=dry_run)
+german_annotations = translate_all(french_annotations, 'FR', 'DE', dry_run=dry_run)
+for a, en, pt, de in zip(all_annotations, english_annotations, portuguese_annotations, german_annotations):
+    a['annotation']['en'] = en
+    a['annotation']['pt'] = pt
+    a['annotation']['de'] = de
+
+if dry_run:
+    print(f"Dry run complete: {len(french_annotations)} annotations, no API calls made, no output written.")
+    sys.exit(0)
 
 all_annotations.sort(key=lambda a: a['act'] * 10000 + a['measure_range'][0])
 
