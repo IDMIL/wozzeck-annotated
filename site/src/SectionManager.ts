@@ -140,6 +140,7 @@ function getVerticalDragBounds(): VerticalBounds {
 export abstract class SectionManager extends TimeManagerListener {
     protected readonly element: HTMLElement | null;
     private readonly resizable: boolean;
+    private readonly closable: boolean;
     private readonly autoHeight: boolean;
     // Mobile layout only replaces the free-form fixed-position behavior of
     // resizable (movable) panels — pinned chrome (title bar, panel-visibility
@@ -149,15 +150,21 @@ export abstract class SectionManager extends TimeManagerListener {
 
     // `resizable` lets a subclass opt out of the four draggable edges (e.g.
     // the title bar, which stays pinned to the top of the page like before).
+    // `closable` defaults to matching `resizable` (every movable panel gets a
+    // close button) but can be set independently — e.g. the timelines panel,
+    // which stays pinned in place yet is still one of PanelVisibilityManager's
+    // toggleable panels and so still needs a way to close it.
     // `autoHeight` (only meaningful when !resizable) sizes the section to
     // fit its content instead of a fixed pixel height, for chrome whose
     // content can wrap onto more lines at smaller widths (e.g. the title
     // bar's links row) — without it the bar would clip that extra content.
     protected constructor(
-        sectionId: string, defaultRect: SectionRect, resizable: boolean = true, autoHeight: boolean = false
+        sectionId: string, defaultRect: SectionRect, resizable: boolean = true, autoHeight: boolean = false,
+        closable: boolean = resizable
     ) {
         super();
         this.resizable = resizable;
+        this.closable = closable;
         this.autoHeight = autoHeight;
         this.mobile = IS_MOBILE_LAYOUT && resizable;
         this.element = document.getElementById(sectionId);
@@ -201,9 +208,15 @@ export abstract class SectionManager extends TimeManagerListener {
     // (replacing innerHTML, appending children, etc.) — resize handles are
     // appended as direct children of the section, so attaching them any
     // earlier would just have them wiped out by the subclass's own setup.
-    // No-ops for non-resizable sections.
+    // Non-resizable sections skip the resize/move handles but still get a
+    // close button if `closable` (see the constructor).
     protected initResizeHandles(): void {
-        if (!this.resizable) return;
+        if (!this.resizable) {
+            if (this.closable && this.element !== null) {
+                this.attachCloseHandle(this.element);
+            }
+            return;
+        }
         this.attachResizeHandles();
     }
 

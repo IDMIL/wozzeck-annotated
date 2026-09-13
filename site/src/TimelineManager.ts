@@ -2,14 +2,15 @@ import {ScoreTime, TimeManager} from "./TimeManager";
 import {scene_bar_ranges} from "./data/sceneBarRanges";
 import {getRomanNumerals, globals} from "./globals";
 import {text} from "./data/text";
-import {SectionManager, SectionRect} from "./SectionManager";
+import {SectionManager, SectionRect, IS_MOBILE_LAYOUT, GAP} from "./SectionManager";
 import {bar_to_page} from "./data/barToPage";
 
 export class TimelineManager extends SectionManager {
     constructor(tm : TimeManager, rect: SectionRect) {
         // Pinned chrome like the title bar (see TitleSectionManager) — always
-        // visible right below it, not draggable/resizable.
-        super("timelines-section", rect, false);
+        // visible right below it, not draggable/resizable — but still
+        // closable like the other toggleable panels (see PanelVisibilityManager).
+        super("timelines-section", rect, false, false, true);
         this.timeManager = tm;
 
         let actLengths = [];
@@ -142,6 +143,23 @@ export class TimelineManager extends SectionManager {
         this.#renderSceneStructureBars();
 
         this.initResizeHandles();
+    }
+
+    // On mobile, this bar is pinned chrome outside the flex-stacked panels
+    // (see main.ts buildWindow), which reserves room for it by padding the
+    // stack's container — closing/reopening the bar here needs to shrink or
+    // restore that padding to match, or the stack is left with a dead gap
+    // (or overlaps the bar) where it used to be. Desktop doesn't need this:
+    // there the stack isn't padded to make room, panels just get dragged
+    // out from underneath it.
+    protected onVisibilityChanged(_visible: boolean): void {
+        if (!IS_MOBILE_LAYOUT) return;
+        const layoutSections = document.getElementById("layout-sections");
+        const titleElement = document.getElementById("title-section");
+        if (layoutSections === null || titleElement === null || this.element === null) return;
+        const titleHeight = titleElement.getBoundingClientRect().height;
+        const timelineHeight = this.element.getBoundingClientRect().height;
+        layoutSections.style.paddingTop = `${titleHeight + timelineHeight + GAP}px`;
     }
 
     // The scene-structure row is rebuilt whenever the current scene changes
