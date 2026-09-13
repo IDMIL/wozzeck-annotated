@@ -584,6 +584,13 @@ button {
 
 .timeline-container h3 {
     width: 72px;
+    /* Without this, the default flex-shrink:1 lets this column shrink on
+       narrow screens — and by how much depends on how much the sibling
+       .timeline needs to shrink too, which differs between the acts row
+       (3 wide buttons) and the scenes row (many narrow ones). That made the
+       two rows' label columns end up different widths on narrow screens,
+       throwing off the alignment of the buttons after them. */
+    flex-shrink: 0;
     color: var(--timeline-row-label);
     font-size: 11px;
     font-weight: 600;
@@ -598,6 +605,22 @@ button {
 .timeline {
     flex-grow: 1;
     display: flex;
+    /* Same nested-flex min-width:auto gotcha as .timeline-button below: without
+       this, this row's own auto-computed minimum width (as a flex item of
+       .timeline-container) is pulled from its children's content size, and
+       that content size differs between the acts row and the scenes row —
+       which throws off how much each row's sibling h3 shrinks, and by how
+       much this row itself shrinks, at very narrow widths. */
+    min-width: 0;
+}
+
+/* Groups a single act's scenes so the scenes row mirrors the acts row's
+   3-item flex structure — see the comment in TimelineManager where these
+   groups are built for why that's needed for pixel alignment. */
+.timeline-scene-group {
+    display: flex;
+    height: 100%;
+    min-width: 0;
 }
 
 .timeline-button {
@@ -605,6 +628,13 @@ button {
     align-items: center;
     justify-content: center;
     height: 100%;
+    /* Flex items default to min-width:auto, which floors shrinking at their
+       content size (text + padding + border). Without overriding that, a
+       button whose percentage width is narrower than its content on small
+       screens refuses to shrink, so its row overflows and drifts out of
+       alignment with the row above (e.g. act/scene boundaries no longer
+       line up) — see the near-identical note on .timeline-structure-bar. */
+    min-width: 0;
     background-color: var(--timeline-cell-bg);
     border: 1px solid var(--timeline-cell-border);
     cursor: pointer;

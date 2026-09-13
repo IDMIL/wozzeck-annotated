@@ -115,13 +115,32 @@ export class TimelineManager extends SectionManager {
 
         let actNumber = 1;
         for (const actBarRange of scene_bar_ranges) {
+            // Scenes are grouped into a per-act wrapper sized with the exact
+            // same width expression as the corresponding act div above
+            // (actLengths[i] * 100 / totalLength), rather than each scene
+            // being sized as a fraction of totalLength directly. Flexbox
+            // rounds each item's fractional pixel width independently per
+            // container, accumulating the leftover remainder differently
+            // depending on how many siblings are in that row — so on narrow
+            // screens, the many-item scenes row and the 3-item acts row
+            // round to different pixel boundaries even though the
+            // percentages are mathematically equal, leaving the two rows
+            // misaligned. Giving the acts row and the scenes row identical
+            // 3-item flex structure (one wrapper per act, same widths, same
+            // order) makes the browser round them identically, and scenes
+            // are then sized relative to their own act's length so they
+            // exactly fill their wrapper regardless of rounding.
+            let actWrapper = document.createElement("div");
+            actWrapper.classList.add("timeline-scene-group");
+            actWrapper.style.width = (actLengths[actNumber - 1] * 100 / totalLength) + "%";
+
             let sceneNumber = 1;
             for (const sceneBarRange of actBarRange) {
                 let sceneDiv = document.createElement("div");
                 sceneDiv.id = "timeline-act-" + actNumber + "-scene-" + sceneNumber;
                 sceneDiv.classList.add("timeline-button");
                 sceneDiv.classList.add("timeline-scene");
-                sceneDiv.style.width = ((sceneBarRange[1] + 1 - sceneBarRange[0]) * 100 / totalLength) + "%";
+                sceneDiv.style.width = ((sceneBarRange[1] + 1 - sceneBarRange[0]) * 100 / actLengths[actNumber - 1]) + "%";
                 let sceneDivText = document.createElement("span");
                 sceneDivText.innerText = sceneNumber.toString();
                 sceneDiv.appendChild(sceneDivText);
@@ -134,9 +153,10 @@ export class TimelineManager extends SectionManager {
                 sceneDiv.onmouseenter = () => {
                     this.timeManager.preloadTime({act: a, bar: sceneBar, barLength: 1});
                 }
-                scenesTimeline.appendChild(sceneDiv);
+                actWrapper.appendChild(sceneDiv);
                 sceneNumber++;
             }
+            scenesTimeline.appendChild(actWrapper);
             actNumber++;
         }
 
