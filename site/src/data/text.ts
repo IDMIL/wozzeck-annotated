@@ -191,8 +191,6 @@ export const text: { [key: string]: MultiLanguageString } = {
     TIMBRE:             { en: "Timbre",                    fr: "Timbre",                           pt: "Timbre",               de: "Klangfarbe" },
     GRAPHICAL:          { en: "Graphical",                 fr: "Graphique",                        pt: "Gráfico",              de: "Grafisch" },
     USER:               { en: "User",                      fr: "Utilisateur·trice",                pt: "Usuário",              de: "Benutzer" },
-    NEXT:               { en: "Next",                      fr: "Suivant",                          pt: "Próximo",              de: "Weiter" },
-    DONE:               { en: "Done",                      fr: "Terminer",                         pt: "Concluir",             de: "Fertig" },
     MOVE:               { en: "Move",                      fr: "Déplacer",                         pt: "Mover",                de: "Verschieben" },
     FULLSCREEN:         { en: "Fullscreen",                fr: "Plein écran",                      pt: "Tela cheia",           de: "Vollbild" },
     // Abbreviated bar/measure prefix, as used inline next to a number in the

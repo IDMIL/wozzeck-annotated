@@ -13,7 +13,6 @@ import {ScoreTransportOverlay} from "./ScoreTransportOverlay";
 import {VideoPlayerManager} from "./VideoPlayerManager";
 import {CurrentPageAnnotations} from "./CurrentPageAnnotations";
 import {ScoreDrawingOverlay} from "./ScoreDrawingOverlay";
-import {Tutorial} from "./Tutorial";
 import {SectionRect, IS_MOBILE_LAYOUT, GAP} from "./SectionManager";
 import {PanelVisibilityManager} from "./PanelVisibilityManager";
 import {LibrettoManager} from "./LibrettoManager";
@@ -252,8 +251,6 @@ async function buildWindow(lang : LanguageCode ) {
     timeManager.listeners.push(librettoManager);
 
     timeManager.notifyListeners("init");
-
-    new Tutorial();
 }
 
 // Expose to window so index.html can call it
