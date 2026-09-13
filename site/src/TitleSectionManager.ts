@@ -1,7 +1,33 @@
 import {text, LanguageCode} from "./data/text";
 import {globals} from "./globals";
-import {SectionManager, SectionRect} from "./SectionManager";
+import {SectionManager, SectionRect, IS_MOBILE_LAYOUT, GAP} from "./SectionManager";
 import {LAST_UPDATED} from "./data/lastUpdated";
+
+// The timeline is pinned chrome flush against the title bar's bottom edge
+// (see main.ts's timelineRect), a one-time value computed from the title
+// bar's height when it was built. Opening the mobile menu (see
+// title-menu-toggle below) grows the title bar's own height:auto box well
+// past that, so both the timeline and — on mobile, where the panel stack is
+// pushed down by #layout-sections' top padding, itself derived from that
+// same one-time height — the padding need to be re-derived each time the
+// menu opens or closes, the same way TimelineManager does for its own
+// collapse/expand toggle.
+function repositionBelowHeader(titleSection: HTMLElement): void {
+    const timelineSection = document.getElementById("timelines-section");
+    if (!timelineSection) {
+        return;
+    }
+    const headerBottom = titleSection.getBoundingClientRect().bottom;
+    timelineSection.style.top = `${headerBottom}px`;
+
+    if (IS_MOBILE_LAYOUT) {
+        const layoutSections = document.getElementById("layout-sections");
+        if (layoutSections) {
+            layoutSections.style.paddingTop =
+                `${timelineSection.getBoundingClientRect().bottom + GAP}px`;
+        }
+    }
+}
 
 function showCredits(showOrHide: boolean) {
     const credits = document.getElementById('credits-anchor');
@@ -49,7 +75,10 @@ export class TitleSectionManager extends SectionManager {
             ).join('');
 
             titleSection.innerHTML = `<h1>` + text.TITLE[globals.language] + `</h1>
-      <div class="title-links-and-buttons"><h3 id="info-link">` + text.INFO[globals.language] + `</h3><h3 id="theme-toggle">${themeToggleLabel()}</h3><select id="language-select" class="language-select">${options}</select></div>`;
+      <div class="title-header-controls">
+      <div class="title-links-and-buttons"><h3 id="info-link">` + text.INFO[globals.language] + `</h3><h3 id="theme-toggle">${themeToggleLabel()}</h3><select id="language-select" class="language-select">${options}</select></div>
+      <button id="title-menu-toggle" class="title-menu-toggle" aria-label="Show menu" aria-expanded="false">&#9654;</button>
+      </div>`;
 
             // Both go on <body>, not in the title bar that opens them: the
             // title bar is a .pinned-section with a z-index, hence a stacking
@@ -87,6 +116,32 @@ export class TitleSectionManager extends SectionManager {
 
             document.getElementById("language-select")?.addEventListener("change", (e) => {
                 window.location.href = (e.target as HTMLSelectElement).value;
+            });
+
+            document.getElementById("title-menu-toggle")?.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const toggle = document.getElementById("title-menu-toggle");
+                const menu = document.querySelector(".title-links-and-buttons");
+                const nowOpen = !menu?.classList.contains("open");
+                menu?.classList.toggle("open", nowOpen);
+                toggle?.classList.toggle("open", nowOpen);
+                toggle?.setAttribute("aria-expanded", String(nowOpen));
+                repositionBelowHeader(titleSection);
+            });
+
+            document.addEventListener("click", (e) => {
+                const controls = document.querySelector(".title-header-controls");
+                if (controls && !controls.contains(e.target as Node)) {
+                    const toggle = document.getElementById("title-menu-toggle");
+                    const menu = document.querySelector(".title-links-and-buttons");
+                    const wasOpen = menu?.classList.contains("open");
+                    menu?.classList.remove("open");
+                    toggle?.classList.remove("open");
+                    toggle?.setAttribute("aria-expanded", "false");
+                    if (wasOpen) {
+                        repositionBelowHeader(titleSection);
+                    }
+                }
             });
         }
         this.initResizeHandles();

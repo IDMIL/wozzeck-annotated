@@ -2,7 +2,7 @@ import {ScoreTime, TimeManager} from "./TimeManager";
 import {scene_bar_ranges} from "./data/sceneBarRanges";
 import {getRomanNumerals, globals} from "./globals";
 import {text} from "./data/text";
-import {SectionManager, SectionRect, IS_MOBILE_LAYOUT, GAP} from "./SectionManager";
+import {SectionManager, SectionRect} from "./SectionManager";
 import {bar_to_page} from "./data/barToPage";
 
 export class TimelineManager extends SectionManager {
@@ -28,37 +28,6 @@ export class TimelineManager extends SectionManager {
         const heading = document.createElement("h2");
         heading.innerText = text.TIMELINES[globals.language];
         timelineSection.appendChild(heading);
-
-        // Collapsing hides every .timeline-container row (see the
-        // #timelines-section.collapsed CSS rule) — the heading above and
-        // this button are the only other direct children, so they're
-        // untouched by that rule. Shrinking to height:auto rather than a
-        // second hardcoded pixel height lets it size to exactly the
-        // (still-visible) title row; expanding restores the fixed height
-        // this panel was constructed with.
-        const collapseButton = document.createElement("div");
-        collapseButton.id = "timeline-collapse-button";
-        collapseButton.title = text.COLLAPSE[globals.language];
-        collapseButton.addEventListener("click", () => {
-            const collapsed = timelineSection!.classList.toggle("collapsed");
-            timelineSection!.style.height = collapsed ? "auto" : `${rect.height}px`;
-
-            // On mobile, the flex-stacked panels below (see buildWindow) are
-            // pushed down by #layout-sections' top padding, a one-time value
-            // computed from this panel's original height. That value is now
-            // stale — re-derive it from the timeline's actual (just-changed)
-            // bottom edge so the stack closes the gap instead of leaving a
-            // blank space where the collapsed rows used to be.
-            if (IS_MOBILE_LAYOUT) {
-                const layoutSections = document.getElementById("layout-sections");
-                if (layoutSections) {
-                    layoutSections.style.paddingTop =
-                        `${timelineSection!.getBoundingClientRect().bottom + GAP}px`;
-                }
-            }
-        });
-        timelineSection.appendChild(collapseButton);
-
 
         let actsSection = document.createElement("div");
         actsSection.id = "acts-timeline";

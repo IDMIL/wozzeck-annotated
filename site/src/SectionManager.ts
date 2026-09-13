@@ -41,9 +41,9 @@ export const IS_MOBILE_LAYOUT = window.innerWidth <= MOBILE_BREAKPOINT;
 export const PANEL_VISIBILITY_EVENT = "panel-visibility-changed";
 
 // Shared spacing constant between panels/chrome — used by main.ts's default
-// layout math and by TimelineManager, which re-derives #layout-sections'
-// mobile top padding when the timeline collapses/expands (its height then
-// no longer matches what that padding was originally computed from).
+// layout math and by TitleSectionManager, which re-derives the timeline's
+// pinned top offset (and, on mobile, #layout-sections' top padding) when
+// opening/closing its menu changes the title bar's height.
 export const GAP = 10;
 
 function clamp(value: number, min: number, max: number): number {
@@ -92,8 +92,9 @@ interface VerticalBounds {
 // below it) and the bottom (panel-visibility bar) — the innermost edge of
 // each stack becomes the effective top/bottom of the viewport for dragging
 // and resizing purposes. Read fresh each drag move since these heights
-// change at runtime: the title bar's content can wrap (see autoHeight), the
-// timeline collapses (see TimelineManager), and either can be hidden.
+// change at runtime: the title bar's content can wrap (see autoHeight) or
+// its menu open/close (see TitleSectionManager), and either it or the
+// timeline can be hidden.
 // Firefox's getBoundingClientRect() is more prone than Chromium's to returning
 // fractional values for position:fixed elements (e.g. 899.98 instead of 900),
 // so an exact edge comparison can miss a bar that's visually flush against the
