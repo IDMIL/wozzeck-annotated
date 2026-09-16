@@ -24,16 +24,14 @@ export class GarantScoreManager extends SectionManager {
 
         const scoreViewer = this.element;
         if (scoreViewer) {
-            scoreViewer.innerHTML = `
-            <div id="garant-score-header" class="score-panel-header">
-              <div id="garant-score-title"></div>
-            </div>
+            const heading = document.createElement("h2");
+            heading.innerText = text.GARANT_SCORE_VIEWER[globals.language];
+            scoreViewer.appendChild(heading);
+
+            scoreViewer.insertAdjacentHTML("beforeend", `
             <div id="garant-image-holder" class="score-image-holder">
               <img class="score-page-image" id="garant-score-viewer-image"/>
-            </div>`
-
-            const title = document.getElementById("garant-score-title");
-            if (title) title.innerText = text.GARANT_SCORE_VIEWER[globals.language];
+            </div>`);
 
             this.initResizeHandles();
         }

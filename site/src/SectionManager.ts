@@ -209,11 +209,14 @@ export abstract class SectionManager extends TimeManagerListener {
     // appended as direct children of the section, so attaching them any
     // earlier would just have them wiped out by the subclass's own setup.
     // Non-resizable sections skip the resize/move handles but still get a
-    // close button if `closable` (see the constructor).
+    // floating title tab if `closable` (see the constructor) — e.g. the
+    // timelines panel (see TimelineManager), which is pinned in place but
+    // still one of PanelVisibilityManager's toggleable panels.
     protected initResizeHandles(): void {
         if (!this.resizable) {
             if (this.closable && this.element !== null) {
-                this.attachCloseHandle(this.element);
+                this.wrapContentForOverflow(this.element);
+                this.attachPanelTitle(this.element);
             }
             return;
         }
@@ -446,6 +449,14 @@ export abstract class SectionManager extends TimeManagerListener {
         const el = this.element;
         if (el === null) return;
 
+        // Wrapped either way — a subclass's own overflow/display rules
+        // target .panel-content-clip regardless of layout mode (see
+        // wrapContentForOverflow), so mobile needs the wrapper just as much
+        // as desktop even though it has no floating title tab to protect
+        // from clipping (mobile's own move/close handles, appended below,
+        // stay outside it either way).
+        this.wrapContentForOverflow(el);
+
         if (this.mobile) {
             this.attachMobileHandles(el);
             return;
@@ -484,7 +495,7 @@ export abstract class SectionManager extends TimeManagerListener {
             this.beginMove(e);
         });
 
-        this.attachCloseHandle(el);
+        this.attachPanelTitle(el);
     }
 
     // Elements that already handle their own clicks — form controls, links,
@@ -533,12 +544,15 @@ export abstract class SectionManager extends TimeManagerListener {
         this.attachCloseHandle(el);
     }
 
-    // Small × button next to the move handle. Firing "panel-close-request" on
-    // the section element (rather than closing it directly here) keeps
-    // SectionManager ignorant of the panel-visibility bar — PanelVisibilityManager
-    // listens for the event on each target it manages and treats it exactly
-    // like unchecking that panel's toggle.
-    private attachCloseHandle(el: HTMLElement): void {
+    // Small × button. Firing "panel-close-request" on the section element
+    // (rather than closing it directly here) keeps SectionManager ignorant
+    // of the panel-visibility bar — PanelVisibilityManager listens for the
+    // event on each target it manages and treats it exactly like unchecking
+    // that panel's toggle. Stopping propagation on mousedown/pointerdown
+    // keeps a click here from also being read as the start of a panel drag
+    // by whichever listener the caller wired up (see attachPanelTitle and
+    // attachMobileHandles).
+    private makeCloseHandle(el: HTMLElement): HTMLElement {
         const closeHandle = document.createElement("div");
         closeHandle.classList.add("section-close-handle");
         closeHandle.title = capitalizeFirstLetter(text.CLOSE[globals.language]);
@@ -549,7 +563,60 @@ export abstract class SectionManager extends TimeManagerListener {
             e.stopPropagation();
             el.dispatchEvent(new CustomEvent("panel-close-request"));
         });
-        el.appendChild(closeHandle);
+        return closeHandle;
+    }
+
+    // Used directly by mobile (see attachMobileHandles), which keeps its
+    // close button appended straight into the panel rather than inside a
+    // .panel-title tab.
+    private attachCloseHandle(el: HTMLElement): void {
+        el.appendChild(this.makeCloseHandle(el));
+    }
+
+    // Moves whatever content the subclass already built (still `el`'s only
+    // children at this point — resize handles/panel-title are added after)
+    // into a fresh inner wrapper (see .panel-content-clip in styles.css),
+    // which takes over whatever overflow/clipping behavior that content's
+    // own CSS declares (scrolling a long list, rounding an iframe's corners
+    // to the panel, ...). `el` itself is left with no overflow rule of its
+    // own (default: visible) so the floating title tab (see
+    // attachPanelTitle), which deliberately pokes outside el's box, doesn't
+    // get clipped along with everything else the way it would if el were
+    // still the element some panel's CSS sets overflow:hidden on.
+    private wrapContentForOverflow(el: HTMLElement): void {
+        const content = document.createElement("div");
+        content.classList.add("panel-content-clip");
+        while (el.firstChild) {
+            content.appendChild(el.firstChild);
+        }
+        el.appendChild(content);
+    }
+
+    // Floating title tab that straddles the panel's own top border (see
+    // .panel-title in styles.css — this only builds the DOM, all
+    // positioning/visibility is CSS, per Panel Style.md). Desktop-only:
+    // mobile-stacked panels keep their own always-visible move/close handles
+    // instead (see attachMobileHandles) since touch has no reliable hover to
+    // reveal a hidden-until-hovered tab with. Pulls whatever h2 the subclass
+    // built (wherever in its content it ended up — see e.g.
+    // VideoPlayerManager, which nests its own inside a header row alongside
+    // a <select>) out into the tab alongside the × button. No extra drag
+    // wiring needed: a mousedown anywhere on the tab except the × bubbles up
+    // to `el`'s own background-drag listener (see attachResizeHandles),
+    // exactly like clicking anywhere else non-interactive on the panel.
+    private attachPanelTitle(el: HTMLElement): void {
+        const heading = el.querySelector<HTMLElement>("h2");
+        if (heading === null && !this.closable) return;
+
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("panel-title");
+        if (heading !== null) {
+            wrapper.appendChild(heading);
+        }
+        if (this.closable) {
+            wrapper.appendChild(this.makeCloseHandle(el));
+        }
+        el.appendChild(wrapper);
     }
 
     // The score viewer's aspect ratio isn't known until its first image

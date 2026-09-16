@@ -121,6 +121,16 @@ button {
     padding: 0 12px;
 }
 
+/* Clears room below the border for the lower half of a floating title tab
+   (see .panel-title) to sit over — without this, content flows right up to
+   the border the moment the h2 that used to hold that space open is pulled
+   out into the tab. Only matches sections that actually got a tab (desktop
+   — see SectionManager.attachPanelTitle); mobile keeps its h2 in normal
+   flow, so it already holds its own space open there. */
+.section:has(> .panel-title) {
+    padding-top: 1.75em;
+}
+
 .section h2 {
     margin-top: 0;
     font-size: 12px;
@@ -135,8 +145,21 @@ button {
     background-color: var(--color-panel);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
-    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.3);
-    transition: background-color var(--transition), border-color var(--transition);
+    transition: background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+/* Thickens the panel's own border while the pointer is over its floating
+   title tab (see .panel-title, and Panel Style.md) — a lightweight "you're
+   about to drag this" cue. An outset box-shadow rather than an actual
+   border-width change: box-shadow never participates in layout, so it can't
+   nudge the padding/content box the way growing the real border would (with
+   box-sizing:border-box, only the *outer* size is held fixed as border
+   grows — the space available for padding+content shrinks by the same
+   amount, which read as the panel "shrinking" by a pixel on hover). Desktop
+   only: .panel-title is never built for mobile-stacked panels (see
+   SectionManager.attachResizeHandles). */
+.draggable-section:has(> .panel-title:hover) {
+    box-shadow: 0 0 0 1px var(--color-border);
 }
 
 /* Pinned chrome (title bar, panel-visibility bar) always renders above
@@ -235,37 +258,38 @@ button {
    handle there. Reorders the panel among its siblings (see beginMobileMove);
    on desktop panels are dragged directly from their own background instead
    (see SectionManager.isInteractiveTarget), so this element is never created
-   there. */
+   there. Kept the same size as .section-close-handle so the two read as a
+   matched pair sitting side by side. */
 .section-move-handle {
     position: absolute;
-    top: 9px;
+    top: 6px;
     right: 14px;
-    width: 14px;
-    height: 14px;
+    width: 20px;
+    height: 20px;
     cursor: move;
     background-color: var(--color-border);
-    -webkit-mask-image: radial-gradient(circle at 2px 2px, #000 1.3px, transparent 1.4px),
-        radial-gradient(circle at 7px 2px, #000 1.3px, transparent 1.4px),
-        radial-gradient(circle at 12px 2px, #000 1.3px, transparent 1.4px),
-        radial-gradient(circle at 2px 7px, #000 1.3px, transparent 1.4px),
-        radial-gradient(circle at 7px 7px, #000 1.3px, transparent 1.4px),
-        radial-gradient(circle at 12px 7px, #000 1.3px, transparent 1.4px),
-        radial-gradient(circle at 2px 12px, #000 1.3px, transparent 1.4px),
-        radial-gradient(circle at 7px 12px, #000 1.3px, transparent 1.4px),
-        radial-gradient(circle at 12px 12px, #000 1.3px, transparent 1.4px);
-    mask-image: radial-gradient(circle at 2px 2px, #000 1.3px, transparent 1.4px),
-        radial-gradient(circle at 7px 2px, #000 1.3px, transparent 1.4px),
-        radial-gradient(circle at 12px 2px, #000 1.3px, transparent 1.4px),
-        radial-gradient(circle at 2px 7px, #000 1.3px, transparent 1.4px),
-        radial-gradient(circle at 7px 7px, #000 1.3px, transparent 1.4px),
-        radial-gradient(circle at 12px 7px, #000 1.3px, transparent 1.4px),
-        radial-gradient(circle at 2px 12px, #000 1.3px, transparent 1.4px),
-        radial-gradient(circle at 7px 12px, #000 1.3px, transparent 1.4px),
-        radial-gradient(circle at 12px 12px, #000 1.3px, transparent 1.4px);
+    -webkit-mask-image: radial-gradient(circle at 3px 3px, #000 1.9px, transparent 2px),
+        radial-gradient(circle at 10px 3px, #000 1.9px, transparent 2px),
+        radial-gradient(circle at 17px 3px, #000 1.9px, transparent 2px),
+        radial-gradient(circle at 3px 10px, #000 1.9px, transparent 2px),
+        radial-gradient(circle at 10px 10px, #000 1.9px, transparent 2px),
+        radial-gradient(circle at 17px 10px, #000 1.9px, transparent 2px),
+        radial-gradient(circle at 3px 17px, #000 1.9px, transparent 2px),
+        radial-gradient(circle at 10px 17px, #000 1.9px, transparent 2px),
+        radial-gradient(circle at 17px 17px, #000 1.9px, transparent 2px);
+    mask-image: radial-gradient(circle at 3px 3px, #000 1.9px, transparent 2px),
+        radial-gradient(circle at 10px 3px, #000 1.9px, transparent 2px),
+        radial-gradient(circle at 17px 3px, #000 1.9px, transparent 2px),
+        radial-gradient(circle at 3px 10px, #000 1.9px, transparent 2px),
+        radial-gradient(circle at 10px 10px, #000 1.9px, transparent 2px),
+        radial-gradient(circle at 17px 10px, #000 1.9px, transparent 2px),
+        radial-gradient(circle at 3px 17px, #000 1.9px, transparent 2px),
+        radial-gradient(circle at 10px 17px, #000 1.9px, transparent 2px),
+        radial-gradient(circle at 17px 17px, #000 1.9px, transparent 2px);
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
-    -webkit-mask-size: 14px 14px;
-    mask-size: 14px 14px;
+    -webkit-mask-size: 20px 20px;
+    mask-size: 20px 20px;
     transition: background-color var(--transition);
     z-index: 7;
 }
@@ -275,42 +299,128 @@ button {
     background-color: var(--color-accent-solid);
 }
 
-/* Close button: a small ×, vertically centered on the panel's title (see
-   .section h2) and tucked right up against the top-right corner resize
-   handle without overlapping its 10px hit zone. Clicking it fires
-   panel-close-request (see SectionManager.attachCloseHandle), which
+/* Close button: a ×. Two contexts reuse this same element+class (see
+   SectionManager.makeCloseHandle): appended straight into a mobile panel —
+   absolute-positioned by this rule, in that same top-right corner as the
+   move handle it sits beside (see .section-move-handle) — or, on desktop,
+   nested inside a .panel-title tab instead (see below), where the override
+   further down switches it to a normal flex child. Clicking it fires
+   panel-close-request (see SectionManager.makeCloseHandle), which
    PanelVisibilityManager listens for to hide the panel and uncheck its
    toggle — the same end state as unchecking it directly. */
 .section-close-handle {
     position: absolute;
-    top: 9px;
-    right: 12px;
-    width: 14px;
-    height: 14px;
+    top: 6px;
+    right: 13px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
+    font-size: 18px;
     line-height: 1;
     color: var(--color-muted);
     transition: color var(--transition);
     z-index: 7;
 }
 
-/* Mobile keeps a move handle in that same corner (see .section-move-handle) —
-   pushed further left so the two don't overlap. */
+/* Mobile keeps a move handle in that same corner (see .section-move-handle,
+   the same size as this button) — pushed further left so the two don't
+   overlap. The × glyph itself is much thinner than the move handle's dot
+   grid at the shared 18px size (a font's × is mostly whitespace), so it's
+   sized up here to read as the same height as the grip beside it. */
 .mobile-layout .section-close-handle {
-    right: 32px;
+    right: 38px;
+    font-size: 34px;
 }
 
 .section-close-handle:hover {
     color: var(--color-accent);
 }
 
+/* ── Panel title ───────────────────────────────────────
+   Floating tab built by SectionManager.attachPanelTitle (desktop only — see
+   .panel-title:hover below for why mobile keeps its own always-visible
+   handles instead), straddling the panel's own top border: half above it,
+   half below, per Panel Style.md. Sized to fit its content instead of
+   stretching to the panel's width, so "right" is left to fall out of
+   `width: fit-content` rather than being set directly. Nothing but the ×
+   inside is meant to be clickable on its own — a mousedown anywhere else on
+   the tab bubbles up to the panel's own background-drag listener (see
+   SectionManager.attachResizeHandles), the same as clicking any other
+   non-interactive part of the panel. */
+.panel-title {
+    position: absolute;
+    left: 1em;
+    top: -1em;
+    height: 2em;
+    width: fit-content;
+    max-width: calc(100% - 2em);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    background-color: var(--color-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    cursor: move;
+    opacity: 0;
+    z-index: 8;
+    transition: opacity var(--transition), border-color var(--transition), background-color var(--transition);
+}
+
+.panel-title h2 {
+    padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.panel-title .section-close-handle {
+    position: static;
+    flex: 0 0 auto;
+}
+
+/* Inner wrapper SectionManager.wrapContentForOverflow moves a panel's own
+   content into. A normal in-flow block (not absolutely positioned) sized to
+   100% of el's content box — el's own padding (see .section) still applies
+   normally this way, same as it did when this content sat directly in el:
+   an absolutely positioned box instead (e.g. inset:0) would resolve against
+   el's *padding edge*, ignoring the padding value entirely and leaving
+   content flush against the border. Deliberately sets no overflow of its
+   own: each panel's existing overflow/display rules (below) now target this
+   class instead of the panel element directly, so it keeps exactly the
+   clipping/scrolling behavior it already had — just relocated off of the
+   panel element itself, which needs to stay overflow:visible for the title
+   tab above to poke outside its box without being clipped along with
+   everything else. */
+.panel-content-clip {
+    width: 100%;
+    height: 100%;
+}
+
+/* Hidden until the pointer is either over the panel itself or over the tab
+   (which mostly floats outside the panel's own box, so hovering it directly
+   has to work too — see Panel Style.md). Kept interactive (not
+   display:none/visibility:hidden) while invisible so hovering that
+   otherwise-empty strip above the panel can still trigger this. No mobile
+   equivalent: .panel-title is never built for mobile-stacked panels (see
+   SectionManager.attachResizeHandles), which keep their own always-visible
+   move/close handles instead, since touch has no reliable hover to reveal
+   this tab with. */
+.draggable-section:hover .panel-title,
+.pinned-section:hover .panel-title,
+.panel-title:hover,
+.panel-title:focus-within {
+    opacity: 1;
+}
+
 .score-fullscreen .section-resize-handle,
 .score-fullscreen .section-move-handle,
-.score-fullscreen .section-close-handle {
+.score-fullscreen .section-close-handle,
+.score-fullscreen .panel-title {
     display: none;
 }
 
@@ -556,18 +666,27 @@ button {
 
 /* ── Timelines ───────────────────────────────────────── */
 
+/* padding-top overrides the generic tab clearance (see .section:has(>
+   .panel-title)) — an id selector always beats that rule's specificity
+   regardless of source order, so it has to be repeated here explicitly
+   rather than just relying on the generic one. */
 #timelines-section {
     background-color: var(--color-navy);
-    padding: 3px 14px 5px;
-    overflow: hidden;
+    padding: 1.75em 14px 5px;
     transition: background-color var(--transition), border-color var(--transition);
 }
 
-/* More compact than the shared .section h2 (see below) — this is a dense
-   toolbar-like strip, not a content panel, so its title doesn't need as
-   much breathing room. */
-#timelines-section h2 {
-    padding: 2px 0 2px;
+/* Clipping lives on the inner wrapper (see .panel-content-clip), not
+   #timelines-section itself — see that rule's comment for why. */
+#timelines-section .panel-content-clip {
+    overflow: hidden;
+}
+
+/* Matches the toolbar's own background instead of the default panel one
+   (see .panel-title) so the floating title tab reads as part of the same
+   surface. */
+#timelines-section .panel-title {
+    background-color: var(--color-navy);
 }
 
 .timeline-container {
@@ -739,26 +858,34 @@ button {
 
 .score-panel {
     padding: 0;
+}
+
+/* Layout/clipping lives on the inner wrapper (see .panel-content-clip),
+   not .score-panel itself — see that rule's comment for why. */
+.score-panel .panel-content-clip {
     overflow: hidden;
     display: flex;
     flex-direction: column;
 }
 
-/* In-flow row above the image, tall enough to hold the section's
-   top-right close button (see .section-close-handle, top:9px/14px tall)
-   without it sitting over the score page — see ScoreManager. */
-.score-panel-header {
-    flex: 0 0 28px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    padding: 0 12px;
-}
+/* Score panels now build a real h2 (see ScoreManager et al.), so — same as
+   every other panel — the generic clearance padding (see .section:has(>
+   .panel-title)) applies here too, on top of this rule's own padding:0 for
+   the other three sides (an id-less class selector, so the two don't
+   conflict: only padding-top competes, and the :has() rule's higher
+   specificity wins that regardless of source order). Its value (1.75em ==
+   28px at the default root size) is exactly SCORE_HEADER_HEIGHT — see that
+   constant — which the aspect-ratio math below still needs to know about
+   even though there's no in-flow header row reserving it anymore. */
 
-/* Hidden in fullscreen along with the other chrome (resize/move/close
-   handles) — see .score-fullscreen rules below. */
-.score-panel.score-fullscreen .score-panel-header {
-    display: none;
+/* On mobile that h2 stays in normal flow as the panel's own title instead
+   of being pulled into a floating tab (see SectionManager.attachPanelTitle,
+   desktop-only) — .score-panel's own left/right padding is 0 so the image
+   can sit flush against the panel's edges, so unlike desktop's tab (which
+   has its own padding) this needs its own horizontal breathing room here. */
+.mobile-layout .score-panel h2 {
+    padding-left: 12px;
+    padding-right: 12px;
 }
 
 .score-image-holder {
@@ -766,16 +893,6 @@ button {
     min-height: 0;
     width: auto;
     position: relative;
-}
-
-#score-title,
-#pv-score-title,
-#garant-score-title {
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-muted);
 }
 
 #pv-current-bar-overlay,
@@ -974,8 +1091,17 @@ button {
 
 /* ── Transport ───────────────────────────────────────── */
 
+/* padding-top overrides the generic tab clearance (see .section:has(>
+   .panel-title)) — an id selector always beats that rule's specificity
+   regardless of source order, so it has to be repeated here explicitly
+   rather than just relying on the generic one. */
 #transport-section {
-    padding: 8px 12px 4px;
+    padding: 1.75em 12px 4px;
+}
+
+/* Clipping lives on the inner wrapper (see .panel-content-clip), not
+   #transport-section itself — see that rule's comment for why. */
+#transport-section .panel-content-clip {
     overflow: auto;
 }
 
@@ -1056,7 +1182,9 @@ button {
 
 /* ── Annotations ─────────────────────────────────────── */
 
-#architecture-list {
+/* Layout/clipping lives on the inner wrapper (see .panel-content-clip),
+   not #architecture-list itself — see that rule's comment for why. */
+#architecture-list .panel-content-clip {
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -1073,13 +1201,15 @@ button {
 }
 
 
-#annotations-section {
+/* Layout lives on the inner wrapper (see .panel-content-clip) rather than
+   #annotations-section itself, same as the other panels below — but unlike
+   them this one deliberately leaves overflow unset (default: visible), on
+   both the wrapper and the panel: content here (the annotation type chips'
+   hover lift, the source checkboxes' info-box icons) sits right up against
+   this section's edges and shouldn't be clipped. */
+#annotations-section .panel-content-clip {
     display: flex;
     flex-direction: column;
-    /* visible, not hidden: content here (the annotation type chips' hover
-       lift, the source checkboxes' info-box icons) sits right up against
-       this section's edges and shouldn't be clipped. */
-    overflow: visible;
 }
 
 #annotation-type-selectors {
@@ -1729,13 +1859,16 @@ mark.search-highlight {
 
 /* ── Video / hidden ──────────────────────────────────── */
 
-#video-player-section {
+/* Layout/clipping lives on the inner wrapper (see .panel-content-clip),
+   not #video-player-section itself — see that rule's comment for why. */
+#video-player-section .panel-content-clip {
     overflow: hidden;
     display: flex;
     flex-direction: column;
 }
 
-#libretto-section {
+/* Same idea as #video-player-section above. */
+#libretto-section .panel-content-clip {
     display: flex;
     flex-direction: column;
     overflow: hidden;

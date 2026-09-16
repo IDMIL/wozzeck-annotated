@@ -23,16 +23,14 @@ export class PVScoreManager extends SectionManager {
 
         const scoreViewer = this.element;
         if (scoreViewer) {
-            scoreViewer.innerHTML = `
-            <div id="pv-score-header" class="score-panel-header">
-              <div id="pv-score-title"></div>
-            </div>
+            const heading = document.createElement("h2");
+            heading.innerText = text.PV_SCORE_VIEWER[globals.language];
+            scoreViewer.appendChild(heading);
+
+            scoreViewer.insertAdjacentHTML("beforeend", `
             <div id="pv-image-holder" class="score-image-holder">
               <img class="score-page-image" id="pv-score-viewer-image"/>
-            </div>`
-
-            const title = document.getElementById("pv-score-title");
-            if (title) title.innerText = text.PV_SCORE_VIEWER[globals.language];
+            </div>`);
 
             this.initResizeHandles();
         }
