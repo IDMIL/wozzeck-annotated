@@ -1082,7 +1082,8 @@ button {
 }
 
 #pv-current-bar-overlay,
-#garant-current-bar-overlay {
+#garant-current-bar-overlay,
+#garant-orchestral-current-bar-overlay {
     background: #e0393e;
     opacity: 0.28;
     top: 0;
@@ -2347,6 +2348,10 @@ mark.search-highlight {
     }
 
     #garant-score-viewer-image {
+        width: 100%;
+    }
+
+    #garant-orchestral-score-viewer-image {
         width: 100%;
     }
 }

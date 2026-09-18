@@ -175,6 +175,7 @@ export const text: { [key: string]: MultiLanguageString } = {
     SCORE_VIEWER:       { en: "Full Score",                fr: "Partition complète",               pt: "Partitura Completa",   de: "Vollpartitur" },
     PV_SCORE_VIEWER:    { en: "PV Score",                  fr: "Partition PV",                     pt: "Partitura PV",         de: "PV-Partitur" },
     GARANT_SCORE_VIEWER: { en: "Garant Score",             fr: "Partition Garant",                 pt: "Partitura Garant",     de: "Garant-Partitur" },
+    GARANT_ORCHESTRAL_SCORE_VIEWER: { en: "Garant Orchestral Score", fr: "Partition d'orchestre Garant", pt: "Partitura orquestral Garant", de: "Garant-Orchesterpartitur" },
     LIBRETTO:           { en: "Libretto",                  fr: "Livret",                           pt: "Libreto",              de: "Libretto" },
     PANELS:             { en: "Panels",                    fr: "Panneaux",                         pt: "Painéis",              de: "Bedienfelder" },
     PAGE:               { en: "page",                      fr: "page",                             pt: "página",               de: "Seite" },

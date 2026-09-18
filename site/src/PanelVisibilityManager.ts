@@ -21,16 +21,18 @@ const TOGGLEABLE_PANELS: ToggleablePanel[] = [
     {id: "score-viewer-section", label: () => text.SCORE_VIEWER[globals.language], visibleByDefault: true},
     {id: "pv-score-viewer-section", label: () => text.PV_SCORE_VIEWER[globals.language], visibleByDefault: false},
     {id: "garant-score-viewer-section", label: () => text.GARANT_SCORE_VIEWER[globals.language], visibleByDefault: false},
+    {id: "garant-orchestral-score-viewer-section", label: () => text.GARANT_ORCHESTRAL_SCORE_VIEWER[globals.language], visibleByDefault: false},
 ];
 
-// The three score ("partition") viewers are variants of the same kind of
+// The four score ("partition") viewers are variants of the same kind of
 // panel, so their toggles are enclosed in a shared translucent box in the
-// panel-visibility bar to read as one group rather than three unrelated
-// entries. Relies on these three being adjacent in TOGGLEABLE_PANELS above.
+// panel-visibility bar to read as one group rather than four unrelated
+// entries. Relies on these four being adjacent in TOGGLEABLE_PANELS above.
 const SCORE_GROUP_IDS = new Set([
     "score-viewer-section",
     "pv-score-viewer-section",
     "garant-score-viewer-section",
+    "garant-orchestral-score-viewer-section",
 ]);
 
 // Shows or hides a panel, announcing the change to whichever SectionManager

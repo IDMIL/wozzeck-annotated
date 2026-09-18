@@ -3,6 +3,7 @@ import {TimeManager} from "./TimeManager";
 import {ScoreManager, SCORE_HEADER_HEIGHT} from "./ScoreManager";
 import {PVScoreManager} from "./PVScoreManager";
 import {GarantScoreManager} from "./GarantScoreManager";
+import {GarantOrchestralScoreManager} from "./GarantOrchestralScoreManager";
 import {TransportManager} from "./TransportManager";
 import {TimelineManager} from "./TimelineManager";
 import {AnnotationManager} from "./AnnotationManager";
@@ -38,6 +39,9 @@ const SCORE_ASPECT_RATIO = 1966 / 2790;
 // PVScoreManager.getAspectRatio / GarantScoreManager.getAspectRatio).
 const PV_SCORE_ASPECT_RATIO = 3656 / 4636;
 const GARANT_SCORE_ASPECT_RATIO = 1241 / 1532;
+// The Garant orchestral scan is photographed two-page spreads (landscape); the
+// spreads vary slightly in size, so this is a typical one.
+const GARANT_ORCHESTRAL_SCORE_ASPECT_RATIO = 3300 / 2050;
 
 // Mobile layout (see SectionManager.IS_MOBILE_LAYOUT): panels stack in a
 // vertical flexbox instead of being freely positioned, so only a starting
@@ -71,6 +75,10 @@ function computeMobileDefaultRects(): { [sectionId: string]: SectionRect } {
     };
     rects["garant-score-viewer-section"] = {
         top: 0, left: 0, width: vw, height: Math.round(vw / GARANT_SCORE_ASPECT_RATIO) + SCORE_HEADER_HEIGHT
+    };
+    rects["garant-orchestral-score-viewer-section"] = {
+        top: 0, left: 0, width: vw,
+        height: Math.round(vw / GARANT_ORCHESTRAL_SCORE_ASPECT_RATIO) + SCORE_HEADER_HEIGHT
     };
     rects["panel-visibility-bar"] = {
         top: window.innerHeight - VISIBILITY_BAR_HEIGHT, left: 0, width: vw, height: VISIBILITY_BAR_HEIGHT
@@ -144,6 +152,10 @@ function computeDefaultRects(headerHeight: number): { [sectionId: string]: Secti
             top: contentTop, left: 0,
             width: Math.round(scoreImageHeight * GARANT_SCORE_ASPECT_RATIO), height: contentHeight
         },
+        "garant-orchestral-score-viewer-section": {
+            top: contentTop, left: 0,
+            width: Math.round(scoreImageHeight * GARANT_ORCHESTRAL_SCORE_ASPECT_RATIO), height: contentHeight
+        },
         "score-viewer-section": {
             top: contentTop, left: scoreLeft, width: scoreWidth, height: contentHeight
         },
@@ -168,6 +180,7 @@ async function buildWindow(lang : LanguageCode ) {
     <div class="section score-panel" id="score-viewer-section"></div>
     <div class="section score-panel" id="pv-score-viewer-section"></div>
     <div class="section score-panel" id="garant-score-viewer-section"></div>
+    <div class="section score-panel" id="garant-orchestral-score-viewer-section"></div>
     <div class="section" id="panel-visibility-bar"></div>
   </div>
     `;
@@ -220,6 +233,8 @@ async function buildWindow(lang : LanguageCode ) {
     let scoreManager = new ScoreManager(timeManager, rects["score-viewer-section"]);
     let pvScoreManager = new PVScoreManager(timeManager, rects["pv-score-viewer-section"]);
     let garantScoreManager = new GarantScoreManager(timeManager, rects["garant-score-viewer-section"]);
+    let garantOrchestralScoreManager = new GarantOrchestralScoreManager(
+        timeManager, rects["garant-orchestral-score-viewer-section"]);
     let transportManager = new TransportManager(timeManager, rects["transport-section"]);
     let timelineManager = new TimelineManager(timeManager, timelineRect);
     let annotationManager = new AnnotationManager(timeManager, rects["annotations-section"]);
@@ -242,9 +257,14 @@ async function buildWindow(lang : LanguageCode ) {
         "garant-score-viewer-section", garantScoreManager,
         (direction) => garantScoreManager.advancePage(direction)
     );
+    new ScoreTransportOverlay(
+        "garant-orchestral-score-viewer-section", garantOrchestralScoreManager,
+        (direction) => garantOrchestralScoreManager.advancePage(direction)
+    );
     timeManager.listeners.push(scoreManager);
     timeManager.listeners.push(pvScoreManager);
     timeManager.listeners.push(garantScoreManager);
+    timeManager.listeners.push(garantOrchestralScoreManager);
     timeManager.listeners.push(transportManager);
     timeManager.listeners.push(timelineManager);
     timeManager.listeners.push(annotationManager);
