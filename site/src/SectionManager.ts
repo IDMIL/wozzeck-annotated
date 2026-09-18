@@ -466,6 +466,18 @@ export abstract class SectionManager extends TimeManagerListener {
             const div = document.createElement("div");
             div.classList.add("section-resize-handle", `section-resize-${handle.name}`);
             div.addEventListener("mousedown", (e) => this.beginDrag(e, handle.edges));
+            // Corners (two edges at once) get three child ticks — the
+            // Windows-95-style diagonal grip (see styles.css) — sized and
+            // positioned individually per tick, which a single element's
+            // background/box-shadow tricks can't do (see Panel Resizing
+            // Style.md and corner.png).
+            if (handle.edges.length === 2) {
+                for (let i = 0; i < 3; i++) {
+                    const tick = document.createElement("div");
+                    tick.classList.add("section-resize-corner-tick");
+                    div.appendChild(tick);
+                }
+            }
             el.appendChild(div);
         }
 

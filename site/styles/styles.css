@@ -171,87 +171,252 @@ button {
 
 /* ── Section resize handles ───────────────────────────
    Four independently draggable edges plus four corners per section (added
-   by SectionManager), always visible as a thin grip so it's clear every
-   side — and corner — can be dragged. */
+   by SectionManager). The hit area (this element) stays invisible until
+   hovered/dragged — see Panel Resizing Style.md — at which point its
+   ::before/::after draw the actual grip: two flanking lines on an edge, or
+   a Windows-95-style diagonal hatch on a corner (below). */
 
 .section-resize-handle {
     position: absolute;
-    background: var(--color-border);
-    transition: background var(--transition);
     z-index: 5;
 }
 
-.section-resize-handle:hover,
-.section-resize-handle.dragging {
-    background: var(--color-accent-solid);
-}
-
+/* 8px of grab tolerance to either side of the true edge (16px total), so
+   the pointer doesn't need to land exactly on the 1px border to resize —
+   see the ::before/::after offset recalculation below, which keeps the
+   flanking indicator lines anchored to the true edge despite this box
+   growing around it. */
 .section-resize-top,
 .section-resize-bottom {
     left: 0;
     right: 0;
-    height: 4px;
+    height: 16px;
     cursor: row-resize;
 }
 
 .section-resize-top {
-    top: 0;
+    top: -8px;
 }
 
 .section-resize-bottom {
-    bottom: 0;
+    bottom: -8px;
 }
 
 .section-resize-left,
 .section-resize-right {
     top: 0;
     bottom: 0;
-    width: 4px;
+    width: 16px;
     cursor: col-resize;
 }
 
 .section-resize-left {
-    left: 0;
+    left: -8px;
 }
 
 .section-resize-right {
-    right: 0;
+    right: -8px;
+}
+
+/* Two 20px lines flanking each edge, 5px to either side of it (one just
+   outside the panel, one just inside), centered along the edge's length.
+   Positioned via left/right:50% + translateX so they stay centered
+   regardless of the handle's own length (it spans the full edge). */
+.section-resize-top::before,
+.section-resize-top::after,
+.section-resize-bottom::before,
+.section-resize-bottom::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    transform: translateX(-50%);
+    background: var(--color-accent-solid);
+    opacity: 0;
+    transition: opacity var(--transition);
+    pointer-events: none;
+}
+
+.section-resize-left::before,
+.section-resize-left::after,
+.section-resize-right::before,
+.section-resize-right::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 2px;
+    height: 20px;
+    transform: translateY(-50%);
+    background: var(--color-accent-solid);
+    opacity: 0;
+    transition: opacity var(--transition);
+    pointer-events: none;
+}
+
+/* Offsets are relative to the handle's own box (the containing block for
+   these absolutely-positioned pseudo-elements), which now starts 8px
+   outside the true edge (see .section-resize-top etc. above) — so each
+   value here is the old edge-relative offset (-5px/5px) plus that 8px, to
+   keep the drawn lines anchored to the same on-screen position. */
+.section-resize-top::before { top: 3px; }
+.section-resize-top::after { top: 13px; }
+.section-resize-bottom::before { bottom: 3px; }
+.section-resize-bottom::after { bottom: 13px; }
+.section-resize-left::before { left: 3px; }
+.section-resize-left::after { left: 13px; }
+.section-resize-right::before { right: 3px; }
+.section-resize-right::after { right: 13px; }
+
+.section-resize-top:hover::before, .section-resize-top:hover::after,
+.section-resize-top.dragging::before, .section-resize-top.dragging::after,
+.section-resize-bottom:hover::before, .section-resize-bottom:hover::after,
+.section-resize-bottom.dragging::before, .section-resize-bottom.dragging::after,
+.section-resize-left:hover::before, .section-resize-left:hover::after,
+.section-resize-left.dragging::before, .section-resize-left.dragging::after,
+.section-resize-right:hover::before, .section-resize-right:hover::after,
+.section-resize-right.dragging::before, .section-resize-right.dragging::after {
+    opacity: 1;
+}
+
+/* The flanking lines' companion cue: thickens the panel's own border on
+   the edge being hovered/dragged. An inset box-shadow rather than an
+   actual border-width change, same reasoning as .panel-title:hover above —
+   it can't perturb the panel's box model. */
+.draggable-section:has(> .section-resize-top:hover),
+.draggable-section:has(> .section-resize-top.dragging) {
+    box-shadow: inset 0 2px 0 0 var(--color-accent-solid);
+}
+
+.draggable-section:has(> .section-resize-bottom:hover),
+.draggable-section:has(> .section-resize-bottom.dragging) {
+    box-shadow: inset 0 -2px 0 0 var(--color-accent-solid);
+}
+
+.draggable-section:has(> .section-resize-left:hover),
+.draggable-section:has(> .section-resize-left.dragging) {
+    box-shadow: inset 2px 0 0 0 var(--color-accent-solid);
+}
+
+.draggable-section:has(> .section-resize-right:hover),
+.draggable-section:has(> .section-resize-right.dragging) {
+    box-shadow: inset -2px 0 0 0 var(--color-accent-solid);
 }
 
 /* Corners sit above the edge strips (higher z-index) so the small overlap
-   region at each corner grabs the diagonal-resize handle, not the edge. */
+   region at each corner grabs the diagonal-resize handle, not the edge.
+   Sized and positioned the same way as the edge handles above: 8px of grab
+   tolerance to either side of the true corner point (16px square, was a
+   10px square flush with the corner) — see the tick offset recalculation
+   below, which keeps the drawn grip anchored to the true corner despite
+   this box growing around it. */
 .section-resize-top-left,
 .section-resize-top-right,
 .section-resize-bottom-right,
 .section-resize-bottom-left {
-    width: 10px;
-    height: 10px;
+    width: 16px;
+    height: 16px;
     z-index: 6;
 }
 
 .section-resize-top-left {
-    top: 0;
-    left: 0;
+    top: -8px;
+    left: -8px;
     cursor: nwse-resize;
 }
 
 .section-resize-top-right {
-    top: 0;
-    right: 0;
+    top: -8px;
+    right: -8px;
     cursor: nesw-resize;
 }
 
 .section-resize-bottom-right {
-    bottom: 0;
-    right: 0;
+    bottom: -8px;
+    right: -8px;
     cursor: nwse-resize;
 }
 
 .section-resize-bottom-left {
-    bottom: 0;
-    left: 0;
+    bottom: -8px;
+    left: -8px;
     cursor: nesw-resize;
 }
+
+/* Windows-95-style corner grip: three ticks (appended by
+   SectionManager.attachResizeHandles — one shared element can't give each
+   tick its own length and its own rotation pivot, so this needs real child
+   elements rather than a ::before/::after trick). Each tick is a straight
+   line from 4px inset off one edge to 4px inset off the other (see
+   corner.png — twice the original 2px inset, to give the grip more room):
+   with the pivot pinned at the panel's actual corner point and the tick's
+   own far edge sitting at that 4px-inset anchor, rotating a horizontal bar
+   of length d·√2 by 45° swings its free end to the matching anchor point
+   on the *other* edge, d px further from the corner than the 4px baseline
+   — which is also why each successive tick (larger d) both starts further
+   out and reads as longer, the "stepping down toward the corner" look. */
+.section-resize-corner-tick {
+    position: absolute;
+    height: 1.5px;
+    background: var(--color-accent-solid);
+    opacity: 0;
+    transition: opacity var(--transition);
+    pointer-events: none;
+}
+
+.section-resize-top-left:hover .section-resize-corner-tick, .section-resize-top-left.dragging .section-resize-corner-tick,
+.section-resize-top-right:hover .section-resize-corner-tick, .section-resize-top-right.dragging .section-resize-corner-tick,
+.section-resize-bottom-right:hover .section-resize-corner-tick, .section-resize-bottom-right.dragging .section-resize-corner-tick,
+.section-resize-bottom-left:hover .section-resize-corner-tick, .section-resize-bottom-left.dragging .section-resize-corner-tick {
+    opacity: 1;
+}
+
+/* d = 6, 12, 18px (twice the original 3/6/9): tick length d·√2, anchored
+   (4 + d − height/2)px off the pivot edge so the tick's own center sits on
+   the 4px-inset guide line. Every offset below is that base value plus 8px:
+   the pivot edge (e.g. `right`/`bottom` for the bottom-right corner) is now
+   the handle's own edge, which the 8px grab-tolerance expansion above moved
+   8px outside the true corner, so the ticks need the same +8 compensation
+   as the edge handles' flanking lines to stay anchored at the true corner. */
+.section-resize-bottom-right .section-resize-corner-tick {
+    right: 12px;
+    width: 8.49px;
+    transform-origin: right center;
+    transform: rotate(-45deg);
+}
+.section-resize-bottom-right .section-resize-corner-tick:nth-child(1) { bottom: 17.25px; }
+.section-resize-bottom-right .section-resize-corner-tick:nth-child(2) { bottom: 23.25px; width: 16.97px; }
+.section-resize-bottom-right .section-resize-corner-tick:nth-child(3) { bottom: 29.25px; width: 25.46px; }
+
+.section-resize-top-left .section-resize-corner-tick {
+    left: 12px;
+    width: 8.49px;
+    transform-origin: left center;
+    transform: rotate(-45deg);
+}
+.section-resize-top-left .section-resize-corner-tick:nth-child(1) { top: 17.25px; }
+.section-resize-top-left .section-resize-corner-tick:nth-child(2) { top: 23.25px; width: 16.97px; }
+.section-resize-top-left .section-resize-corner-tick:nth-child(3) { top: 29.25px; width: 25.46px; }
+
+.section-resize-top-right .section-resize-corner-tick {
+    right: 12px;
+    width: 8.49px;
+    transform-origin: right center;
+    transform: rotate(45deg);
+}
+.section-resize-top-right .section-resize-corner-tick:nth-child(1) { top: 17.25px; }
+.section-resize-top-right .section-resize-corner-tick:nth-child(2) { top: 23.25px; width: 16.97px; }
+.section-resize-top-right .section-resize-corner-tick:nth-child(3) { top: 29.25px; width: 25.46px; }
+
+.section-resize-bottom-left .section-resize-corner-tick {
+    left: 12px;
+    width: 8.49px;
+    transform-origin: left center;
+    transform: rotate(45deg);
+}
+.section-resize-bottom-left .section-resize-corner-tick:nth-child(1) { bottom: 17.25px; }
+.section-resize-bottom-left .section-resize-corner-tick:nth-child(2) { bottom: 23.25px; width: 16.97px; }
+.section-resize-bottom-left .section-resize-corner-tick:nth-child(3) { bottom: 29.25px; width: 25.46px; }
 
 /* Move handle: mobile only. A small grip in the top-right corner, inset far
    enough from the actual corner that it never fights the diagonal resize
@@ -458,6 +623,32 @@ button {
     border: 2px dashed var(--color-accent);
     border-radius: var(--radius);
     background: var(--color-highlight);
+}
+
+/* Mobile keeps its bottom resize handle always visible as a thin grip
+   (rather than the hover-revealed lines above) since touch has no reliable
+   hover to reveal it with — see .panel-title:hover for the same reasoning
+   applied to the desktop-only title tab. */
+.mobile-layout .section-resize-bottom {
+    /* Undoes the desktop 8px grab-tolerance expansion above: mobile's grip
+       is a permanently-visible thin bar (colored via background, below),
+       not a hover-revealed line pair, so growing it would make the visible
+       bar itself thicker rather than just widening an invisible hit area. */
+    top: auto;
+    bottom: 0;
+    height: 4px;
+    background: var(--color-border);
+    transition: background var(--transition);
+}
+
+.mobile-layout .section-resize-bottom:hover,
+.mobile-layout .section-resize-bottom.dragging {
+    background: var(--color-accent-solid);
+}
+
+.mobile-layout .section-resize-bottom::before,
+.mobile-layout .section-resize-bottom::after {
+    display: none;
 }
 
 /* Bottom resize handle is inert when the panel's aspect ratio is locked (see
