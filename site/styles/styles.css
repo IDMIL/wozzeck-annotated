@@ -305,17 +305,17 @@ button {
 
 /* Corners sit above the edge strips (higher z-index) so the small overlap
    region at each corner grabs the diagonal-resize handle, not the edge.
-   Sized and positioned the same way as the edge handles above: 8px of grab
-   tolerance to either side of the true corner point (16px square, was a
-   10px square flush with the corner) — see the tick offset recalculation
-   below, which keeps the drawn grip anchored to the true corner despite
-   this box growing around it. */
+   Reaches 8px outside the true corner point (like the edge handles above)
+   but 16px inward — a 24px square — so it claims more of the strip along
+   each edge than the edges' own 8px-deep zone would leave it. The ticks
+   below are anchored to the handle's outer (-8px) sides, so growing it
+   inward doesn't move them. */
 .section-resize-top-left,
 .section-resize-top-right,
 .section-resize-bottom-right,
 .section-resize-bottom-left {
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     z-index: 6;
 }
 
