@@ -1275,14 +1275,14 @@ button {
     opacity: 0.25 !important;
 }
 
-/* ── Transport ───────────────────────────────────────── */
+/* ── Navigation (transport) ──────────────────────────── */
 
 /* padding-top overrides the generic tab clearance (see .section:has(>
    .panel-title)) — an id selector always beats that rule's specificity
    regardless of source order, so it has to be repeated here explicitly
    rather than just relying on the generic one. */
 #transport-section {
-    padding: 1.75em 12px 4px;
+    padding: 1.75em 12px 8px;
 }
 
 /* Clipping lives on the inner wrapper (see .panel-content-clip), not
@@ -1291,79 +1291,110 @@ button {
     overflow: auto;
 }
 
-#position-text {
+#nav-panel {
     display: flex;
-    align-items: baseline;
-    gap: 0;
-    margin-bottom: 8px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 6px;
 }
 
-#position-text p {
-    color: var(--color-text);
-    display: inline;
-    margin: 0;
-    line-height: 1.6;
+.nav-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-#position-text p.level-name {
+.nav-label {
+    flex: 0 0 4em;
     font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-muted);
-    margin-right: 3px;
-    padding-left: 8px;
 }
 
-#position-text p.level-name:first-child {
-    padding-left: 0;
+.nav-choices {
+    display: flex;
+    gap: 3px;
 }
 
-#transport-act-select,
-#transport-scene-select,
-#transport-bar-input,
-#transport-page-input {
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--color-heading);
-    letter-spacing: -0.01em;
+.nav-choice,
+.nav-step-button,
+#nav-page-input,
+#nav-bar-input {
     font-family: var(--font);
+    color: var(--color-heading);
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
-    padding: 1px 4px;
     outline: none;
+    transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+
+.nav-choice {
+    min-width: 28px;
+    padding: 2px 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: none;
     cursor: pointer;
-    transition: border-color var(--transition), background var(--transition);
 }
 
-#transport-bar-input,
-#transport-page-input {
-    width: 60px;
+.nav-step-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 6px;
+    cursor: pointer;
+}
+
+/* Buttons are invisible chrome until hovered or active. Placed after the
+   shared rule above (same specificity) so it wins over its surface/border. */
+.nav-choice,
+.nav-step-button {
+    background: transparent;
+    border-color: transparent;
+}
+
+.nav-choice:hover,
+.nav-step-button:hover {
+    background: var(--color-surface);
+    border-color: var(--color-accent);
+}
+
+.nav-choice.active {
+    background: var(--color-accent-solid);
+    border-color: var(--color-accent-solid);
+    color: #fff;
+}
+
+/* The prev/next buttons flank the input, which takes the remaining width. */
+.nav-stepper #nav-page-input,
+.nav-stepper #nav-bar-input {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 4px;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-align: center;
     cursor: text;
+    -moz-appearance: textfield;
+    appearance: textfield;
 }
 
-/* Chrome/Safari/Edge spin buttons on the bar and page number fields */
-#transport-bar-input::-webkit-inner-spin-button,
-#transport-bar-input::-webkit-outer-spin-button,
-#transport-page-input::-webkit-inner-spin-button,
-#transport-page-input::-webkit-outer-spin-button {
-    opacity: 1;
+/* The prev/next buttons replace the number fields' own spin buttons. */
+#nav-page-input::-webkit-inner-spin-button,
+#nav-page-input::-webkit-outer-spin-button,
+#nav-bar-input::-webkit-inner-spin-button,
+#nav-bar-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-#transport-act-select:focus,
-#transport-scene-select:focus,
-#transport-bar-input:focus,
-#transport-page-input:focus {
+#nav-page-input:focus,
+#nav-bar-input:focus {
     border-color: var(--color-accent);
     background: var(--color-panel);
-}
-
-#transport-act-select option,
-#transport-scene-select option {
-    background: var(--color-panel);
-    color: var(--color-text);
 }
 
 /* ── Annotations ─────────────────────────────────────── */

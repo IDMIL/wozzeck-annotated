@@ -204,6 +204,14 @@ export abstract class SectionManager extends TimeManagerListener {
         return null;
     }
 
+    // Overridden by subclasses (e.g. the navigation panel) whose content is a
+    // fixed-size control cluster that resizing would only stretch or clip.
+    // Returning false leaves the panel movable and closable but omits the
+    // edge/corner resize handles (and, on mobile, the height handle).
+    protected isResizable(): boolean {
+        return true;
+    }
+
     // Subclasses must call this once they've finished building their content
     // (replacing innerHTML, appending children, etc.) — resize handles are
     // appended as direct children of the section, so attaching them any
@@ -460,7 +468,7 @@ export abstract class SectionManager extends TimeManagerListener {
             return;
         }
 
-        for (const handle of HANDLES) {
+        for (const handle of this.isResizable() ? HANDLES : []) {
             const div = document.createElement("div");
             div.classList.add("section-resize-handle", `section-resize-${handle.name}`);
             div.addEventListener("mousedown", (e) => this.beginDrag(e, handle.edges));
@@ -538,12 +546,14 @@ export abstract class SectionManager extends TimeManagerListener {
     // work with touch on an actual phone — the desktop resize handles stay
     // mouse-only since they don't need touch support.
     private attachMobileHandles(el: HTMLElement): void {
-        const bottomHandle = document.createElement("div");
-        bottomHandle.classList.add("section-resize-handle", "section-resize-bottom");
-        bottomHandle.addEventListener("pointerdown", (e) => this.beginMobileResize(e));
-        bottomHandle.addEventListener("pointerenter", () => this.updateMobileResizeDisabled(bottomHandle));
-        this.updateMobileResizeDisabled(bottomHandle);
-        el.appendChild(bottomHandle);
+        if (this.isResizable()) {
+            const bottomHandle = document.createElement("div");
+            bottomHandle.classList.add("section-resize-handle", "section-resize-bottom");
+            bottomHandle.addEventListener("pointerdown", (e) => this.beginMobileResize(e));
+            bottomHandle.addEventListener("pointerenter", () => this.updateMobileResizeDisabled(bottomHandle));
+            this.updateMobileResizeDisabled(bottomHandle);
+            el.appendChild(bottomHandle);
+        }
 
         const moveHandle = document.createElement("div");
         moveHandle.classList.add("section-move-handle");

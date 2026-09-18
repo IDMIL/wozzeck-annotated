@@ -23,6 +23,10 @@ import {LibrettoManager} from "./LibrettoManager";
 const HEADER_HEIGHT_FALLBACK = 50;
 const TIMELINES_HEIGHT = 82;
 const VISIBILITY_BAR_HEIGHT = 40;
+// The navigation panel is not resizable (see TransportManager.isResizable), so
+// these are its fixed size: four rows of controls plus the title-tab clearance.
+const NAV_PANEL_WIDTH = 229;
+const NAV_PANEL_HEIGHT = 180;
 
 // Matches the score page images' fixed pixel dimensions (see
 // ScoreManager.getAspectRatio, which reads the same ratio from the loaded
@@ -46,7 +50,7 @@ const GARANT_SCORE_ASPECT_RATIO = 1241 / 1532;
 // outside the flex stack (see buildWindow), not one of these freely
 // draggable/resizable panels.
 const MOBILE_DEFAULT_HEIGHTS: { [sectionId: string]: number } = {
-    "transport-section": 160,
+    "transport-section": 250,
     "annotations-section": 420,
     "architecture-list": 260,
     "video-player-section": 220,
@@ -113,13 +117,13 @@ function computeDefaultRects(headerHeight: number): { [sectionId: string]: Secti
     // Hidden by default (see PanelVisibilityManager) — these defaults only
     // matter as a starting arrangement for whenever the user toggles them on.
     const leftColumnWidth = Math.round(vw * 0.4);
-    const transportHeight = 130;
+    const transportHeight = NAV_PANEL_HEIGHT;
     const archVideoTop = contentTop + transportHeight + GAP;
     const archListHeight = Math.round((vh - archVideoTop - GAP) * 0.4);
     const videoTop = archVideoTop + archListHeight + GAP;
 
     return {
-        "transport-section": {top: contentTop, left: 0, width: leftColumnWidth, height: transportHeight},
+        "transport-section": {top: contentTop, left: 0, width: NAV_PANEL_WIDTH, height: transportHeight},
         "annotations-section": {top: contentTop, left: 0, width: annotationsWidth, height: contentHeight},
         "architecture-list": {top: archVideoTop, left: 0, width: leftColumnWidth, height: archListHeight},
         "video-player-section": {
