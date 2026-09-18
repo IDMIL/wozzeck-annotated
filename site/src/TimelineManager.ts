@@ -8,9 +8,11 @@ import {bar_to_page} from "./data/barToPage";
 export class TimelineManager extends SectionManager {
     constructor(tm : TimeManager, rect: SectionRect) {
         // Pinned chrome like the title bar (see TitleSectionManager) — always
-        // visible right below it, not draggable/resizable — but still
-        // closable like the other toggleable panels (see PanelVisibilityManager).
-        super("timelines-section", rect, false, false, true);
+        // visible right below it, not draggable/resizable. Still one of
+        // PanelVisibilityManager's toggleable panels, but has no × of its own
+        // and no floating title tab — its h2 just stays in normal flow at the
+        // panel's top left.
+        super("timelines-section", rect, false, false, false);
         this.timeManager = tm;
 
         let actLengths = [];

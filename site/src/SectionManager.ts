@@ -60,8 +60,10 @@ function clamp(value: number, min: number, max: number): number {
 // Rather than handing out ever-increasing z-indexes, this renumbers all the
 // panels from PANEL_Z_BASE on every call, preserving their existing relative
 // order. That keeps the values bounded by the number of panels — they must
-// stay below .pinned-section's z-index (50) so the title bar, timeline, and
-// panel-visibility bar are never covered, and below .floating-panel (60).
+// stay below .pinned-section's z-index (50) so the title bar and
+// panel-visibility bar are never covered, and below .floating-panel (60). The
+// timeline is the exception: it sits at z-index 0 (see #timelines-section) so
+// panels' floating title tabs can overlap it.
 const PANEL_Z_BASE = 1;
 
 function panelZIndex(el: HTMLElement): number {
@@ -151,9 +153,7 @@ export abstract class SectionManager extends TimeManagerListener {
     // `resizable` lets a subclass opt out of the four draggable edges (e.g.
     // the title bar, which stays pinned to the top of the page like before).
     // `closable` defaults to matching `resizable` (every movable panel gets a
-    // close button) but can be set independently — e.g. the timelines panel,
-    // which stays pinned in place yet is still one of PanelVisibilityManager's
-    // toggleable panels and so still needs a way to close it.
+    // close button) but can be set independently.
     // `autoHeight` (only meaningful when !resizable) sizes the section to
     // fit its content instead of a fixed pixel height, for chrome whose
     // content can wrap onto more lines at smaller widths (e.g. the title
@@ -209,9 +209,7 @@ export abstract class SectionManager extends TimeManagerListener {
     // appended as direct children of the section, so attaching them any
     // earlier would just have them wiped out by the subclass's own setup.
     // Non-resizable sections skip the resize/move handles but still get a
-    // floating title tab if `closable` (see the constructor) — e.g. the
-    // timelines panel (see TimelineManager), which is pinned in place but
-    // still one of PanelVisibilityManager's toggleable panels.
+    // floating title tab if `closable` (see the constructor).
     protected initResizeHandles(): void {
         if (!this.resizable) {
             if (this.closable && this.element !== null) {

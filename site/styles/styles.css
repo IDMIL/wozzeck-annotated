@@ -857,27 +857,22 @@ button {
 
 /* ── Timelines ───────────────────────────────────────── */
 
-/* padding-top overrides the generic tab clearance (see .section:has(>
-   .panel-title)) — an id selector always beats that rule's specificity
-   regardless of source order, so it has to be repeated here explicitly
-   rather than just relying on the generic one. */
+/* No floating title tab here (see TimelineManager) — the h2 stays in normal
+   flow at the top left, so no extra top padding is needed to clear a tab.
+   z-index: 0 overrides .pinned-section's 50 (an id selector beats a class
+   regardless of source order) so movable panels — which can be dragged flush
+   against the timeline's bottom edge, leaving the upper half of their
+   floating title tabs poking up over it — paint above it. A tab is stuck at
+   its panel's own z-index (the panel is a stacking context), so it can't
+   outrank the timeline any other way. Panels can't otherwise overlap the
+   timeline (see getVerticalDragBounds). Sits before the panels in the DOM,
+   so it still paints beneath those with no inline z-index yet. */
 #timelines-section {
+    z-index: 0;
     background-color: var(--color-navy);
-    padding: 1.75em 14px 5px;
-    transition: background-color var(--transition), border-color var(--transition);
-}
-
-/* Clipping lives on the inner wrapper (see .panel-content-clip), not
-   #timelines-section itself — see that rule's comment for why. */
-#timelines-section .panel-content-clip {
+    padding: 0 14px 5px;
     overflow: hidden;
-}
-
-/* Matches the toolbar's own background instead of the default panel one
-   (see .panel-title) so the floating title tab reads as part of the same
-   surface. */
-#timelines-section .panel-title {
-    background-color: var(--color-navy);
+    transition: background-color var(--transition), border-color var(--transition);
 }
 
 .timeline-container {
