@@ -16,6 +16,10 @@ import {SCORE_HEADER_HEIGHT} from "./ScoreManager";
 // The scan only covers part of Act 3 (as two-page spreads); every other bar
 // maps to the scan's cover image with a 0,0,0,0 bounding box, so on those bars
 // the panel shows the cover and draws no bar overlays.
+const SCAN_ACT = 3;
+const SCAN_FIRST_BAR = 106;
+const SCAN_LAST_BAR = 374;
+
 export class GarantOrchestralScoreManager extends SectionManager {
     private currentPage: undefined | string;
     private currentAct: undefined | number;
@@ -88,6 +92,20 @@ export class GarantOrchestralScoreManager extends SectionManager {
                 this.timeManager.goToTime(time.act, time.bar, "transport-click");
                 return;
             }
+        }
+    }
+
+    // The scan only covers Act 3 bars SCAN_FIRST_BAR..SCAN_LAST_BAR, so when
+    // the panel is opened outside that range, jump the timeline to the
+    // nearest covered bar (anything before it → the first, after → the last)
+    // rather than showing just the cover.
+    protected onVisibilityChanged(visible: boolean) {
+        if (!visible) return;
+        const {act, bar} = this.timeManager.scoreTime;
+        if (act < SCAN_ACT || (act === SCAN_ACT && bar < SCAN_FIRST_BAR)) {
+            this.timeManager.goToTime(SCAN_ACT, SCAN_FIRST_BAR, "transport-click");
+        } else if (act > SCAN_ACT || bar > SCAN_LAST_BAR) {
+            this.timeManager.goToTime(SCAN_ACT, SCAN_LAST_BAR, "transport-click");
         }
     }
 
