@@ -63,7 +63,9 @@ export class AnnotationManager extends SectionManager {
     private annotationItemElements: Map<AnnotationContent, HTMLElement> = new Map();
     private editingEntry: {group: AnnotationGroup, annotation: AnnotationContent} | null = null;
     private searchText: string = '';
-    private enabledSources: Set<string> = new Set(Object.keys(this.sourceDescriptions));
+    // Only René Schmidt's analysis is shown by default; the other sources are
+    // opt-in via their checkboxes.
+    private enabledSources: Set<string> = new Set(["René Schmidt"]);
     private timeManager: TimeManager;
     private addAnnotationPanel!: AddAnnotationPanel;
     private downloadButton!: HTMLButtonElement;
@@ -121,7 +123,7 @@ export class AnnotationManager extends SectionManager {
             label.classList.add('annotation-source-label');
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
-            checkbox.checked = true;
+            checkbox.checked = this.enabledSources.has(source);
             checkbox.classList.add('annotation-source-checkbox');
             checkbox.dataset.source = source;
             checkbox.addEventListener('change', () => {
@@ -188,6 +190,7 @@ export class AnnotationManager extends SectionManager {
         this.addAnnotationPanel = new AddAnnotationPanel(annotationsSection, this.annotationCodes, (flatAnnotation) => {
             const {group, annotation} = this.insertIntoGroups(flatAnnotation);
             this.insertAnnotationAtCorrectPosition(group, annotation);
+            this.enableSource('User');
             this.setAnnotationVisibilityFromState();
             this.saveUserAnnotations();
         }, this.timeManager, (_old, updatedFlatAnnotation) => {
@@ -479,6 +482,7 @@ export class AnnotationManager extends SectionManager {
                     const {group, annotation} = this.insertIntoGroups({...flatAnnotation, annotation_source: 'User'});
                     this.insertAnnotationAtCorrectPosition(group, annotation);
                 }
+                this.enableSource('User');
                 this.setAnnotationVisibilityFromState();
                 this.saveUserAnnotations();
             } catch {
@@ -487,6 +491,19 @@ export class AnnotationManager extends SectionManager {
             fileInput.value = '';
         };
         reader.readAsText(file);
+    }
+
+    // Turns a source filter on and ticks its checkbox to match, so annotations
+    // the user just added or uploaded aren't immediately hidden by the
+    // default (Schmidt-only) filter.
+    private enableSource(source: string) {
+        this.enabledSources.add(source);
+        const checkbox = this.element?.querySelector<HTMLInputElement>(
+            `.annotation-source-checkbox[data-source="${source}"]`
+        );
+        if (checkbox) {
+            checkbox.checked = true;
+        }
     }
 
     private updateTransferButtons() {

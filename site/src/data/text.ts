@@ -60,7 +60,7 @@ export const text: { [key: string]: MultiLanguageString } = {
             "  <li><strong>Piano-vocal score: Serge Garant Fonds, P0141/C4,5 – Container 058997Ah</strong>: annotated score, undated, comprising the analysis of Act I (complete) as well as the beginning of a partial analysis of Act II. This is an analysis by Serge Garant.</li>\n" +
             "  <li><strong>Orchestral score: Marcelle Deschênes Fonds, P0485 – Container 056577AH</strong>, folder 3 “Serge Garant”: annotated score produced in connection with Serge Garant's course. It has not been determined whether these are notes taken during the course or supplementary work/an assignment, but the handwriting is indeed that of Marcelle Deschênes. The document contains 25 annotated pages covering the end of Act III, Scene 2, from measure 106, to three measures after the beginning of Scene 5, at measure 374.</li>\n" +
             "</ul>\n" +
-            "<p>(3) Leitmotifs according to George Perle's numbering, in his book <em>The Operas of Alban Berg, Vol. I: Wozzeck</em>, University of California Press, Berkeley and Los Angeles, USA, 1980.</p>",
+            "<p>(3) <em>Leitmotifs</em> according to George Perle's numbering, in his book <em>The Operas of Alban Berg, Vol. I: Wozzeck</em>, University of California Press, Berkeley and Los Angeles, USA, 1980.</p>",
         fr: "<p>Informer l'interprétation et la création par l'analyse, projet de recherche subventionné par le Conseil de recherches en sciences humaines du Canada (CRSH), Subvention Connexion (novembre 2025-octobre 2026)</p>\n" +
             "<h2>Direction scientifique :</h2>\n" +
             "\n" +
@@ -101,7 +101,7 @@ export const text: { [key: string]: MultiLanguageString } = {
             "  <li><strong>Partition Chant-Piano : Fonds Serge Garant, P0141/C4,5 – Contenant 058997Ah</strong> : partition annotée, non datée, comprenant l'analyse de l'acte I (complète) ainsi que le début d'une analyse partielle de l'acte II. Il s'agit d'une analyse de Serge Garant.</li>\n" +
             "  <li><strong>Partition d'orchestre : Fonds Marcelle Deschênes, P0485 – Contenant 056577AH</strong>, dossier 3 « Serge Garant » : partition annotée dans le cadre du cours de Serge Garant. Il n'est pas déterminé s'il s'agit de notes prises pendant le cours ou d'un travail complémentaire/devoir, mais il s'agit bien de l'écriture de Marcelle Deschênes. Le document contient 25 pages annotées couvrant la fin de la scène 2 de l'acte III, à partir de la mesure 106, jusqu'à trois mesures après le début de la scène 5, à la mesure 374.</li>\n" +
             "</ul>\n" +
-            "<p>(3) Leitmotive selon la numérotation de George Perle, dans son ouvrage <em>The Operas of Alban Berg, Vol. I: Wozzeck</em>, University of California Press, Berkeley and Los Angeles, USA, 1980.</p>",
+            "<p>(3) <em>Leitmotive</em> selon la numérotation de George Perle, dans son ouvrage <em>The Operas of Alban Berg, Vol. I: Wozzeck</em>, University of California Press, Berkeley and Los Angeles, USA, 1980.</p>",
         pt: "<p>Informar a interpretação e a criação através da análise, projeto de investigação financiado pelo Conselho de Investigação em Ciências Humanas do Canadá (CRSH), Bolsa Connexion (novembro de 2025-outubro de 2026)</p>\n" +
             "<h2>Direção científica:</h2>\n" +
             "\n" +
@@ -142,7 +142,7 @@ export const text: { [key: string]: MultiLanguageString } = {
             "  <li><strong>Partitura Canto e Piano: Fundo Serge Garant, P0141/C4,5 – Contentor 058997Ah</strong>: partitura anotada, sem data, compreendendo a análise do Ato I (completa), bem como o início de uma análise parcial do Ato II. Trata-se de uma análise de Serge Garant.</li>\n" +
             "  <li><strong>Partitura de orquestra: Fundo Marcelle Deschênes, P0485 – Contentor 056577AH</strong>, pasta 3 “Serge Garant”: partitura anotada no âmbito do curso de Serge Garant. Não é possível determinar se se trata de notas tomadas durante o curso ou de um trabalho complementar/dever, mas trata-se, de facto, da caligrafia de Marcelle Deschênes. O documento contém 25 páginas anotadas, cobrindo o final da cena 2 do ato III, a partir do compasso 106, até três compassos após o início da cena 5, no compasso 374.</li>\n" +
             "</ul>\n" +
-            "<p>(3) Leitmotivs segundo a numeração de George Perle, na sua obra <em>The Operas of Alban Berg, Vol. I: Wozzeck</em>, University of California Press, Berkeley e Los Angeles, EUA, 1980.</p>",
+            "<p>(3) <em>Leitmotivs</em> segundo a numeração de George Perle, na sua obra <em>The Operas of Alban Berg, Vol. I: Wozzeck</em>, University of California Press, Berkeley e Los Angeles, EUA, 1980.</p>",
         de: "<p>Interpretation und Schöpfung durch Analyse – ein vom Social Sciences and Humanities Research Council of Canada (SSHRC) gefördertes Forschungsprojekt, Connexion-Förderung (November 2025–Oktober 2026)</p>\n" +
             "<h2>Wissenschaftliche Leitung:</h2>\n" +
             "\n" +
