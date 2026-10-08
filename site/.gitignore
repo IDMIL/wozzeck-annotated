@@ -3,3 +3,5 @@ dist/
 *.local
 .idea
 .vite
+# Combined Garant score is >100MB (over GitHub limit) and not used by the site
+pdf/Garant_Wozzeck.pdf

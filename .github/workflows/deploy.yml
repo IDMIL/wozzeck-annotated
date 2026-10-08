@@ -35,6 +35,7 @@ jobs:
           mkdir public
           mv site/dist/* public
           mv site/data public
+          mv site/pdf public
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
