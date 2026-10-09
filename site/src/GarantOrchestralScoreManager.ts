@@ -32,8 +32,7 @@ export class GarantOrchestralScoreManager extends SectionManager {
 
         const scoreViewer = this.element;
         if (scoreViewer) {
-            const heading = document.createElement("h2");
-            heading.innerText = text.GARANT_ORCHESTRAL_SCORE_VIEWER[globals.language];
+            const heading = this.makePdfHeading(text.GARANT_ORCHESTRAL_SCORE_VIEWER[globals.language], "pdf/Garant-Orchestral-Score.pdf");
             scoreViewer.appendChild(heading);
 
             scoreViewer.insertAdjacentHTML("beforeend", `

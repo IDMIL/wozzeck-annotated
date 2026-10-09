@@ -23,8 +23,7 @@ export class PVScoreManager extends SectionManager {
 
         const scoreViewer = this.element;
         if (scoreViewer) {
-            const heading = document.createElement("h2");
-            heading.innerText = text.PV_SCORE_VIEWER[globals.language];
+            const heading = this.makePdfHeading(text.PV_SCORE_VIEWER[globals.language], "pdf/PV_Score_bw.pdf");
             scoreViewer.appendChild(heading);
 
             scoreViewer.insertAdjacentHTML("beforeend", `

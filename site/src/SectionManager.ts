@@ -624,6 +624,25 @@ export abstract class SectionManager extends TimeManagerListener {
     // wiring needed: a mousedown anywhere on the tab except the × bubbles up
     // to `el`'s own background-drag listener (see attachResizeHandles),
     // exactly like clicking anywhere else non-interactive on the panel.
+    // Panel heading whose text links to the source PDF (used by the score
+    // panels). Opens in a new tab so playback state isn't lost. A link counts
+    // as interactive (see isInteractiveTarget), so clicking it doesn't start a
+    // panel drag the way the rest of the title tab does.
+    protected makePdfHeading(label: string, href: string): HTMLHeadingElement {
+        const heading = document.createElement("h2");
+        heading.appendChild(this.makePdfLink(label, href));
+        return heading;
+    }
+
+    protected makePdfLink(label: string, href: string): HTMLAnchorElement {
+        const link = document.createElement("a");
+        link.href = href;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.innerText = label;
+        return link;
+    }
+
     private attachPanelTitle(el: HTMLElement): void {
         const heading = el.querySelector<HTMLElement>("h2");
         if (heading === null && !this.closable) return;

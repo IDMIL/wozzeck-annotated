@@ -1,0 +1,78 @@
+/* Shared design tokens — imported by styles.css (main app) and info.css (info pages). */
+
+:root {
+    color-scheme: dark;
+    --gap: 10px;
+    --radius: 6px;
+    --transition: 150ms ease;
+    --font: "Jost", sans-serif;
+    --font-serif: "Arvo", serif;
+
+    /* annotation category colors — same in both themes */
+    --dynamiques-color: #ffc000;
+    --duree-color: #00b0f0;
+    --formes-color: #7030a0;
+    --intonation-color: #e53e3e;
+    --motifs-color: #00b050;
+    --timbre-color: #c05621;
+    --graph-color: #718096;
+
+    --color-bg: #12100e;
+    --color-header: #000000;
+    --color-navy: #1c1815;
+    --color-panel: #1a1613;
+    --color-surface: #241f1a;
+    --color-overlay: rgba(0, 0, 0, 0.65);
+    --color-heading: #f0ece6;
+    --color-text: #cec7bd;
+    --color-muted: #948c81;
+    --color-border: #3a332c;
+    --color-accent: #c20404;
+    /* Solid accent fills (buttons, active states) — same as --color-accent
+       here; light mode darkens it instead (see below) since a bright red
+       fill reads as too loud against light backgrounds. */
+    --color-accent-solid: var(--color-accent);
+    --color-highlight: rgba(194, 4, 4, 0.18);
+    --color-item-hover: #ff6b5e;
+    --btn-hover-bg: rgba(255, 255, 255, 0.07);
+    --btn-hover-border: rgba(255, 255, 255, 0.3);
+
+    --timeline-height: 16px;
+    /* Timeline cells are their own little surface sitting on --color-navy, so
+       they get their own tokens rather than reusing the panel ones — both
+       themes need the cell to read as raised above that strip. */
+    --timeline-cell-bg: #2c2621;
+    --timeline-cell-border: rgba(255, 255, 255, 0.14);
+    --timeline-cell-text: #cec7bd;
+    --timeline-label-text: #f0ece6;
+    --timeline-row-label: rgba(255, 255, 255, 0.55);
+    /* Tinted toward the row background, not toward white — in dark mode a
+       white-ward mix would go pale and swallow the light cell text. */
+    --timeline-current-page-bg: color-mix(in srgb, var(--color-accent) 40%, #1c1815);
+}
+
+[data-theme="light"] {
+    color-scheme: light;
+    --color-bg: #f4f1ec;
+    --color-navy: #e7e1d8;
+    --color-panel: #ffffff;
+    --color-surface: #ece6dd;
+    --color-overlay: rgba(0, 0, 0, 0.4);
+    --color-heading: #1e1a16;
+    --color-text: #423a32;
+    --color-muted: #8a8073;
+    --color-border: #d8d0c3;
+    --color-accent: #b31217;
+    --color-accent-solid: color-mix(in srgb, var(--color-accent) 78%, black);
+    --color-highlight: rgba(179, 18, 23, 0.1);
+    --color-item-hover: #b31217;
+    --btn-hover-bg: rgba(179, 18, 23, 0.06);
+    --btn-hover-border: #b31217;
+
+    --timeline-cell-bg: rgba(255, 255, 255, 0.9);
+    --timeline-cell-border: rgba(0, 0, 0, 0.12);
+    --timeline-cell-text: #241f1a;
+    --timeline-label-text: #241f1a;
+    --timeline-row-label: rgba(0, 0, 0, 0.45);
+    --timeline-current-page-bg: color-mix(in srgb, var(--color-accent) 35%, white);
+}

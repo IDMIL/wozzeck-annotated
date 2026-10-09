@@ -24,8 +24,7 @@ export class ScoreManager extends SectionManager {
 
         const scoreViewer = this.element;
         if (scoreViewer) {
-            const heading = document.createElement("h2");
-            heading.innerText = text.SCORE_VIEWER[globals.language];
+            const heading = this.makePdfHeading(text.SCORE_VIEWER[globals.language], "pdf/Full-Score.pdf");
             scoreViewer.appendChild(heading);
 
             scoreViewer.insertAdjacentHTML("beforeend", `

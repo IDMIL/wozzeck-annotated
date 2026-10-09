@@ -24,8 +24,13 @@ export class GarantScoreManager extends SectionManager {
 
         const scoreViewer = this.element;
         if (scoreViewer) {
+            // Title itself isn't a link; the act numerals after it each link
+            // to that act's PDF (see makePdfLink).
             const heading = document.createElement("h2");
             heading.innerText = text.GARANT_SCORE_VIEWER[globals.language];
+            ["I", "II", "III"].forEach((numeral, i) => {
+                heading.append(" ", this.makePdfLink(numeral, `pdf/Garant_Wozzeck_Acte${i + 1}.pdf`));
+            });
             scoreViewer.appendChild(heading);
 
             scoreViewer.insertAdjacentHTML("beforeend", `
