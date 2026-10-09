@@ -102,17 +102,17 @@ export const text: { [key: string]: MultiLanguageString } = {
             "  <li><strong>Partition d'orchestre : Fonds Marcelle Deschênes, P0485 – Contenant 056577AH</strong>, dossier 3 « Serge Garant » : partition annotée dans le cadre du cours de Serge Garant. Il n'est pas déterminé s'il s'agit de notes prises pendant le cours ou d'un travail complémentaire/devoir, mais il s'agit bien de l'écriture de Marcelle Deschênes. Le document contient 25 pages annotées couvrant la fin de la scène 2 de l'acte III, à partir de la mesure 106, jusqu'à trois mesures après le début de la scène 5, à la mesure 374.</li>\n" +
             "</ul>\n" +
             "<p>(3) <em>Leitmotive</em> selon la numérotation de George Perle, dans son ouvrage <em>The Operas of Alban Berg, Vol. I: Wozzeck</em>, University of California Press, Berkeley and Los Angeles, USA, 1980.</p>",
-        pt: "<p>Informar a interpretação e a criação através da análise, projeto de investigação financiado pelo Conselho de Investigação em Ciências Humanas do Canadá (CRSH), Bolsa Connexion (novembro de 2025-outubro de 2026)</p>\n" +
+        pt: "<p>Informar a interpretação e a criação através da análise, projeto de pesquisa financiado pelo Conselho de Pesquisa em Ciências Humanas do Canadá (CRSH), Bolsa Connexion (novembro de 2025-outubro de 2026)</p>\n" +
             "<h2>Direção científica:</h2>\n" +
             "\n" +
             "<ul>\n" +
-            "  <li><em>François-Hugues Leclair</em>: investigador principal, compositor, professor catedrático de composição e escrita na Faculdade de Música da Universidade de Montreal (FMus-UdeM)</li>\n" +
-            "  <li><em>Zoey Cochran</em>: co-investigadora, musicóloga, cantora, diretora artística da Cátedra de Investigação do Canadá em Criação de Ópera (CRCCO), professora convidada na FMus-UdeM</li>\n" +
+            "  <li><em>François-Hugues Leclair</em>: pesquisador principal, compositor, professor associado de composição e escrita na Faculdade de Música da Universidade de Montreal (FMus-UdeM)</li>\n" +
+            "  <li><em>Zoey Cochran</em>: copesquisadora, musicóloga, cantora, diretora artística da Cátedra de Pesquisa do Canadá em Criação de Ópera (CRCCO), professora convidada na FMus-UdeM</li>\n" +
             "</ul>\n" +
             "\n" +
-            "<h2>Membros da equipa de investigação</h2>\n" +
+            "<h2>Membros da equipe de pesquisa</h2>\n" +
             "<ul>\n" +
-            "  <li><em>Jean-Michaël Lavoie</em>: maestro, professor catedrático na FMus-UdeM</li>\n" +
+            "  <li><em>Jean-Michaël Lavoie</em>: maestro, professor associado na FMus-UdeM</li>\n" +
             "  <li><em>Marie-Annick Béliveau</em>: mezzo-soprano, diretora artística da Chants libres, docente na Universidade de Quebec em Montreal (UQAM)</li>\n" +
             "  <li><em>Ana Sokolovic</em>: compositora, titular da CRCCO, professora titular na FMus-UdeM</li>\n" +
             "</ul>\n" +
@@ -129,20 +129,20 @@ export const text: { [key: string]: MultiLanguageString } = {
             "  <li><em>Matthieu Galliker</em>: supervisão da elaboração da partitura interativa, doutorando em musicologia na FMus-UdeM</li>\n" +
             "</ul>\n" +
             "\n" +
-            "<h2>Assistentes de investigação</h2>\n" +
+            "<h2>Assistentes de pesquisa</h2>\n" +
             "<ul>\n" +
             "  <li><em>Arden Butterfield</em>: criador do site, mestrando em tecnologias musicais na Faculdade de Música da Universidade McGill</li>\n" +
-            "  <li><em>Hugo Duguay</em> e <em>Olivier Tremblay</em>: recolha de dados analíticos para a elaboração da partitura interativa, candidatos ao Mestrado em Composição e Criação Sonora na FMus-UdeM</li>\n" +
+            "  <li><em>Hugo Duguay</em> e <em>Olivier Tremblay</em>: coleta de dados analíticos para a elaboração da partitura interativa, candidatos ao Mestrado em Composição e Criação Sonora na FMus-UdeM</li>\n" +
             "</ul>\n" +
             "\n" +
             "<h2>Fontes</h2>\n" +
             "<p>(1) René Schmidt, Professor no Conservatoire National de Région de Strasbourg: anotações do curso de Análise Musical (Quinto Ciclo) por François-Hugues Leclair (1994-95)</p>\n" +
             "<p>(2) Serge Garant, Professor na Faculdade de Música da Universidade de Montreal:</p>\n" +
             "<ul>\n" +
-            "  <li><strong>Partitura Canto e Piano: Fundo Serge Garant, P0141/C4,5 – Contentor 058997Ah</strong>: partitura anotada, sem data, compreendendo a análise do Ato I (completa), bem como o início de uma análise parcial do Ato II. Trata-se de uma análise de Serge Garant.</li>\n" +
-            "  <li><strong>Partitura de orquestra: Fundo Marcelle Deschênes, P0485 – Contentor 056577AH</strong>, pasta 3 “Serge Garant”: partitura anotada no âmbito do curso de Serge Garant. Não é possível determinar se se trata de notas tomadas durante o curso ou de um trabalho complementar/dever, mas trata-se, de facto, da caligrafia de Marcelle Deschênes. O documento contém 25 páginas anotadas, cobrindo o final da cena 2 do ato III, a partir do compasso 106, até três compassos após o início da cena 5, no compasso 374.</li>\n" +
+            "  <li><strong>Partitura Canto e Piano: Fundo Serge Garant, P0141/C4,5 – Contêiner 058997Ah</strong>: partitura anotada, sem data, compreendendo a análise do Ato I (completa), bem como o início de uma análise parcial do Ato II. Trata-se de uma análise de Serge Garant.</li>\n" +
+            "  <li><strong>Partitura de orquestra: Fundo Marcelle Deschênes, P0485 – Contêiner 056577AH</strong>, pasta 3 “Serge Garant”: partitura anotada no âmbito do curso de Serge Garant. Não é possível determinar se se trata de anotações feitas durante o curso ou de um trabalho complementar/tarefa, mas trata-se, de fato, da caligrafia de Marcelle Deschênes. O documento contém 25 páginas anotadas, cobrindo o final da cena 2 do ato III, a partir do compasso 106, até três compassos após o início da cena 5, no compasso 374.</li>\n" +
             "</ul>\n" +
-            "<p>(3) <em>Leitmotivs</em> segundo a numeração de George Perle, na sua obra <em>The Operas of Alban Berg, Vol. I: Wozzeck</em>, University of California Press, Berkeley e Los Angeles, EUA, 1980.</p>",
+            "<p>(3) <em>Leitmotivs</em> segundo a numeração de George Perle, em sua obra <em>The Operas of Alban Berg, Vol. I: Wozzeck</em>, University of California Press, Berkeley e Los Angeles, EUA, 1980.</p>",
         de: "<p>Interpretation und Schöpfung durch Analyse – ein vom Social Sciences and Humanities Research Council of Canada (SSHRC) gefördertes Forschungsprojekt, Connexion-Förderung (November 2025–Oktober 2026)</p>\n" +
             "<h2>Wissenschaftliche Leitung:</h2>\n" +
             "\n" +

@@ -75,7 +75,8 @@ html, body {
 
 .info-main h1,
 .info-main h2,
-.info-main h3 {
+.info-main h3,
+.info-main h4 {
     color: var(--color-heading);
     font-weight: 500;
     line-height: 1.25;
@@ -96,6 +97,12 @@ html, body {
 .info-main h3 {
     font-size: 16px;
     margin: 28px 0 8px;
+}
+
+.info-main h4 {
+    font-size: 15px;
+    font-style: italic;
+    margin: 20px 0 8px;
 }
 
 .info-main p,

@@ -511,7 +511,6 @@ export class AnnotationManager extends SectionManager {
             g => g.annotations.some(a => a.annotation_source === 'User')
         );
         this.downloadButton.disabled = !hasUserAnnotations;
-        this.uploadButton.disabled = !hasUserAnnotations;
     }
 
     private saveUserAnnotations() {
