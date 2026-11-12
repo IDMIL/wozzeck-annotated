@@ -50,7 +50,7 @@ export const text: { [key: string]: MultiLanguageString } = {
             "<h2>Research Assistants</h2>\n" +
             "<ul>\n" +
             "  <li><em>Arden Butterfield</em>: website designer, Master's candidate in music technology at the Faculty of Music, McGill University</li>\n" +
-            "  <li><em>Hugo Duguay</em> and <em>Olivier Tremblay</em>: collection of analytical data for the development of the interactive score, Master's candidates in Composition and Sound Design at FMus-UdeM</li>\n" +
+            "  <li><em>Hugo Duguay</em> and <em>Olivier Tremblay</em>: collection of analytical data for the development of the interactive score, Master's candidates in Composition and Sound Design at FMus-UdeM. Additional analytical remarks drawn from their written work for the Wozzeck analysis seminar in Fall 2024.</li>\n" +
             "</ul>\n" +
             "\n" +
             "<h2>Sources</h2>\n" +
@@ -91,7 +91,7 @@ export const text: { [key: string]: MultiLanguageString } = {
             "<h2>Auxiliaires de recherche</h2>\n" +
             "<ul>\n" +
             "  <li><em>Arden Butterfield</em> : concepteur du site Web, candidat à la Maîtrise en technologies musicales à la Faculté de Musique de l'Université McGill</li>\n" +
-            "  <li><em>Hugo Duguay</em> et <em>Olivier Tremblay</em> : recueillement des données analytiques pour l'élaboration de la partition interactive, candidats à la Maîtrise en composition et création sonore à la FMus-UdeM</li>\n" +
+            "  <li><em>Hugo Duguay</em> et <em>Olivier Tremblay</em> : recueillement des données analytiques pour l'élaboration de la partition interactive, candidats à la Maîtrise en composition et création sonore à la FMus-UdeM. Remarques analytiques complémentaires provenant de leurs travaux écrits dans le cadre du séminaire d'analyse sur Wozzeck à l'automne 2024.</li>\n" +
             "</ul>\n" +
             "\n" +
             "<h2>Sources</h2>\n" +
@@ -132,7 +132,7 @@ export const text: { [key: string]: MultiLanguageString } = {
             "<h2>Assistentes de pesquisa</h2>\n" +
             "<ul>\n" +
             "  <li><em>Arden Butterfield</em>: criador do site, mestrando em tecnologias musicais na Faculdade de Música da Universidade McGill</li>\n" +
-            "  <li><em>Hugo Duguay</em> e <em>Olivier Tremblay</em>: coleta de dados analíticos para a elaboração da partitura interativa, candidatos ao Mestrado em Composição e Criação Sonora na FMus-UdeM</li>\n" +
+            "  <li><em>Hugo Duguay</em> e <em>Olivier Tremblay</em>: coleta de dados analíticos para a elaboração da partitura interativa, candidatos ao Mestrado em Composição e Criação Sonora na FMus-UdeM. Observações analíticas complementares provenientes de seus trabalhos escritos no âmbito do seminário de análise sobre Wozzeck no outono de 2024.</li>\n" +
             "</ul>\n" +
             "\n" +
             "<h2>Fontes</h2>\n" +
@@ -173,7 +173,7 @@ export const text: { [key: string]: MultiLanguageString } = {
             "<h2>Forschungsassistenten</h2>\n" +
             "<ul>\n" +
             "  <li><em>Arden Butterfield</em>: Webdesigner, Masterstudent im Fach Musiktechnologie an der Musikfakultät der McGill-Universität</li>\n" +
-            "  <li><em>Hugo Duguay</em> und <em>Olivier Tremblay</em>: Erhebung der analytischen Daten für die Erstellung der interaktiven Partitur, Masterstudierende im Fach Komposition und Klangkunst an der FMus-UdeM</li>\n" +
+            "  <li><em>Hugo Duguay</em> und <em>Olivier Tremblay</em>: Erhebung der analytischen Daten für die Erstellung der interaktiven Partitur, Masterstudierende im Fach Komposition und Klangkunst an der FMus-UdeM. Ergänzende analytische Anmerkungen stammen aus ihren schriftlichen Arbeiten im Rahmen des Analyseseminars zu Wozzeck im Herbst 2024.</li>\n" +
             "</ul>\n" +
             "\n" +
             "<h2>Quellen</h2>\n" +
@@ -216,6 +216,7 @@ export const text: { [key: string]: MultiLanguageString } = {
     PANELS:             { en: "Panels",                    fr: "Panneaux",                         pt: "Painéis",              de: "Bedienfelder" },
     PAGE:               { en: "page",                      fr: "page",                             pt: "página",               de: "Seite" },
     INFO:               { en: "credits",                   fr: "crédits",                          pt: "créditos",             de: "Credits" },
+    HELP:               { en: "help",                      fr: "aide",                             pt: "ajuda",                de: "Hilfe" },
     CLOSE:              { en: "close",                     fr: "annuler",                          pt: "fechar",               de: "schließen" },
     THEME_LIGHT:        { en: "light mode",                fr: "mode clair",                       pt: "modo claro",           de: "heller Modus" },
     THEME_DARK:         { en: "dark mode",                 fr: "mode sombre",                      pt: "modo escuro",          de: "dunkler Modus" },

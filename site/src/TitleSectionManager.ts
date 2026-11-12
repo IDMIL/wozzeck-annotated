@@ -78,6 +78,7 @@ export class TitleSectionManager extends SectionManager {
       <div class="title-header-controls">
       <div class="title-links-and-buttons"><h3 id="info-link">` + text.INFO[globals.language] + `</h3><h3 id="theme-toggle">${themeToggleLabel()}</h3><select id="language-select" class="language-select">${options}</select></div>
       <button id="title-menu-toggle" class="title-menu-toggle" aria-label="Show menu" aria-expanded="false">&#9654;</button>
+      <a id="help-link" class="help-link" href="info/${globals.language}.html" aria-label="${text.HELP[globals.language]}" title="${text.HELP[globals.language]}">?</a>
       </div>`;
 
             // Both go on <body>, not in the title bar that opens them: the
